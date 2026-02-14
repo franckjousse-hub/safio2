@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Safio — Entrez l'esprit tranquille</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
@@ -79,19 +80,29 @@
     top: 0; left: 0; right: 0; bottom: 0;
     overflow-y: auto;
     overflow-x: hidden;
-    display: none;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
     scrollbar-width: none;
+    transition: opacity 0.2s ease;
   }
   .screen::-webkit-scrollbar { display: none; }
-  .screen.active { display: block; }
+  .screen.active {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: all;
+  }
 
   /* ── SPLASH SCREEN ── */
   #splash {
     background: radial-gradient(ellipse at 50% 40%, rgba(0,232,122,0.15) 0%, transparent 70%), var(--bg);
+  }
+  #splash > div {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: 100%;
   }
   .splash-logo {
     font-family: 'Syne', sans-serif;
@@ -230,89 +241,39 @@
   }
   .section-sub { font-size: 13px; color: var(--muted); }
 
-  /* MAP PREVIEW */
+  /* MAP */
   .map-container {
     margin: 0 24px 20px;
     border-radius: 20px;
     overflow: hidden;
-    height: 160px;
+    height: 180px;
     background: var(--card);
     border: 1px solid var(--border);
     position: relative;
   }
-  .map-bg {
-    width: 100%; height: 100%;
-    background: 
-      repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 40px),
-      repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 40px),
-      #12121A;
-    position: relative;
-  }
-  /* Simulated streets */
-  .map-street-h {
-    position: absolute;
-    height: 8px;
-    background: rgba(255,255,255,0.06);
-    left: 0; right: 0;
-  }
-  .map-street-v {
-    position: absolute;
-    width: 8px;
-    background: rgba(255,255,255,0.06);
-    top: 0; bottom: 0;
-  }
-  .map-pin {
-    position: absolute;
-    transform: translate(-50%, -100%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
-  .map-pin:active { transform: translate(-50%, -100%) scale(1.2); }
-  .map-pin-bubble {
-    background: var(--green);
+  /* Leaflet overrides dark */
+  .leaflet-tile-pane { filter: brightness(0.85) saturate(0.7); }
+  .leaflet-control-attribution { display: none; }
+  .leaflet-control-zoom { display: none; }
+  .safio-marker {
+    background: #00E87A;
     color: #000;
-    font-size: 10px;
-    font-weight: 800;
     font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
     padding: 4px 8px;
     border-radius: 10px;
     white-space: nowrap;
-    box-shadow: 0 4px 12px rgba(0,232,122,0.4);
+    box-shadow: 0 4px 12px rgba(0,232,122,0.5);
+    cursor: pointer;
   }
-  .map-pin-bubble.orange { background: var(--orange); box-shadow: 0 4px 12px rgba(255,140,0,0.4); }
-  .map-pin-dot {
-    width: 8px; height: 8px;
-    background: var(--green);
-    border-radius: 50%;
-    margin-top: -1px;
-  }
-  .map-pin-dot.orange { background: var(--orange); }
-  .map-user-pin {
-    position: absolute;
-    width: 16px; height: 16px;
-    background: #4A9EFF;
-    border-radius: 50%;
-    border: 3px solid white;
-    box-shadow: 0 0 0 6px rgba(74,158,255,0.2);
-    transform: translate(-50%, -50%);
-    left: 50%; top: 50%;
-  }
-  .map-label {
-    position: absolute;
-    bottom: 10px; right: 10px;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(10px);
-    border-radius: 8px;
-    padding: 4px 10px;
-    font-size: 11px;
-    color: var(--muted);
+  .safio-marker.orange {
+    background: #FF8C00;
+    box-shadow: 0 4px 12px rgba(255,140,0,0.5);
   }
 
   /* BAR CARDS */
-  .bars-list { padding: 0 24px 100px; display: flex; flex-direction: column; gap: 14px; }
+  .bars-list { padding: 0 24px 96px; display: flex; flex-direction: column; gap: 14px; }
 
   .bar-card {
     background: var(--card);
@@ -427,14 +388,17 @@
     position: absolute;
     bottom: 0; left: 0; right: 0;
     height: 84px;
-    background: rgba(10,10,15,0.95);
+    background: rgba(10,10,15,0.97);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-top: 1px solid var(--border);
-    display: flex;
+    display: none;
     align-items: flex-start;
     padding-top: 12px;
-    z-index: 50;
+    z-index: 200;
+    flex-shrink: 0;
   }
+  .tab-bar.visible { display: flex; }
   .tab-item {
     flex: 1;
     display: flex;
@@ -600,7 +564,7 @@
   .cs-bad { background: rgba(255,59,92,0.1); color: var(--red); }
 
   /* ACTIONS */
-  .actions-section { padding: 0 24px 100px; }
+  .actions-section { padding: 0 24px 96px; }
   .actions-title {
     font-family: 'Syne', sans-serif;
     font-size: 16px;
@@ -858,32 +822,9 @@
       <div class="section-sub">3 établissements • Tours, Indre-et-Loire</div>
     </div>
 
-    <!-- MAP -->
-    <div class="map-container">
-      <div class="map-bg">
-        <div class="map-street-h" style="top:30%"></div>
-        <div class="map-street-h" style="top:55%"></div>
-        <div class="map-street-h" style="top:75%"></div>
-        <div class="map-street-v" style="left:25%"></div>
-        <div class="map-street-v" style="left:50%"></div>
-        <div class="map-street-v" style="left:72%"></div>
-        <!-- Pins bars -->
-        <div class="map-pin" style="left:28%;top:30%;" onclick="openModal(0)">
-          <div class="map-pin-bubble">82 • Le Vieux Murier</div>
-          <div class="map-pin-dot"></div>
-        </div>
-        <div class="map-pin" style="left:55%;top:55%;" onclick="openModal(1)">
-          <div class="map-pin-bubble orange">78 • Bar du Centre</div>
-          <div class="map-pin-dot orange"></div>
-        </div>
-        <div class="map-pin" style="left:73%;top:28%;" onclick="openModal(2)">
-          <div class="map-pin-bubble">85 • La Guinguette</div>
-          <div class="map-pin-dot"></div>
-        </div>
-        <!-- User -->
-        <div class="map-user-pin"></div>
-        <div class="map-label">📍 Tours Centre</div>
-      </div>
+    <!-- MAP LEAFLET -->
+    <div class="map-container" id="mapContainer">
+      <div id="leafletMap" style="width:100%;height:100%;"></div>
     </div>
 
     <!-- BARS LIST -->
@@ -976,26 +917,6 @@
 
     </div>
 
-    <!-- TAB BAR -->
-    <div class="tab-bar">
-      <div class="tab-item">
-        <div class="tab-icon active">🗺️</div>
-        <div class="tab-txt active">Carte</div>
-      </div>
-      <div class="tab-item">
-        <div class="tab-icon">⭐</div>
-        <div class="tab-txt">Favoris</div>
-      </div>
-      <div class="tab-item">
-        <div class="tab-icon">🔍</div>
-        <div class="tab-txt">Chercher</div>
-      </div>
-      <div class="tab-item">
-        <div class="tab-icon">👤</div>
-        <div class="tab-txt">Profil</div>
-      </div>
-    </div>
-
     <!-- MODAL DETAIL -->
     <div class="modal-overlay" id="detailModal" onclick="closeModal(event)">
       <div class="modal-sheet" id="modalContent">
@@ -1013,7 +934,7 @@
         </div>
         <div class="modal-section-title">Détails du certificat</div>
         <div class="modal-detail-grid" id="modalGrid"></div>
-        <button class="modal-cta" onclick="showToast('📍 Itinéraire lancé vers cet établissement !')">
+        <button class="modal-cta" onclick="navigate()">
           🗺️ Y aller
         </button>
         <button class="modal-cta" style="background:var(--card);color:var(--text);border:1px solid var(--border);margin-top:10px;" onclick="showToast('⭐ Ajouté à vos favoris !')">
@@ -1180,24 +1101,45 @@
       </div>
     </div>
 
-    <!-- TAB BAR -->
-    <div class="tab-bar">
-      <div class="tab-item">
-        <div class="tab-icon active">🏠</div>
-        <div class="tab-txt active">Accueil</div>
-      </div>
-      <div class="tab-item">
-        <div class="tab-icon">📊</div>
-        <div class="tab-txt">Stats</div>
-      </div>
-      <div class="tab-item">
-        <div class="tab-icon">📋</div>
-        <div class="tab-txt">Documents</div>
-      </div>
-      <div class="tab-item">
-        <div class="tab-icon">⚙️</div>
-        <div class="tab-txt">Réglages</div>
-      </div>
+  </div>
+
+  <!-- TAB BAR CLIENT -->
+  <div class="tab-bar" id="tabClient">
+    <div class="tab-item">
+      <div class="tab-icon active">🗺️</div>
+      <div class="tab-txt active">Carte</div>
+    </div>
+    <div class="tab-item">
+      <div class="tab-icon">⭐</div>
+      <div class="tab-txt">Favoris</div>
+    </div>
+    <div class="tab-item">
+      <div class="tab-icon">🔍</div>
+      <div class="tab-txt">Chercher</div>
+    </div>
+    <div class="tab-item">
+      <div class="tab-icon">👤</div>
+      <div class="tab-txt">Profil</div>
+    </div>
+  </div>
+
+  <!-- TAB BAR BAR OWNER -->
+  <div class="tab-bar" id="tabBar">
+    <div class="tab-item">
+      <div class="tab-icon active">🏠</div>
+      <div class="tab-txt active">Accueil</div>
+    </div>
+    <div class="tab-item">
+      <div class="tab-icon">📊</div>
+      <div class="tab-txt">Stats</div>
+    </div>
+    <div class="tab-item">
+      <div class="tab-icon">📋</div>
+      <div class="tab-txt">Documents</div>
+    </div>
+    <div class="tab-item">
+      <div class="tab-icon">⚙️</div>
+      <div class="tab-txt">Réglages</div>
     </div>
   </div>
 
@@ -1219,6 +1161,7 @@ const bars = [
     lastInspection: "14 juin 2025",
     nextInspection: "juin 2026",
     scoreClass: "",
+    lat: 47.3953, lng: 0.6831,
     details: [
       {label:"Extincteurs",value:"✓ Conformes",cls:"green"},
       {label:"Issues secours",value:"✓ Conformes",cls:"green"},
@@ -1238,6 +1181,7 @@ const bars = [
     lastInspection: "3 mars 2025",
     nextInspection: "mars 2026",
     scoreClass: "orange",
+    lat: 47.3935, lng: 0.6862,
     details: [
       {label:"Extincteurs",value:"✓ Conformes",cls:"green"},
       {label:"Issues secours",value:"⚠ Action req.",cls:"orange"},
@@ -1257,6 +1201,7 @@ const bars = [
     lastInspection: "22 sept. 2025",
     nextInspection: "sept. 2026",
     scoreClass: "",
+    lat: 47.3928, lng: 0.6820,
     details: [
       {label:"Extincteurs",value:"✓ Conformes",cls:"green"},
       {label:"Issues secours",value:"✓ Conformes",cls:"green"},
@@ -1270,18 +1215,96 @@ const bars = [
 
 // ── NAVIGATION ──
 function goTo(screen) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(screen).classList.add('active');
-  document.getElementById(screen).scrollTop = 0;
+  // Masquer tous les écrans
+  document.querySelectorAll('.screen').forEach(function(s) {
+    s.classList.remove('active');
+  });
+  // Masquer toutes les tab bars
+  document.querySelectorAll('.tab-bar').forEach(function(t) {
+    t.classList.remove('visible');
+  });
+  // Afficher l'écran cible
+  var target = document.getElementById(screen);
+  if (target) {
+    target.classList.add('active');
+    target.scrollTop = 0;
+  }
+  // Afficher la bonne tab bar
+  if (screen === 'client') {
+    document.getElementById('tabClient').classList.add('visible');
+    initGeolocation();
+  }
+  if (screen === 'barowner') {
+    document.getElementById('tabBar').classList.add('visible');
+    animateScore();
+  }
+}
 
-  if (screen === 'client') initGeolocation();
-  if (screen === 'barowner') animateScore();
+// ── MAP LEAFLET ──
+var leafletMap = null;
+
+function buildMap() {
+  if (leafletMap) { leafletMap.invalidateSize(); return; }
+
+  leafletMap = L.map('leafletMap', {
+    center: [47.3941, 0.6848],
+    zoom: 15,
+    zoomControl: false,
+    attributionControl: false,
+    dragging: true,
+    scrollWheelZoom: false
+  });
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19
+  }).addTo(leafletMap);
+
+  var barCoords = [
+    { lat: 47.3953, lng: 0.6831, idx: 0, score: 82, name: 'Le Vieux Murier', cls: '' },
+    { lat: 47.3935, lng: 0.6862, idx: 1, score: 78, name: 'Bar du Centre', cls: 'orange' },
+    { lat: 47.3928, lng: 0.6820, idx: 2, score: 85, name: 'La Guinguette', cls: '' },
+  ];
+
+  barCoords.forEach(function(b) {
+    var icon = L.divIcon({
+      className: '',
+      html: '<div class="safio-marker ' + b.cls + '">' + b.score + ' • ' + b.name + '</div>',
+      iconAnchor: [0, 20]
+    });
+    L.marker([b.lat, b.lng], { icon: icon })
+      .addTo(leafletMap)
+      .on('click', function() { openModal(b.idx); });
+  });
+
+  var userIcon = L.divIcon({
+    className: '',
+    html: '<div style="width:14px;height:14px;background:#4A9EFF;border-radius:50%;border:3px solid white;box-shadow:0 0 0 5px rgba(74,158,255,0.25);"></div>',
+    iconAnchor: [7, 7]
+  });
+  L.marker([47.3941, 0.6848], { icon: userIcon }).addTo(leafletMap);
+}
+
+function loadLeafletThenMap() {
+  if (typeof L !== 'undefined') {
+    buildMap();
+    return;
+  }
+  var script = document.createElement('script');
+  script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+  script.onload = function() { buildMap(); };
+  script.onerror = function() { 
+    document.getElementById('leafletMap').innerHTML = 
+      '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:rgba(255,255,255,0.3);font-size:13px;">📡 Carte non disponible hors ligne</div>';
+  };
+  document.head.appendChild(script);
 }
 
 // ── GEOLOCATION ──
 function initGeolocation() {
-  const pill = document.getElementById('locationPill');
-  const txt = document.getElementById('locationText');
+  var pill = document.getElementById('locationPill');
+  var txt = document.getElementById('locationText');
+
+  loadLeafletThenMap();
 
   if (!navigator.geolocation) {
     txt.textContent = 'Tours, Indre-et-Loire';
@@ -1291,21 +1314,21 @@ function initGeolocation() {
   txt.textContent = 'Localisation en cours…';
 
   navigator.geolocation.getCurrentPosition(
-    (pos) => {
-      const lat = pos.coords.latitude.toFixed(4);
-      const lng = pos.coords.longitude.toFixed(4);
-      txt.textContent = `${lat}°N, ${lng}°E • Tours`;
+    function(pos) {
+      txt.textContent = pos.coords.latitude.toFixed(4) + '°N, ' + pos.coords.longitude.toFixed(4) + '°E • Tours';
       pill.style.background = 'rgba(0,232,122,0.15)';
+      if (leafletMap) leafletMap.panTo([pos.coords.latitude, pos.coords.longitude]);
     },
-    () => {
-      txt.textContent = 'Tours, Indre-et-Loire';
-    },
+    function() { txt.textContent = 'Tours, Indre-et-Loire'; },
     { timeout: 5000, maximumAge: 60000 }
   );
 }
 
 // ── MODAL ──
+var currentBarIdx = 0;
+
 function openModal(idx) {
+  currentBarIdx = idx;
   const bar = bars[idx];
   document.getElementById('modalName').textContent = bar.name;
   document.getElementById('modalAddr').textContent = bar.addr + ' • ' + bar.type;
@@ -1356,6 +1379,27 @@ function showToast(msg) {
   toast.textContent = msg;
   toast.classList.add('show');
   setTimeout(() => toast.classList.remove('show'), 2800);
+}
+
+// ── NAVIGATION GPS ──
+function navigate() {
+  var bar = bars[currentBarIdx];
+  var lat = bar.lat;
+  var lng = bar.lng;
+  var name = encodeURIComponent(bar.name);
+  var addr = encodeURIComponent(bar.addr);
+
+  // Détection iPhone/iOS → Apple Maps
+  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  var isMac = /Mac/.test(navigator.userAgent) && navigator.maxTouchPoints > 0;
+
+  if (isIOS || isMac) {
+    // Apple Maps — ouvre l'app native Maps sur iPhone
+    window.location.href = 'maps://maps.apple.com/?daddr=' + lat + ',' + lng + '&dirflg=w&q=' + name;
+  } else {
+    // Google Maps pour Android/Desktop
+    window.open('https://www.google.com/maps/dir/?api=1&destination=' + lat + ',' + lng + '&destination_place_name=' + name + '&travelmode=walking', '_blank');
+  }
 }
 
 // ── CLOCK ──
