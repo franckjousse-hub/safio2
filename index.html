@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Safio — Entrez l'esprit tranquille</title>
+<title>Safio — Sortez l'esprit tranquille</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <style>
@@ -740,6 +740,169 @@
   .bar-card:nth-child(2) { animation-delay: 0.2s; }
   .bar-card:nth-child(3) { animation-delay: 0.3s; }
 
+  /* PARTNERS SECTION */
+  .partners-screen { display: none; padding: 52px 24px 100px; }
+  .partners-screen.active { display: block; }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+  }
+  .search-bar input {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--text);
+  }
+  .search-bar input::placeholder { color: var(--muted); }
+  .search-bar .search-icon { font-size: 18px; }
+
+  .filter-pills {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    margin-bottom: 20px;
+    scrollbar-width: none;
+  }
+  .filter-pills::-webkit-scrollbar { display: none; }
+  .filter-pill {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 12px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--muted);
+  }
+  .filter-pill.active {
+    background: rgba(0,232,122,0.12);
+    border-color: rgba(0,232,122,0.35);
+    color: var(--green);
+  }
+  .filter-pill:active { transform: scale(0.95); }
+
+  .partner-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .partner-card:active { transform: scale(0.98); }
+  .partner-card-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+  .partner-logo {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+  }
+  .partner-info { flex: 1; }
+  .partner-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .partner-type { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+  .partner-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+  .partner-badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+  }
+  .pb-agréé { background: rgba(0,232,122,0.1); color: var(--green); border: 1px solid rgba(0,232,122,0.2); }
+  .pb-local { background: rgba(74,158,255,0.1); color: #4A9EFF; border: 1px solid rgba(74,158,255,0.2); }
+  .pb-rapide { background: rgba(255,140,0,0.1); color: var(--orange); border: 1px solid rgba(255,140,0,0.2); }
+  .pb-certif { background: rgba(160,100,255,0.1); color: #A064FF; border: 1px solid rgba(160,100,255,0.2); }
+
+  .partner-divider {
+    height: 1px;
+    background: var(--border);
+    margin-bottom: 12px;
+  }
+  .partner-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .partner-meta-item { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 4px; }
+  .partner-price {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .partner-price span { font-size: 11px; font-weight: 400; color: var(--muted); }
+
+  .partner-services {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .partner-service {
+    background: var(--bg3);
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .partner-cta {
+    display: flex;
+    gap: 8px;
+  }
+  .partner-btn {
+    flex: 1;
+    padding: 11px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .partner-btn:active { transform: scale(0.97); }
+  .partner-btn-primary {
+    background: var(--green);
+    color: #000;
+  }
+  .partner-btn-secondary {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+
+  .partners-header { margin-bottom: 20px; }
+  .partners-count { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+  /* Owner sub-screens */
+  .owner-sub { display: none; }
+  .owner-sub.active { display: block; }
+
   /* Desktop hint */
   @media (min-width: 500px) {
     body { background: #070708; }
@@ -780,8 +943,25 @@
     <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:40px 28px;">
       <div class="splash-orb"></div>
       <div style="position:relative;z-index:2;text-align:center;margin-bottom:60px;">
-        <div class="splash-logo">safe<span>io</span></div>
-        <div class="splash-tagline">Entrez l'esprit tranquille</div>
+        <div class="splash-logo" style="font-size:0"><svg width="180" height="52" viewBox="0 0 268 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="Lgo" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#F5D07A"/><stop offset="50%" stop-color="#E8B84B"/><stop offset="100%" stop-color="#C9962A"/></linearGradient>
+  <linearGradient id="Lgf" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00C878" stop-opacity=".18"/><stop offset="100%" stop-color="#00C878" stop-opacity=".04"/></linearGradient>
+  <filter id="Lgg"><feGaussianBlur stdDeviation="5"/></filter>
+</defs>
+<ellipse cx="35" cy="40" rx="28" ry="22" fill="#C9962A" opacity=".12" filter="url(#Lgg)"/>
+<path d="M35 5 L62 38 L35 71 L8 38 Z" fill="url(#Lgf)"/>
+<path d="M35 5 L62 38 L35 71 L8 38 Z" fill="none" stroke="url(#Lgo)" stroke-width="2.2"/>
+<path d="M35 5 L35 38 M8 38 L62 38 M35 38 L35 71" stroke="url(#Lgo)" stroke-width=".6" opacity=".4"/>
+<path d="M25 28 C25 24.7 27.7 22 31 22 L39 22 C42.3 22 45 24.7 45 28 C45 31.3 42.3 34 39 34 L31 34 C27.7 34 25 36.7 25 40 C25 43.3 27.7 46 31 46 L39 46 C42.3 46 45 43.3 45 40" stroke="#00C878" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+<circle cx="35" cy="7"  r="2.4" fill="url(#Lgo)"/>
+<circle cx="35" cy="69" r="2"   fill="url(#Lgo)" opacity=".8"/>
+<circle cx="10" cy="38" r="1.5" fill="url(#Lgo)" opacity=".6"/>
+<circle cx="60" cy="38" r="1.5" fill="url(#Lgo)" opacity=".6"/>
+<text x="77" y="44" font-family="Outfit,sans-serif" font-weight="800" font-size="34" letter-spacing="-1" fill="#F5F5F0">safio</text>
+<circle cx="170" cy="14" r="4.2" fill="url(#Lgo)"/>
+</svg></div>
+        <div class="splash-tagline" style="margin-top:12px;font-size:13px;letter-spacing:0.5px;">Parce que chaque sortie compte</div>
       </div>
       <div class="role-cards" style="margin-top:0;">
         <div class="role-card" onclick="goTo('client')">
@@ -920,7 +1100,10 @@
     <!-- MODAL DETAIL -->
     <div class="modal-overlay" id="detailModal" onclick="closeModal(event)">
       <div class="modal-sheet" id="modalContent">
-        <div class="modal-handle"></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+          <div class="modal-handle" style="margin:0;"></div>
+          <button onclick="closeModal()" style="background:rgba(255,255,255,0.08);border:none;color:var(--text);font-size:13px;padding:6px 14px;border-radius:10px;cursor:pointer;">✕ Fermer</button>
+        </div>
         <div class="modal-bar-name" id="modalName">–</div>
         <div class="modal-bar-addr" id="modalAddr">–</div>
         <div class="modal-score-big">
@@ -940,6 +1123,9 @@
         <button class="modal-cta" style="background:var(--card);color:var(--text);border:1px solid var(--border);margin-top:10px;" onclick="showToast('⭐ Ajouté à vos favoris !')">
           ⭐ Sauvegarder
         </button>
+        <button class="modal-cta" style="background:transparent;color:var(--muted);border:none;margin-top:6px;font-size:14px;" onclick="closeModal()">
+          ← Retour à la carte
+        </button>
       </div>
     </div>
 
@@ -947,6 +1133,9 @@
 
   <!-- ════════ BAR OWNER SCREEN ════════ -->
   <div class="screen" id="barowner">
+
+    <!-- SUB: ACCUEIL -->
+    <div class="owner-sub active" id="ownerHome">
     <div class="bar-header">
       <div class="bar-header-top">
         <div class="app-logo-small">safio</div>
@@ -1125,22 +1314,72 @@
 
   <!-- TAB BAR BAR OWNER -->
   <div class="tab-bar" id="tabBar">
-    <div class="tab-item">
-      <div class="tab-icon active">🏠</div>
-      <div class="tab-txt active">Accueil</div>
+    <div class="tab-item" onclick="switchOwnerTab('home')">
+      <div class="tab-icon active" id="ownerTabHome">🏠</div>
+      <div class="tab-txt active" id="ownerTabHomeTxt">Accueil</div>
     </div>
-    <div class="tab-item">
-      <div class="tab-icon">📊</div>
-      <div class="tab-txt">Stats</div>
+    <div class="tab-item" onclick="switchOwnerTab('partners')">
+      <div class="tab-icon" id="ownerTabPartners">🤝</div>
+      <div class="tab-txt" id="ownerTabPartnersTxt">Partenaires</div>
     </div>
-    <div class="tab-item">
-      <div class="tab-icon">📋</div>
-      <div class="tab-txt">Documents</div>
+    <div class="tab-item" onclick="switchOwnerTab('docs')">
+      <div class="tab-icon" id="ownerTabDocs">📋</div>
+      <div class="tab-txt" id="ownerTabDocsTxt">Documents</div>
     </div>
-    <div class="tab-item">
-      <div class="tab-icon">⚙️</div>
-      <div class="tab-txt">Réglages</div>
+    <div class="tab-item" onclick="switchOwnerTab('settings')">
+      <div class="tab-icon" id="ownerTabSettings">⚙️</div>
+      <div class="tab-txt" id="ownerTabSettingsTxt">Réglages</div>
     </div>
+    </div><!-- /ownerHome -->
+
+    <!-- SUB: PARTENAIRES -->
+    <div class="owner-sub" id="ownerPartners">
+      <div class="partners-screen active">
+        <div style="padding-top:8px;" class="header-top">
+          <div>
+            <div class="section-title">Partenaires agréés</div>
+            <div class="partners-count" id="partnersCount">5 organismes • Région Centre-Val de Loire</div>
+          </div>
+        </div>
+
+        <!-- SEARCH -->
+        <div class="search-bar" style="margin-top:16px;">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="partnerSearch" placeholder="Nom, ville, spécialité…" oninput="filterPartners()">
+        </div>
+
+        <!-- FILTERS -->
+        <div class="filter-pills">
+          <div class="filter-pill active" onclick="setFilter('tous', this)">Tous</div>
+          <div class="filter-pill" onclick="setFilter('bureau', this)">Bureau de contrôle</div>
+          <div class="filter-pill" onclick="setFilter('securite', this)">Sécurité incendie</div>
+          <div class="filter-pill" onclick="setFilter('erp', this)">Spé. ERP</div>
+          <div class="filter-pill" onclick="setFilter('rapide', this)">Intervention rapide</div>
+        </div>
+
+        <!-- LISTE -->
+        <div id="partnersList"></div>
+      </div>
+    </div><!-- /ownerPartners -->
+
+    <!-- SUB: DOCUMENTS -->
+    <div class="owner-sub" id="ownerDocs">
+      <div style="padding:60px 24px;text-align:center;color:var(--muted);">
+        <div style="font-size:48px;margin-bottom:16px;">📋</div>
+        <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:8px;">Mes documents</div>
+        <div style="font-size:13px;">Vos certificats et rapports apparaîtront ici</div>
+      </div>
+    </div>
+
+    <!-- SUB: RÉGLAGES -->
+    <div class="owner-sub" id="ownerSettings">
+      <div style="padding:60px 24px;text-align:center;color:var(--muted);">
+        <div style="font-size:48px;margin-bottom:16px;">⚙️</div>
+        <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:8px;">Réglages</div>
+        <div style="font-size:13px;">Gérez votre profil et vos préférences</div>
+      </div>
+    </div>
+
   </div>
 
   <!-- TOAST -->
@@ -1273,7 +1512,7 @@ function buildMap() {
     });
     L.marker([b.lat, b.lng], { icon: icon })
       .addTo(leafletMap)
-      .on('click', function() { openModal(b.idx); });
+      .on('click', function() { window.openModal(b.idx); });
   });
 
   var userIcon = L.divIcon({
@@ -1327,34 +1566,39 @@ function initGeolocation() {
 // ── MODAL ──
 var currentBarIdx = 0;
 
-function openModal(idx) {
+window.openModal = function openModal(idx) {
   currentBarIdx = idx;
-  const bar = bars[idx];
+  var bar = bars[idx];
   document.getElementById('modalName').textContent = bar.name;
   document.getElementById('modalAddr').textContent = bar.addr + ' • ' + bar.type;
 
-  const scoreEl = document.getElementById('modalScore');
+  var scoreEl = document.getElementById('modalScore');
   scoreEl.textContent = bar.score;
   scoreEl.className = 'modal-score-num' + (bar.scoreClass ? ' ' + bar.scoreClass : '');
 
-  const barFill = document.getElementById('modalBar');
+  var barFill = document.getElementById('modalBar');
   barFill.style.width = bar.score + '%';
   barFill.className = 'modal-score-bar-fill' + (bar.scoreClass ? ' ' + bar.scoreClass : '');
 
-  const grid = document.getElementById('modalGrid');
-  grid.innerHTML = bar.details.map(d => `
-    <div class="modal-detail-item">
-      <div class="modal-detail-label">${d.label}</div>
-      <div class="modal-detail-value ${d.cls}">${d.value}</div>
-    </div>
-  `).join('');
+  var grid = document.getElementById('modalGrid');
+  grid.innerHTML = bar.details.map(function(d) {
+    return '<div class="modal-detail-item"><div class="modal-detail-label">' + d.label + '</div><div class="modal-detail-value ' + d.cls + '">' + d.value + '</div></div>';
+  }).join('');
 
+  // Masquer la carte, afficher le modal
+  document.getElementById('mapContainer').style.display = 'none';
   document.getElementById('detailModal').classList.add('open');
 }
 
 function closeModal(e) {
-  if (e.target === document.getElementById('detailModal')) {
+  if (!e || e.target === document.getElementById('detailModal')) {
     document.getElementById('detailModal').classList.remove('open');
+    // Réafficher la carte
+    document.getElementById('mapContainer').style.display = 'block';
+    // Forcer Leaflet à recalculer la taille
+    if (leafletMap) {
+      setTimeout(function() { leafletMap.invalidateSize(); }, 50);
+    }
   }
 }
 
@@ -1399,6 +1643,198 @@ function navigate() {
   } else {
     // Google Maps pour Android/Desktop
     window.open('https://www.google.com/maps/dir/?api=1&destination=' + lat + ',' + lng + '&destination_place_name=' + name + '&travelmode=walking', '_blank');
+  }
+}
+
+// ── PARTENAIRES ──
+var activeFilter = 'tous';
+
+var partners = [
+  {
+    name: "Apave Centre-Val de Loire",
+    type: "Bureau de contrôle agréé",
+    logo: "🏢",
+    logoColor: "#1A3A6A",
+    badges: ["pb-agréé", "pb-local", "pb-certif"],
+    badgeLabels: ["✓ Agréé Préfecture", "📍 Tours", "ERP certifié"],
+    tags: ["bureau", "erp"],
+    rating: 4.8, reviews: 124,
+    delay: "Sous 5 jours",
+    price: "À partir de 380€",
+    city: "Tours (37)",
+    phone: "02 47 XX XX XX",
+    services: ["Visite de sécurité ERP", "Rapport commission", "Suivi annuel", "Certification incendie"],
+    desc: "Bureau de contrôle référence en région Centre. Intervient sur tous types d'ERP jusqu'à la 1ère catégorie."
+  },
+  {
+    name: "Socotec Indre-et-Loire",
+    type: "Organisme de prévention sécurité",
+    logo: "🔬",
+    logoColor: "#1A1A2E",
+    badges: ["pb-agréé", "pb-rapide", "pb-certif"],
+    badgeLabels: ["✓ Agréé Ministère", "⚡ Rapide", "ERP certifié"],
+    tags: ["bureau", "erp", "rapide"],
+    rating: 4.6, reviews: 89,
+    delay: "Sous 48h",
+    price: "À partir de 290€",
+    city: "Tours (37)",
+    phone: "02 47 XX XX XX",
+    services: ["Audit sécurité ERP", "Mise en conformité", "Formation SSI", "Certification"],
+    desc: "Interventions rapides garanties sous 48h. Spécialiste des bars, restaurants et ERP de type N et L."
+  },
+  {
+    name: "Sécuritas Protection",
+    type: "Conseil en sécurité incendie",
+    logo: "🛡️",
+    logoColor: "#1A2A1A",
+    badges: ["pb-agréé", "pb-local"],
+    badgeLabels: ["✓ Agréé", "📍 Tours"],
+    tags: ["securite"],
+    rating: 4.5, reviews: 67,
+    delay: "Sous 7 jours",
+    price: "À partir de 250€",
+    city: "Tours (37)",
+    phone: "02 47 XX XX XX",
+    services: ["Installation extincteurs", "Détection incendie", "Éclairage sécurité", "Formation évacuation"],
+    desc: "Spécialiste de l'installation et maintenance des équipements de sécurité incendie. Contrats d'entretien annuels."
+  },
+  {
+    name: "Bureau Veritas Centre",
+    type: "Bureau de contrôle & certification",
+    logo: "✅",
+    logoColor: "#1A2A3A",
+    badges: ["pb-agréé", "pb-certif"],
+    badgeLabels: ["✓ Agréé Préfecture", "ERP certifié"],
+    tags: ["bureau", "erp", "securite"],
+    rating: 4.9, reviews: 201,
+    delay: "Sous 10 jours",
+    price: "À partir de 450€",
+    city: "Orléans (45)",
+    phone: "02 38 XX XX XX",
+    services: ["Contrôle réglementaire ERP", "Commission de sécurité", "Audit complet", "Rapport officiel"],
+    desc: "Leader mondial du contrôle. Rapport reconnu par toutes les commissions de sécurité de la région."
+  },
+  {
+    name: "SafeConsult Tours",
+    type: "Cabinet conseil ERP indépendant",
+    logo: "💼",
+    logoColor: "#2A1A1A",
+    badges: ["pb-local", "pb-rapide"],
+    badgeLabels: ["📍 Tours", "⚡ Rapide"],
+    tags: ["erp", "rapide"],
+    rating: 4.7, reviews: 43,
+    delay: "Sous 3 jours",
+    price: "À partir de 180€",
+    city: "Tours (37)",
+    phone: "02 47 XX XX XX",
+    services: ["Pré-audit ERP", "Accompagnement dossier", "Conseil mise en conformité", "Préparation visite"],
+    desc: "Cabinet indépendant spécialisé bars et restaurants. Préparez votre dossier avant la commission officielle."
+  }
+];
+
+function renderPartners(list) {
+  var container = document.getElementById('partnersList');
+  if (!list || list.length === 0) {
+    container.innerHTML = '<div style="text-align:center;padding:40px 0;color:var(--muted);"><div style="font-size:36px;margin-bottom:12px;">🔍</div><div>Aucun partenaire trouvé</div></div>';
+    return;
+  }
+  document.getElementById('partnersCount').textContent = list.length + ' organisme' + (list.length > 1 ? 's' : '') + ' • Région Centre-Val de Loire';
+  container.innerHTML = list.map(function(p, i) {
+    return '<div class="partner-card" id="pcard' + i + '">' +
+      '<div class="partner-card-top">' +
+        '<div class="partner-logo" style="background:' + p.logoColor + ';">' + p.logo + '</div>' +
+        '<div class="partner-info">' +
+          '<div class="partner-name">' + p.name + '</div>' +
+          '<div class="partner-type">' + p.type + '</div>' +
+          '<div class="partner-badges">' +
+            p.badges.map(function(b, bi) {
+              return '<span class="partner-badge ' + b + '">' + p.badgeLabels[bi] + '</span>';
+            }).join('') +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="partner-divider"></div>' +
+      '<div class="partner-meta">' +
+        '<div class="partner-meta-item">⭐ ' + p.rating + ' <span style="color:rgba(255,255,255,0.2)">(' + p.reviews + ' avis)</span></div>' +
+        '<div class="partner-meta-item">📍 ' + p.city + '</div>' +
+        '<div class="partner-meta-item">⏱ ' + p.delay + '</div>' +
+      '</div>' +
+      '<div class="partner-services">' +
+        p.services.map(function(s) { return '<span class="partner-service">' + s + '</span>'; }).join('') +
+      '</div>' +
+      '<div style="font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.5;">' + p.desc + '</div>' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">' +
+        '<div class="partner-price">' + p.price + ' <span>/ évaluation</span></div>' +
+      '</div>' +
+      '<div class="partner-cta">' +
+        '<button class="partner-btn partner-btn-primary" onclick="contactPartner('' + p.name + '')">📞 Contacter</button>' +
+        '<button class="partner-btn partner-btn-secondary" onclick="showToast('📋 Devis envoyé à ' + p.name.split(' ')[0] + ' !')">💬 Devis</button>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function filterPartners() {
+  var search = document.getElementById('partnerSearch').value.toLowerCase();
+  var filtered = partners.filter(function(p) {
+    var matchFilter = activeFilter === 'tous' || p.tags.indexOf(activeFilter) !== -1;
+    var matchSearch = search === '' ||
+      p.name.toLowerCase().indexOf(search) !== -1 ||
+      p.type.toLowerCase().indexOf(search) !== -1 ||
+      p.city.toLowerCase().indexOf(search) !== -1 ||
+      p.services.some(function(s) { return s.toLowerCase().indexOf(search) !== -1; });
+    return matchFilter && matchSearch;
+  });
+  renderPartners(filtered);
+}
+
+function setFilter(filter, el) {
+  activeFilter = filter;
+  document.querySelectorAll('.filter-pill').forEach(function(p) { p.classList.remove('active'); });
+  el.classList.add('active');
+  filterPartners();
+}
+
+function contactPartner(name) {
+  showToast('📞 Appel vers ' + name.split(' ')[0] + '…');
+}
+
+// ── OWNER TAB NAVIGATION ──
+function switchOwnerTab(tab) {
+  // Masquer tous les sub-screens
+  document.querySelectorAll('.owner-sub').forEach(function(s) { s.classList.remove('active'); });
+
+  // Reset toutes les icônes tab
+  var tabs = ['Home', 'Partners', 'Docs', 'Settings'];
+  tabs.forEach(function(t) {
+    var icon = document.getElementById('ownerTab' + t);
+    var txt = document.getElementById('ownerTab' + t + 'Txt');
+    if (icon) { icon.classList.remove('active'); }
+    if (txt) { txt.classList.remove('active'); txt.style.color = ''; }
+  });
+
+  // Afficher le bon sub-screen et activer l'onglet
+  var map = {
+    'home': { sub: 'ownerHome', tab: 'Home' },
+    'partners': { sub: 'ownerPartners', tab: 'Partners' },
+    'docs': { sub: 'ownerDocs', tab: 'Docs' },
+    'settings': { sub: 'ownerSettings', tab: 'Settings' }
+  };
+
+  if (map[tab]) {
+    var el = document.getElementById(map[tab].sub);
+    if (el) el.classList.add('active');
+    var icon = document.getElementById('ownerTab' + map[tab].tab);
+    var txt = document.getElementById('ownerTab' + map[tab].tab + 'Txt');
+    if (icon) icon.classList.add('active');
+    if (txt) { txt.classList.add('active'); txt.style.color = 'var(--green)'; }
+
+    // Initialiser la liste partenaires au premier affichage
+    if (tab === 'partners') {
+      renderPartners(partners);
+    }
+    // Scroll to top
+    document.getElementById('barowner').scrollTop = 0;
   }
 }
 
