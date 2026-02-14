@@ -968,7 +968,7 @@
           <div class="role-icon client">🧭</div>
           <div class="role-info">
             <div class="role-title">Je suis un client</div>
-            <div class="role-desc">Trouvez des bars sécurisés près de vous à Tours</div>
+            <div class="role-desc">Trouvez des bars sécurisés près de vous — pilote Tours &amp; Paris</div>
           </div>
           <div class="role-arrow">›</div>
         </div>
@@ -976,13 +976,13 @@
           <div class="role-icon bar">🏪</div>
           <div class="role-info">
             <div class="role-title">Je gère un établissement</div>
-            <div class="role-desc">Consultez et améliorez votre score de sécurité</div>
+            <div class="role-desc">Gratuit · Score public + badge vitrine certifié</div>
           </div>
           <div class="role-arrow">›</div>
         </div>
       </div>
       <div style="margin-top:32px;font-size:12px;color:rgba(240,240,248,0.25);text-align:center;line-height:1.5;">
-        Données ERP • Certificats de sécurité<br>Transparence pour tous
+        Données ERP • Certificats de sécurité<br>Gratuit pour les gérants · Transparent pour tous
       </div>
     </div>
   </div>
@@ -999,7 +999,7 @@
         <span id="locationText">Localisation en cours…</span>
       </div>
       <div class="section-title">Bars près de vous</div>
-      <div class="section-sub">3 établissements • Tours, Indre-et-Loire</div>
+      <div class="section-sub">7 établissements • Tours &amp; Paris — Pilote bêta</div>
     </div>
 
     <!-- MAP LEAFLET -->
@@ -1092,6 +1092,138 @@
           <div class="certif-pill">✓ Extincteurs</div>
           <div class="certif-pill">✓ Issues secours</div>
           <div class="certif-pill">✓ Détecteurs</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SECTION PARIS -->
+    <div style="padding:20px 24px 8px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+        <div class="section-title" style="margin:0;">Paris — Bêta</div>
+        <div style="background:rgba(232,184,75,0.12);border:1px solid rgba(232,184,75,0.3);color:#E8B84B;font-size:9px;font-weight:700;padding:3px 8px;border-radius:100px;letter-spacing:.04em;">🟡 PILOTE PARIS</div>
+      </div>
+      <div class="section-sub">4 établissements • Marais &amp; Oberkampf · accès bêta</div>
+    </div>
+    <div class="bars-list">
+
+      <!-- Paris 1 — Le Marais -->
+      <div class="bar-card" onclick="openModal(3)">
+        <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#E8B84B;border-radius:0 2px 2px 0;"></div>
+        <div style="position:absolute;top:10px;right:10px;background:rgba(232,184,75,0.12);border:1px solid rgba(232,184,75,0.3);color:#E8B84B;font-size:8px;font-weight:700;padding:2px 7px;border-radius:100px;">🗼 Paris</div>
+        <div class="bar-card-top" style="padding-right:60px;">
+          <div>
+            <div class="bar-name">Le Marais Social Club</div>
+            <div class="bar-type">Bar cocktails — 18 Rue de Bretagne, 3e</div>
+          </div>
+          <div class="score-badge">
+            <div class="score-num">91</div>
+            <div class="score-label">/100</div>
+          </div>
+        </div>
+        <div class="score-bar-wrap">
+          <div class="score-bar-track"><div class="score-bar-fill" style="width:91%"></div></div>
+          <div class="score-pct">91%</div>
+        </div>
+        <div class="bar-meta">
+          <div class="bar-meta-item">📍 Paris 3e</div>
+          <div class="bar-meta-item">🕐 Ouvert</div>
+          <div class="bar-meta-item">👥 ~60 pers.</div>
+        </div>
+        <div class="certif-pills">
+          <div class="certif-pill">✓ Extincteurs</div>
+          <div class="certif-pill">✓ Issues secours</div>
+          <div class="certif-pill">✓ Détecteurs</div>
+        </div>
+      </div>
+
+      <!-- Paris 2 — Oberkampf -->
+      <div class="bar-card" style="border-color:rgba(255,140,0,0.2);" onclick="openModal(4)">
+        <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--orange);border-radius:0 2px 2px 0;"></div>
+        <div style="position:absolute;top:10px;right:10px;background:rgba(232,184,75,0.12);border:1px solid rgba(232,184,75,0.3);color:#E8B84B;font-size:8px;font-weight:700;padding:2px 7px;border-radius:100px;">🗼 Paris</div>
+        <div class="bar-card-top" style="padding-right:60px;">
+          <div>
+            <div class="bar-name">Café Oberkampf</div>
+            <div class="bar-type">Bar concert — 3 Rue Oberkampf, 11e</div>
+          </div>
+          <div class="score-badge orange">
+            <div class="score-num orange">74</div>
+            <div class="score-label">/100</div>
+          </div>
+        </div>
+        <div class="score-bar-wrap">
+          <div class="score-bar-track"><div class="score-bar-fill orange" style="width:74%"></div></div>
+          <div class="score-pct">74%</div>
+        </div>
+        <div class="bar-meta">
+          <div class="bar-meta-item">📍 Paris 11e</div>
+          <div class="bar-meta-item">🕐 Ouvert</div>
+          <div class="bar-meta-item">👥 ~150 pers.</div>
+        </div>
+        <div class="certif-pills">
+          <div class="certif-pill">✓ Extincteurs</div>
+          <div class="certif-pill warning">⚠ Issues secours</div>
+          <div class="certif-pill warning">⚠ Registre</div>
+        </div>
+      </div>
+
+      <!-- Paris 3 — République -->
+      <div class="bar-card" onclick="openModal(5)">
+        <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#E8B84B;border-radius:0 2px 2px 0;"></div>
+        <div style="position:absolute;top:10px;right:10px;background:rgba(232,184,75,0.12);border:1px solid rgba(232,184,75,0.3);color:#E8B84B;font-size:8px;font-weight:700;padding:2px 7px;border-radius:100px;">🗼 Paris</div>
+        <div class="bar-card-top" style="padding-right:60px;">
+          <div>
+            <div class="bar-name">Bar République</div>
+            <div class="bar-type">Brasserie — 42 Bd du Temple, 3e</div>
+          </div>
+          <div class="score-badge">
+            <div class="score-num">88</div>
+            <div class="score-label">/100</div>
+          </div>
+        </div>
+        <div class="score-bar-wrap">
+          <div class="score-bar-track"><div class="score-bar-fill" style="width:88%"></div></div>
+          <div class="score-pct">88%</div>
+        </div>
+        <div class="bar-meta">
+          <div class="bar-meta-item">📍 Paris 3e</div>
+          <div class="bar-meta-item">🕐 Ouvert</div>
+          <div class="bar-meta-item">👥 ~200 pers.</div>
+        </div>
+        <div class="certif-pills">
+          <div class="certif-pill">✓ Extincteurs</div>
+          <div class="certif-pill">✓ Issues secours</div>
+          <div class="certif-pill">✓ Éclairage</div>
+        </div>
+      </div>
+
+      <!-- Paris 4 — Bastille -->
+      <div class="bar-card" style="border-color:rgba(255,140,0,0.2);" onclick="openModal(6)">
+        <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--orange);border-radius:0 2px 2px 0;"></div>
+        <div style="position:absolute;top:10px;right:10px;background:rgba(232,184,75,0.12);border:1px solid rgba(232,184,75,0.3);color:#E8B84B;font-size:8px;font-weight:700;padding:2px 7px;border-radius:100px;">🗼 Paris</div>
+        <div class="bar-card-top" style="padding-right:60px;">
+          <div>
+            <div class="bar-name">La Scène Bastille</div>
+            <div class="bar-type">Bar PMU — 7 Rue de la Roquette, 11e</div>
+          </div>
+          <div class="score-badge orange">
+            <div class="score-num orange">71</div>
+            <div class="score-label">/100</div>
+          </div>
+        </div>
+        <div class="score-bar-wrap">
+          <div class="score-bar-track"><div class="score-bar-fill orange" style="width:71%"></div></div>
+          <div class="score-pct">71%</div>
+        </div>
+        <div class="bar-meta">
+          <div class="bar-meta-item">📍 Paris 11e</div>
+          <div class="bar-meta-item">🕐 Fermé</div>
+          <div class="bar-meta-item">👥 ~90 pers.</div>
+        </div>
+        <div class="certif-pills">
+          <div class="certif-pill">✓ Extincteurs</div>
+          <div class="certif-pill warning">⚠ Détecteurs</div>
+          <div class="certif-pill warning">⚠ Éclairage</div>
         </div>
       </div>
 
@@ -1318,6 +1450,10 @@
       <div class="tab-icon active" id="ownerTabHome">🏠</div>
       <div class="tab-txt active" id="ownerTabHomeTxt">Accueil</div>
     </div>
+    <div class="tab-item" onclick="switchOwnerTab('analytics')">
+      <div class="tab-icon" id="ownerTabAnalytics">📊</div>
+      <div class="tab-txt" id="ownerTabAnalyticsTxt">Stats</div>
+    </div>
     <div class="tab-item" onclick="switchOwnerTab('partners')">
       <div class="tab-icon" id="ownerTabPartners">🤝</div>
       <div class="tab-txt" id="ownerTabPartnersTxt">Partenaires</div>
@@ -1338,8 +1474,9 @@
         <div style="padding-top:8px;" class="header-top">
           <div>
             <div class="section-title">Partenaires agréés</div>
-            <div class="partners-count" id="partnersCount">5 organismes • Région Centre-Val de Loire</div>
+            <div class="partners-count" id="partnersCount">7 organismes • Tours, Paris & France</div>
           </div>
+          <div class="back-btn" onclick="switchOwnerTab('home')">← Retour</div>
         </div>
 
         <!-- SEARCH -->
@@ -1364,18 +1501,201 @@
 
     <!-- SUB: DOCUMENTS -->
     <div class="owner-sub" id="ownerDocs">
-      <div style="padding:60px 24px;text-align:center;color:var(--muted);">
-        <div style="font-size:48px;margin-bottom:16px;">📋</div>
-        <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:8px;">Mes documents</div>
-        <div style="font-size:13px;">Vos certificats et rapports apparaîtront ici</div>
+      <div style="padding:16px 24px 0;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+          <div class="section-title" style="margin:0;">Certificats & documents</div>
+          <div class="back-btn" onclick="switchOwnerTab('home')">← Retour</div>
+        </div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:20px;">Bar du Centre • Tours</div>
+      </div>
+
+      <!-- Certificat actif -->
+      <div style="margin:0 24px 16px;">
+        <div style="background:linear-gradient(135deg,rgba(0,200,120,0.1),rgba(0,200,120,0.04));border:1px solid rgba(0,200,120,0.3);border-radius:16px;padding:18px;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+            <div>
+              <div style="font-size:11px;color:var(--green);font-weight:700;letter-spacing:.06em;margin-bottom:4px;">✅ CERTIFICAT ACTIF</div>
+              <div style="font-size:15px;font-weight:700;color:var(--text);">Certificat de conformité ERP</div>
+              <div style="font-size:11px;color:var(--muted);margin-top:2px;">Délivré par Apave Centre-Val de Loire</div>
+            </div>
+            <div style="background:rgba(0,200,120,0.15);border-radius:10px;padding:8px 12px;text-align:center;">
+              <div style="font-size:22px;font-weight:900;color:var(--green);line-height:1;">82</div>
+              <div style="font-size:8px;color:var(--muted);">/100</div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
+            <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:8px 10px;">
+              <div style="font-size:9px;color:var(--muted);margin-bottom:2px;">Délivré le</div>
+              <div style="font-size:11px;font-weight:600;color:var(--text);">14 juin 2025</div>
+            </div>
+            <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:8px 10px;">
+              <div style="font-size:9px;color:var(--muted);margin-bottom:2px;">Valide jusqu'au</div>
+              <div style="font-size:11px;font-weight:600;color:var(--text);">14 juin 2026</div>
+            </div>
+            <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:8px 10px;">
+              <div style="font-size:9px;color:var(--muted);margin-bottom:2px;">Référence</div>
+              <div style="font-size:11px;font-weight:600;color:var(--text);">APV-2025-4471</div>
+            </div>
+            <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:8px 10px;">
+              <div style="font-size:9px;color:var(--muted);margin-bottom:2px;">Catégorie ERP</div>
+              <div style="font-size:11px;font-weight:600;color:var(--text);">Type N — 3e cat.</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button onclick="showToast('📥 Certificat téléchargé')" style="flex:1;background:var(--green);color:#000;border:none;border-radius:10px;padding:10px;font-size:12px;font-weight:700;cursor:pointer;">📥 Télécharger PDF</button>
+            <button onclick="showToast('📤 Certificat partagé')" style="flex:1;background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:10px;font-size:12px;font-weight:600;cursor:pointer;">📤 Partager</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rapport de visite -->
+      <div style="margin:0 24px 16px;">
+        <div style="font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.06em;margin-bottom:10px;">RAPPORTS DE VISITE</div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+          <div onclick="showToast('📋 Rapport ouvert')" style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer;">
+            <div style="font-size:22px;">📄</div>
+            <div style="flex:1;">
+              <div style="font-size:12px;font-weight:600;color:var(--text);">Rapport visite Apave — juin 2025</div>
+              <div style="font-size:10px;color:var(--muted);margin-top:2px;">PDF • 3 pages • 245 Ko</div>
+            </div>
+            <div style="color:var(--muted);font-size:16px;">›</div>
+          </div>
+          <div onclick="showToast('📋 Rapport ouvert')" style="display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;">
+            <div style="font-size:22px;">📄</div>
+            <div style="flex:1;">
+              <div style="font-size:12px;font-weight:600;color:var(--text);">Rapport visite Apave — juin 2024</div>
+              <div style="font-size:10px;color:var(--muted);margin-top:2px;">PDF • 3 pages • 218 Ko</div>
+            </div>
+            <div style="color:var(--muted);font-size:16px;">›</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prochain renouvellement -->
+      <div style="margin:0 24px 100px;">
+        <div style="background:rgba(255,140,0,0.08);border:1px solid rgba(255,140,0,0.25);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px;">
+          <div style="font-size:24px;">⏰</div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:var(--orange);">Renouvellement dans 4 mois</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:2px;">Planifier une visite Apave avant le 14 juin 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUB: ANALYTICS -->
+    <div class="owner-sub" id="ownerAnalytics">
+      <div style="padding:16px 24px 0;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+          <div class="section-title" style="margin:0;">Statistiques de consultation</div>
+          <div class="back-btn" onclick="switchOwnerTab('home')">← Retour</div>
+        </div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:16px;">Bar du Centre • Tours — 30 derniers jours</div>
+      </div>
+
+      <!-- KPIs -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 24px 16px;">
+        <div style="background:linear-gradient(135deg,rgba(0,200,120,0.12),rgba(0,200,120,0.04));border:1px solid rgba(0,200,120,0.25);border-radius:14px;padding:14px;">
+          <div style="font-size:10px;color:var(--green);font-weight:700;letter-spacing:.05em;margin-bottom:6px;">VUES FICHE</div>
+          <div style="font-size:28px;font-weight:900;color:var(--text);line-height:1;" class="kpi-vues">847</div>
+          <div style="font-size:10px;color:var(--green);margin-top:4px;">↑ +23% vs mois préc.</div>
+        </div>
+        <div style="background:linear-gradient(135deg,rgba(232,184,75,0.12),rgba(232,184,75,0.04));border:1px solid rgba(232,184,75,0.25);border-radius:14px;padding:14px;">
+          <div style="font-size:10px;color:var(--gold, #E8B84B);font-weight:700;letter-spacing:.05em;margin-bottom:6px;">SCANS QR</div>
+          <div style="font-size:28px;font-weight:900;color:var(--text);line-height:1;" class="kpi-scans">134</div>
+          <div style="font-size:10px;color:var(--gold, #E8B84B);margin-top:4px;">↑ +41% vs mois préc.</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.05em;margin-bottom:6px;">SCORE MOYEN VU</div>
+          <div style="font-size:28px;font-weight:900;color:var(--text);line-height:1;">82<span style="font-size:14px;color:var(--muted)">/100</span></div>
+          <div style="font-size:10px;color:var(--muted);margin-top:4px;">Stable ce mois</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;">
+          <div style="font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.05em;margin-bottom:6px;">CLASSEMENT LOCAL</div>
+          <div style="font-size:28px;font-weight:900;color:var(--text);line-height:1;">#2<span style="font-size:14px;color:var(--muted)">/7</span></div>
+          <div style="font-size:10px;color:var(--muted);margin-top:4px;">Bars du centre-ville</div>
+        </div>
+      </div>
+
+      <!-- Graphe visites 30j -->
+      <div style="margin:0 24px 16px;">
+        <div style="font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.06em;margin-bottom:10px;">VISITES PAR JOUR — 30 DERNIERS JOURS</div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;">
+          <canvas id="analyticsChart" width="270" height="100" style="width:100%;height:100px;"></canvas>
+        </div>
+      </div>
+
+      <!-- Sélecteur période -->
+      <div style="padding:0 24px;margin-bottom:16px;display:flex;gap:8px;">
+        <div id="period7"  onclick="setPeriod(7)"  style="background:var(--card);border:1px solid var(--border);border-radius:100px;padding:5px 12px;font-size:11px;color:var(--muted);cursor:pointer;">7j</div>
+        <div id="period30" onclick="setPeriod(30)" style="background:rgba(0,200,120,0.15);border:1px solid rgba(0,200,120,0.4);border-radius:100px;padding:5px 12px;font-size:11px;color:var(--green);font-weight:700;cursor:pointer;">30j</div>
+        <div id="period90" onclick="setPeriod(90)" style="background:var(--card);border:1px solid var(--border);border-radius:100px;padding:5px 12px;font-size:11px;color:var(--muted);cursor:pointer;">90j</div>
+      </div>
+
+      <!-- Sources de trafic -->
+      <div style="margin:0 24px 16px;">
+        <div style="font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.06em;margin-bottom:10px;">SOURCES DE CONSULTATION</div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;">
+          <div style="padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;">
+            <div style="font-size:18px;">📱</div>
+            <div style="flex:1;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+                <span style="font-size:12px;font-weight:600;color:var(--text);">Application Safio</span>
+                <span style="font-size:12px;font-weight:700;color:var(--green);">58%</span>
+              </div>
+              <div style="background:var(--border);border-radius:4px;height:4px;"><div style="width:58%;height:100%;background:var(--green);border-radius:4px;"></div></div>
+            </div>
+          </div>
+          <div style="padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;">
+            <div style="font-size:18px;">🔷</div>
+            <div style="flex:1;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+                <span style="font-size:12px;font-weight:600;color:var(--text);">Scan QR badge vitrine</span>
+                <span style="font-size:12px;font-weight:700;color:#E8B84B;">16%</span>
+              </div>
+              <div style="background:var(--border);border-radius:4px;height:4px;"><div style="width:16%;height:100%;background:#E8B84B;border-radius:4px;"></div></div>
+            </div>
+          </div>
+          <div style="padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;">
+            <div style="font-size:18px;">🗺️</div>
+            <div style="flex:1;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+                <span style="font-size:12px;font-weight:600;color:var(--text);">Google Maps</span>
+                <span style="font-size:12px;font-weight:700;color:#3B9EFF;">18%</span>
+              </div>
+              <div style="background:var(--border);border-radius:4px;height:4px;"><div style="width:18%;height:100%;background:#3B9EFF;border-radius:4px;"></div></div>
+            </div>
+          </div>
+          <div style="padding:12px 16px;display:flex;align-items:center;gap:12px;">
+            <div style="font-size:18px;">🌐</div>
+            <div style="flex:1;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+                <span style="font-size:12px;font-weight:600;color:var(--text);">Recherche web directe</span>
+                <span style="font-size:12px;font-weight:700;color:var(--muted);">8%</span>
+              </div>
+              <div style="background:var(--border);border-radius:4px;height:4px;"><div style="width:8%;height:100%;background:var(--muted);border-radius:4px;"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Conseil -->
+      <div style="margin:0 24px 100px;">
+        <div style="background:rgba(0,200,120,0.06);border:1px solid rgba(0,200,120,0.2);border-radius:12px;padding:14px 16px;">
+          <div style="font-size:11px;color:var(--green);font-weight:700;margin-bottom:6px;">💡 CONSEIL SAFIO</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.6;">Votre score de 82/100 vous place dans le <strong style="color:var(--text);">top 30%</strong> des bars de Tours. Corriger le point "Détecteurs fumée" vous ferait gagner <strong style="color:var(--green);">+8 points</strong> et passer en top 10%.</div>
+        </div>
       </div>
     </div>
 
     <!-- SUB: RÉGLAGES -->
     <div class="owner-sub" id="ownerSettings">
-      <div style="padding:60px 24px;text-align:center;color:var(--muted);">
+      <div class="header-top" style="padding-top:8px;">
+        <div><div class="section-title">Réglages</div></div>
+        <div class="back-btn" onclick="switchOwnerTab('home')">← Retour</div>
+      </div>
+      <div style="padding:40px 24px;text-align:center;color:var(--muted);">
         <div style="font-size:48px;margin-bottom:16px;">⚙️</div>
-        <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:8px;">Réglages</div>
         <div style="font-size:13px;">Gérez votre profil et vos préférences</div>
       </div>
     </div>
@@ -1449,10 +1769,88 @@ const bars = [
       {label:"Affichages",value:"✓ Conformes",cls:"green"},
       {label:"Dernière visite",value:"sept. 2025",cls:""},
     ]
+  },
+  {
+    name: "Le Marais Social Club",
+    addr: "18 Rue de Bretagne, Paris 3e",
+    score: 91,
+    type: "Bar cocktails • ERP Type N • 5e catégorie",
+    capacity: "60 personnes",
+    distance: "Paris — Pilote bêta",
+    lastInspection: "8 nov. 2025",
+    nextInspection: "nov. 2026",
+    scoreClass: "",
+    lat: 48.8627, lng: 2.3597,
+    details: [
+      {label:"Extincteurs",value:"✓ Conformes",cls:"green"},
+      {label:"Issues secours",value:"✓ Conformes",cls:"green"},
+      {label:"Détecteurs fumée",value:"✓ Conformes",cls:"green"},
+      {label:"Éclairage sécu.",value:"✓ Conforme",cls:"green"},
+      {label:"Affichages",value:"✓ Conformes",cls:"green"},
+      {label:"Dernière visite",value:"nov. 2025",cls:""},
+    ]
+  },
+  {
+    name: "Café Oberkampf",
+    addr: "3 Rue Oberkampf, Paris 11e",
+    score: 74,
+    type: "Bar concert • ERP Type L • 3e catégorie",
+    capacity: "150 personnes",
+    distance: "Paris — Pilote bêta",
+    lastInspection: "5 oct. 2025",
+    nextInspection: "oct. 2026",
+    scoreClass: "orange",
+    lat: 48.8651, lng: 2.3748,
+    details: [
+      {label:"Extincteurs",value:"✓ Conformes",cls:"green"},
+      {label:"Issues secours",value:"⚠ Action req.",cls:"orange"},
+      {label:"Détecteurs fumée",value:"✓ Conformes",cls:"green"},
+      {label:"Éclairage sécu.",value:"✓ Conforme",cls:"green"},
+      {label:"Registre sécu.",value:"⚠ Incomplet",cls:"orange"},
+      {label:"Dernière visite",value:"oct. 2025",cls:""},
+    ]
+  },
+  {
+    name: "Bar République",
+    addr: "42 Bd du Temple, Paris 3e",
+    score: 88,
+    type: "Brasserie • ERP Type N • 2e catégorie",
+    capacity: "200 personnes",
+    distance: "Paris — Pilote bêta",
+    lastInspection: "15 janv. 2026",
+    nextInspection: "janv. 2027",
+    scoreClass: "",
+    lat: 48.8641, lng: 2.3623,
+    details: [
+      {label:"Extincteurs",value:"✓ Conformes",cls:"green"},
+      {label:"Issues secours",value:"✓ Conformes",cls:"green"},
+      {label:"Détecteurs fumée",value:"✓ Conformes",cls:"green"},
+      {label:"Éclairage sécu.",value:"✓ Conforme",cls:"green"},
+      {label:"Affichages",value:"✓ Conformes",cls:"green"},
+      {label:"Dernière visite",value:"janv. 2026",cls:""},
+    ]
+  },
+  {
+    name: "La Scène Bastille",
+    addr: "7 Rue de la Roquette, Paris 11e",
+    score: 71,
+    type: "Bar PMU • ERP Type N • 5e catégorie",
+    capacity: "90 personnes",
+    distance: "Paris — Pilote bêta",
+    lastInspection: "2 déc. 2025",
+    nextInspection: "déc. 2026",
+    scoreClass: "orange",
+    lat: 48.8535, lng: 2.3710,
+    details: [
+      {label:"Extincteurs",value:"✓ Conformes",cls:"green"},
+      {label:"Issues secours",value:"✓ Conformes",cls:"green"},
+      {label:"Détecteurs fumée",value:"⚠ Partiel",cls:"orange"},
+      {label:"Éclairage sécu.",value:"⚠ Action req.",cls:"orange"},
+      {label:"Affichages",value:"✓ Conformes",cls:"green"},
+      {label:"Dernière visite",value:"déc. 2025",cls:""},
+    ]
   }
 ];
-
-// ── NAVIGATION ──
 function goTo(screen) {
   // Masquer tous les écrans
   document.querySelectorAll('.screen').forEach(function(s) {
@@ -1546,7 +1944,7 @@ function initGeolocation() {
   loadLeafletThenMap();
 
   if (!navigator.geolocation) {
-    txt.textContent = 'Tours, Indre-et-Loire';
+    txt.textContent = 'Tours — Pilote bêta';
     return;
   }
 
@@ -1558,7 +1956,7 @@ function initGeolocation() {
       pill.style.background = 'rgba(0,232,122,0.15)';
       if (leafletMap) leafletMap.panTo([pos.coords.latitude, pos.coords.longitude]);
     },
-    function() { txt.textContent = 'Tours, Indre-et-Loire'; },
+    function() { txt.textContent = 'Tours — Pilote bêta'; },
     { timeout: 5000, maximumAge: 60000 }
   );
 }
@@ -1651,6 +2049,38 @@ var activeFilter = 'tous';
 
 var partners = [
   {
+    name: "UMIH — Union des Métiers",
+    type: "Fédération professionnelle CHR",
+    logo: "🏛",
+    logoColor: "#1A1A3A",
+    badges: ["pb-agréé", "pb-local", "pb-certif"],
+    badgeLabels: ["✓ Partenaire officiel", "🤝 30 000 gérants", "CHR France"],
+    tags: ["fédération", "erp"],
+    rating: 4.9, reviews: 312,
+    delay: "Contact immédiat",
+    price: "Partenaire officiel",
+    city: "Tours (37) & France",
+    phone: "umih.fr",
+    services: ["Réseau 30 000 gérants", "Accompagnement réglementaire", "Événements CHR", "Veille législative"],
+    desc: "Premier partenaire Safio. L'UMIH référence Safio auprès de ses 30 000 adhérents gérants de bars, restaurants et hôtels en France."
+  },
+  {
+    name: "France Boissons (Heineken)",
+    type: "Distributeur CHR national",
+    logo: "🍺",
+    logoColor: "#1A2A1A",
+    badges: ["pb-agréé", "pb-rapide"],
+    badgeLabels: ["✓ Distribution nationale", "200K établissements"],
+    tags: ["distribution", "erp"],
+    rating: 4.7, reviews: 198,
+    delay: "Tournée hebdomadaire",
+    price: "Co-distribution",
+    city: "France entière",
+    phone: "franceboissons.com",
+    services: ["Distribution nationale CHR", "200 000 établissements/semaine", "Présentation Safio en tournée", "Commission apporteur d'affaires"],
+    desc: "Réseau de distribution Heineken présent chez 200 000 établissements CHR chaque semaine. Les commerciaux France Boissons présentent Safio lors de leurs tournées."
+  },
+  {
     name: "Apave Centre-Val de Loire",
     type: "Bureau de contrôle agréé",
     logo: "🏢",
@@ -1665,6 +2095,22 @@ var partners = [
     phone: "02 47 XX XX XX",
     services: ["Visite de sécurité ERP", "Rapport commission", "Suivi annuel", "Certification incendie"],
     desc: "Bureau de contrôle référence en région Centre. Intervient sur tous types d'ERP jusqu'à la 1ère catégorie."
+  },
+  {
+    name: "Bureau Veritas Centre",
+    type: "Bureau de contrôle & certification",
+    logo: "✅",
+    logoColor: "#1A2A3A",
+    badges: ["pb-agréé", "pb-certif"],
+    badgeLabels: ["✓ Agréé Préfecture", "ERP certifié"],
+    tags: ["bureau", "erp", "securite"],
+    rating: 4.9, reviews: 201,
+    delay: "Sous 10 jours",
+    price: "À partir de 450€",
+    city: "Orléans (45)",
+    phone: "02 38 XX XX XX",
+    services: ["Contrôle réglementaire ERP", "Commission de sécurité", "Audit complet", "Rapport officiel"],
+    desc: "Leader mondial du contrôle. Rapport reconnu par toutes les commissions de sécurité de la région."
   },
   {
     name: "Socotec Indre-et-Loire",
@@ -1699,22 +2145,6 @@ var partners = [
     desc: "Spécialiste de l'installation et maintenance des équipements de sécurité incendie. Contrats d'entretien annuels."
   },
   {
-    name: "Bureau Veritas Centre",
-    type: "Bureau de contrôle & certification",
-    logo: "✅",
-    logoColor: "#1A2A3A",
-    badges: ["pb-agréé", "pb-certif"],
-    badgeLabels: ["✓ Agréé Préfecture", "ERP certifié"],
-    tags: ["bureau", "erp", "securite"],
-    rating: 4.9, reviews: 201,
-    delay: "Sous 10 jours",
-    price: "À partir de 450€",
-    city: "Orléans (45)",
-    phone: "02 38 XX XX XX",
-    services: ["Contrôle réglementaire ERP", "Commission de sécurité", "Audit complet", "Rapport officiel"],
-    desc: "Leader mondial du contrôle. Rapport reconnu par toutes les commissions de sécurité de la région."
-  },
-  {
     name: "SafeConsult Tours",
     type: "Cabinet conseil ERP indépendant",
     logo: "💼",
@@ -1738,7 +2168,7 @@ function renderPartners(list) {
     container.innerHTML = '<div style="text-align:center;padding:40px 0;color:var(--muted);"><div style="font-size:36px;margin-bottom:12px;">🔍</div><div>Aucun partenaire trouvé</div></div>';
     return;
   }
-  document.getElementById('partnersCount').textContent = list.length + ' organisme' + (list.length > 1 ? 's' : '') + ' • Région Centre-Val de Loire';
+  document.getElementById('partnersCount').textContent = list.length + ' organisme' + (list.length > 1 ? 's' : '') + ' • Tours, Paris & France';
   container.innerHTML = list.map(function(p, i) {
     return '<div class="partner-card" id="pcard' + i + '">' +
       '<div class="partner-card-top">' +
@@ -1767,8 +2197,8 @@ function renderPartners(list) {
         '<div class="partner-price">' + p.price + ' <span>/ évaluation</span></div>' +
       '</div>' +
       '<div class="partner-cta">' +
-        '<button class="partner-btn partner-btn-primary" onclick="contactPartner('' + p.name + '')">📞 Contacter</button>' +
-        '<button class="partner-btn partner-btn-secondary" onclick="showToast('📋 Devis envoyé à ' + p.name.split(' ')[0] + ' !')">💬 Devis</button>' +
+        '<button class="partner-btn partner-btn-primary" onclick="contactPartner(\' + p.name + \')">📞 Contacter</button>' +
+        '<button class="partner-btn partner-btn-secondary" onclick="showToast(\'Devis envoy\u00e9 \' + p.name)">💬 Devis</button>' +
       '</div>' +
     '</div>';
   }).join('');
@@ -1801,41 +2231,160 @@ function contactPartner(name) {
 
 // ── OWNER TAB NAVIGATION ──
 function switchOwnerTab(tab) {
-  // Masquer tous les sub-screens
   document.querySelectorAll('.owner-sub').forEach(function(s) { s.classList.remove('active'); });
-
-  // Reset toutes les icônes tab
-  var tabs = ['Home', 'Partners', 'Docs', 'Settings'];
+  var tabs = ['Home', 'Analytics', 'Partners', 'Docs', 'Settings'];
   tabs.forEach(function(t) {
     var icon = document.getElementById('ownerTab' + t);
-    var txt = document.getElementById('ownerTab' + t + 'Txt');
-    if (icon) { icon.classList.remove('active'); }
-    if (txt) { txt.classList.remove('active'); txt.style.color = ''; }
+    var txt  = document.getElementById('ownerTab' + t + 'Txt');
+    if (icon) icon.classList.remove('active');
+    if (txt)  { txt.classList.remove('active'); txt.style.color = ''; }
   });
-
-  // Afficher le bon sub-screen et activer l'onglet
   var map = {
-    'home': { sub: 'ownerHome', tab: 'Home' },
-    'partners': { sub: 'ownerPartners', tab: 'Partners' },
-    'docs': { sub: 'ownerDocs', tab: 'Docs' },
-    'settings': { sub: 'ownerSettings', tab: 'Settings' }
+    'home':      { sub: 'ownerHome',      tab: 'Home' },
+    'analytics': { sub: 'ownerAnalytics', tab: 'Analytics' },
+    'partners':  { sub: 'ownerPartners',  tab: 'Partners' },
+    'docs':      { sub: 'ownerDocs',      tab: 'Docs' },
+    'settings':  { sub: 'ownerSettings',  tab: 'Settings' }
   };
-
   if (map[tab]) {
-    var el = document.getElementById(map[tab].sub);
-    if (el) el.classList.add('active');
+    var el   = document.getElementById(map[tab].sub);
+    if (el)   el.classList.add('active');
     var icon = document.getElementById('ownerTab' + map[tab].tab);
-    var txt = document.getElementById('ownerTab' + map[tab].tab + 'Txt');
+    var txt  = document.getElementById('ownerTab' + map[tab].tab + 'Txt');
     if (icon) icon.classList.add('active');
-    if (txt) { txt.classList.add('active'); txt.style.color = 'var(--green)'; }
-
-    // Initialiser la liste partenaires au premier affichage
-    if (tab === 'partners') {
-      renderPartners(partners);
-    }
-    // Scroll to top
+    if (txt)  { txt.classList.add('active'); txt.style.color = 'var(--green)'; }
+    if (tab === 'partners') renderPartners(partners);
+    if (tab === 'analytics') { setTimeout(drawChart, 80); }
     document.getElementById('barowner').scrollTop = 0;
   }
+}
+
+// ── ANALYTICS ──
+var currentPeriod = 30;
+
+var visitData = {
+  7:  [18,22,15,30,27,19,24],
+  30: [12,18,14,22,16,28,20,15,24,19,30,22,18,26,31,24,17,20,28,23,15,19,27,22,34,28,19,24,31,26],
+  90: (function(){var d=[];for(var i=0;i<90;i++){d.push(Math.floor(10+Math.random()*30+Math.sin(i/7)*8));}return d;})()
+};
+
+function drawChart() {
+  var canvas = document.getElementById('analyticsChart');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var dpr = window.devicePixelRatio || 1;
+  var rect = canvas.getBoundingClientRect();
+  canvas.width  = rect.width  * dpr;
+  canvas.height = rect.height * dpr;
+  ctx.scale(dpr, dpr);
+  var W = rect.width, H = rect.height;
+  var data = visitData[currentPeriod];
+  var max  = Math.max.apply(null, data);
+  var pad  = {l:28, r:8, t:10, b:18};
+  var cw   = W - pad.l - pad.r;
+  var ch   = H - pad.t - pad.b;
+  var step = cw / (data.length - 1);
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Grille horizontale
+  ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+  ctx.lineWidth = 0.8;
+  [0, 0.25, 0.5, 0.75, 1].forEach(function(t) {
+    var y = pad.t + ch * (1 - t);
+    ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke();
+    ctx.fillStyle = 'rgba(85,85,106,0.8)';
+    ctx.font = '8px sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText(Math.round(max * t), pad.l - 4, y + 3);
+  });
+
+  // Aire sous la courbe (gradient vert)
+  var grad = ctx.createLinearGradient(0, pad.t, 0, pad.t + ch);
+  grad.addColorStop(0,   'rgba(0,200,120,0.35)');
+  grad.addColorStop(1,   'rgba(0,200,120,0.02)');
+  ctx.beginPath();
+  ctx.moveTo(pad.l, pad.t + ch);
+  data.forEach(function(v, i) {
+    var x = pad.l + i * step;
+    var y = pad.t + ch - (v / max) * ch;
+    i === 0 ? ctx.lineTo(x, y) : ctx.lineTo(x, y);
+  });
+  ctx.lineTo(pad.l + (data.length - 1) * step, pad.t + ch);
+  ctx.closePath();
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // Ligne de la courbe
+  ctx.beginPath();
+  ctx.strokeStyle = '#00C878';
+  ctx.lineWidth = 2;
+  ctx.lineJoin = 'round';
+  data.forEach(function(v, i) {
+    var x = pad.l + i * step;
+    var y = pad.t + ch - (v / max) * ch;
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+
+  // Point du jour le plus récent
+  var lastX = pad.l + (data.length - 1) * step;
+  var lastY = pad.t + ch - (data[data.length - 1] / max) * ch;
+  ctx.beginPath();
+  ctx.arc(lastX, lastY, 4, 0, Math.PI * 2);
+  ctx.fillStyle = '#00C878';
+  ctx.fill();
+  ctx.strokeStyle = '#07080A';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Labels axe X
+  ctx.fillStyle = 'rgba(85,85,106,0.8)';
+  ctx.font = '8px sans-serif';
+  ctx.textAlign = 'center';
+  var labels = currentPeriod === 7
+    ? ['L','M','M','J','V','S','D']
+    : currentPeriod === 30
+      ? ['J-30','','','','J-25','','','','J-20','','','','J-15','','','','J-10','','','','J-5','','','','','','','','','','Auj']
+      : ['J-90','','','','','','','','','J-80','','','','','','','','','J-70','','','','','','','','','J-60','','','','','','','','','J-50','','','','','','','','','J-40','','','','','','','','','J-30','','','','','','','','','J-20','','','','','','','','','J-10','','','','','','','','','Auj'];
+  var step2 = Math.max(1, Math.floor(data.length / 6));
+  data.forEach(function(v, i) {
+    if (i % step2 === 0 || i === data.length - 1) {
+      var x = pad.l + i * step;
+      var lbl = labels[i] || '';
+      if (lbl) ctx.fillText(lbl, x, H - 2);
+    }
+  });
+}
+
+function setPeriod(days) {
+  currentPeriod = days;
+  [7, 30, 90].forEach(function(d) {
+    var el = document.getElementById('period' + d);
+    if (!el) return;
+    if (d === days) {
+      el.style.background = 'rgba(0,200,120,0.15)';
+      el.style.border = '1px solid rgba(0,200,120,0.4)';
+      el.style.color = 'var(--green)';
+      el.style.fontWeight = '700';
+    } else {
+      el.style.background = 'var(--card)';
+      el.style.border = '1px solid var(--border)';
+      el.style.color = 'var(--muted)';
+      el.style.fontWeight = '';
+    }
+  });
+  drawChart();
+  // Mettre à jour le sous-titre période
+  var sub = document.querySelector('#ownerAnalytics .section-title + *');
+  // Mettre à jour les KPIs selon période
+  var kpiVues  = { 7: '198', 30: '847',  90: '2 341' };
+  var kpiScans = { 7:  '31', 30: '134',  90:  '389'  };
+  var kpiTrend = { 7: '+8%', 30: '+23%', 90: '+67%'  };
+  var elVues = document.querySelector('#ownerAnalytics .kpi-vues');
+  var elScans = document.querySelector('#ownerAnalytics .kpi-scans');
+  if (elVues)  elVues.textContent  = kpiVues[days];
+  if (elScans) elScans.textContent = kpiScans[days];
 }
 
 // ── CLOCK ──
