@@ -449,7 +449,7 @@
     cursor: pointer;
     padding: 4px 0;
   }
-  .tab-icon { font-size: 22px; opacity: 0.4; }
+  .tab-icon { font-size: 22px; opacity: 0.4; display:flex; align-items:center; justify-content:center; width:28px; height:28px; transition: opacity .2s; }
   .tab-icon.active { opacity: 1; }
   .tab-txt { font-size: 10px; color: var(--muted); }
   .tab-txt.active { color: var(--green); }
@@ -1016,30 +1016,62 @@
         <div class="splash-tagline" style="margin-top:12px;font-size:13px;letter-spacing:0.5px;">Parce que chaque sortie compte</div>
       </div>
       <div class="role-cards" style="margin-top:0;">
-        <div class="role-card" onclick="goTo('client')">
-          <div class="role-icon client">🧭</div>
+
+        <!-- CLIENT — Style B -->
+        <div class="role-card" onclick="goTo('client')" style="border-color:rgba(0,200,120,0.2);">
+          <div class="role-icon client" style="background:linear-gradient(135deg,#003d22,#005c34);border-radius:16px;">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <path d="M14 3L5 8v5c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V8L14 3z"
+                fill="rgba(0,200,120,.2)" stroke="#00C878" stroke-width="1.7"/>
+              <path d="M10 14l3 3 5-5" stroke="#00C878" stroke-width="2.1"
+                stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
           <div class="role-info">
             <div class="role-title">Je suis un client</div>
             <div class="role-desc">Trouvez des bars sécurisés près de vous — pilote Tours &amp; Paris</div>
           </div>
-          <div class="role-arrow">›</div>
+          <div class="role-arrow" style="color:var(--green);">›</div>
         </div>
-        <div class="role-card" onclick="goTo('barowner')">
-          <div class="role-icon bar">🏪</div>
+
+        <!-- GÉRANT — Style B -->
+        <div class="role-card" onclick="goTo('barowner')" style="border-color:rgba(232,184,75,0.2);">
+          <div class="role-icon bar" style="background:linear-gradient(135deg,#3d2e00,#5c4500);border-radius:16px;">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <path d="M14 3l2.5 5H22l-4.1 3 1.6 5L14 13l-5.5 3 1.6-5L6 8h5.5z"
+                fill="rgba(232,184,75,.25)" stroke="#E8B84B" stroke-width="1.6"/>
+              <rect x="9" y="16" width="10" height="9" rx="2" stroke="#E8B84B" stroke-width="1.7"/>
+              <path d="M11 16v-2.5a3 3 0 016 0V16" stroke="#E8B84B" stroke-width="1.7" stroke-linecap="round"/>
+              <circle cx="14" cy="21" r="1.4" fill="#E8B84B"/>
+            </svg>
+          </div>
           <div class="role-info">
             <div class="role-title">Je gère un établissement</div>
             <div class="role-desc">Gratuit · Score public + badge vitrine certifié</div>
           </div>
-          <div class="role-arrow">›</div>
+          <div class="role-arrow" style="color:#E8B84B;">›</div>
         </div>
-        <div class="role-card" onclick="goTo('parent')" style="border-color:rgba(160,100,255,0.3);">
-          <div class="role-icon" style="background:rgba(160,100,255,0.15);font-size:24px;">👨‍👩‍👧</div>
+
+        <!-- PARENT — Style B -->
+        <div class="role-card" onclick="goTo('parent')" style="border-color:rgba(160,100,255,0.25);">
+          <div class="role-icon" style="background:linear-gradient(135deg,#1a003d,#2d0060);border-radius:16px;width:52px;height:52px;display:flex;align-items:center;justify-content:center;">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <circle cx="10" cy="9" r="3.8" fill="rgba(160,100,255,.25)" stroke="#A064FF" stroke-width="1.7"/>
+              <path d="M3 23c0-3.8 3-6.8 7-6.8" stroke="#A064FF" stroke-width="1.7" stroke-linecap="round"/>
+              <circle cx="20" cy="11" r="2.8" stroke="#00C878" stroke-width="1.5"/>
+              <path d="M25 16c-.6-2-2.6-3.3-4.5-2.8" stroke="#00C878" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M14 23c0-3.2 2.7-5.8 6-5.8S26 19.8 26 23" stroke="#00C878" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M14 15l2 2" stroke="#E8B84B" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="13.5" cy="15.5" r="1" fill="#E8B84B"/>
+            </svg>
+          </div>
           <div class="role-info">
             <div class="role-title">Je suis parent</div>
             <div class="role-desc">Suivez la position de votre enfant · Sachez s'il est dans un lieu sécurisé</div>
           </div>
-          <div class="role-arrow">›</div>
+          <div class="role-arrow" style="color:#A064FF;">›</div>
         </div>
+
       </div>
       <div style="margin-top:32px;font-size:12px;color:rgba(240,240,248,0.25);text-align:center;line-height:1.5;">
         Données ERP • Certificats de sécurité<br>Gratuit pour les gérants · Transparent pour tous
@@ -2054,28 +2086,28 @@
   <!-- TAB BAR CLIENT -->
   <div class="tab-bar" id="tabClient">
     <div class="tab-item" onclick="switchClientTab('map')">
-      <div class="tab-icon active" id="ctabMap">🗺️</div>
-      <div class="tab-txt active" id="ctabMapTxt">Carte</div>
+      <div class="tab-icon active" id="ctabMap"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2C7.7 2 5 4.7 5 8c0 4.5 6 12 6 12s6-7.5 6-12c0-3.3-2.7-6-6-6z" stroke="#00C878" stroke-width="1.7" fill="rgba(0,200,120,.18)"/><circle cx="11" cy="8" r="2" fill="#00C878"/></svg></div>
+      <div class="tab-txt active" id="ctabMapTxt" style="color:#00C878;">Carte</div>
     </div>
     <div class="tab-item" onclick="switchClientTab('favorites')">
-      <div class="tab-icon" id="ctabFavorites">⭐</div>
+      <div class="tab-icon" id="ctabFavorites" style="opacity:.4;"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 18s-8-5.3-8-10a5 5 0 0110 0 5 5 0 0110 0c0 4.7-8 10-8 10z" stroke="#FF6B8A" stroke-width="1.7" stroke-linejoin="round" fill="rgba(255,107,138,.12)"/></svg></div>
       <div class="tab-txt" id="ctabFavoritesTxt">Favoris</div>
     </div>
     <div class="tab-item" onclick="switchClientTab('search')">
-      <div class="tab-icon" id="ctabSearch">🔍</div>
+      <div class="tab-icon" id="ctabSearch" style="opacity:.4;"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="10" cy="10" r="5.5" stroke="#3B82F6" stroke-width="1.7" fill="rgba(59,130,246,.12)"/><path d="M14.5 14.5l4 4" stroke="#3B82F6" stroke-width="1.9" stroke-linecap="round"/></svg></div>
       <div class="tab-txt" id="ctabSearchTxt">Chercher</div>
     </div>
     <div class="tab-item" onclick="switchClientTab('alerts')" style="position:relative;">
-      <div class="tab-icon" id="ctabAlerts">🔔</div>
+      <div class="tab-icon" id="ctabAlerts" style="opacity:.4;"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 3a6 6 0 016 6v4l2 2H3l2-2V9a6 6 0 016-6z" stroke="#E8B84B" stroke-width="1.7" stroke-linejoin="round" fill="rgba(232,184,75,.12)"/><path d="M9 17a2 2 0 004 0" stroke="#E8B84B" stroke-width="1.6"/><circle cx="11" cy="3" r="1.5" fill="#E8B84B"/></svg></div>
       <div class="tab-txt" id="ctabAlertsTxt">Alertes</div>
       <div id="alertBadge" style="position:absolute;top:6px;right:14px;background:#E8B84B;color:#07080F;border-radius:10px;font-size:9px;font-weight:900;padding:1px 5px;display:none;">3</div>
     </div>
     <div class="tab-item" onclick="switchClientTab('report')">
-      <div class="tab-icon" id="ctabReport">📸</div>
+      <div class="tab-icon" id="ctabReport" style="opacity:.4;"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="3" width="16" height="12" rx="2.5" stroke="#FF6B6B" stroke-width="1.7" fill="rgba(255,107,107,.1)"/><circle cx="11" cy="9" r="2.8" stroke="#FF6B6B" stroke-width="1.5"/><path d="M7 19h8M11 15v4" stroke="#FF6B6B" stroke-width="1.6" stroke-linecap="round"/></svg></div>
       <div class="tab-txt" id="ctabReportTxt">Signaler</div>
     </div>
     <div class="tab-item" onclick="switchClientTab('profile')">
-      <div class="tab-icon" id="ctabProfile">👤</div>
+      <div class="tab-icon" id="ctabProfile" style="opacity:.4;"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="8" r="3.8" stroke="#A064FF" stroke-width="1.7" fill="rgba(160,100,255,.12)"/><path d="M3 21c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="#A064FF" stroke-width="1.7" stroke-linecap="round"/></svg></div>
       <div class="tab-txt" id="ctabProfileTxt">Profil</div>
     </div>
   </div>
@@ -2976,13 +3008,14 @@ function switchClientTab(tab) {
   tabs.forEach(function(t) {
     var ic = document.getElementById('ctab'+t);
     var tx = document.getElementById('ctab'+t+'Txt');
-    if (ic) { ic.classList.remove('active'); }
+    if (ic) { ic.classList.remove('active'); ic.style.opacity='0.4'; }
     if (tx) { tx.classList.remove('active'); tx.style.color = ''; }
   });
   var ic = document.getElementById('ctab'+ tab.charAt(0).toUpperCase()+tab.slice(1));
   var tx = document.getElementById('ctab'+ tab.charAt(0).toUpperCase()+tab.slice(1)+'Txt');
-  if (ic) ic.classList.add('active');
-  if (tx) { tx.classList.add('active'); tx.style.color='var(--green)'; }
+  if (ic) { ic.classList.add('active'); ic.style.opacity='1'; }
+  var tabColors = {map:'#00C878',favorites:'#FF6B8A',search:'#3B82F6',alerts:'#E8B84B',report:'#FF6B6B',profile:'#A064FF'};
+  if (tx) { tx.classList.add('active'); tx.style.color = tabColors[tab] || 'var(--green)'; }
 
   var header = document.querySelector('#client .client-header');
 
