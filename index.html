@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Safio — Sortez l'esprit tranquille</title>
+<title>Spotafe — Sortez l'esprit tranquille</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <style>
@@ -196,12 +196,14 @@
     margin-bottom: 20px;
   }
   .app-logo-small {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 22px;
-    font-weight: 800;
-    color: var(--green);
+    font-weight: 900;
     letter-spacing: -0.5px;
   }
+  .app-logo-small .s   { color: var(--green); }
+  .app-logo-small .pot { color: rgba(240,240,248,0.28); font-weight: 300; }
+  .app-logo-small .afe { color: var(--green); }
   .back-btn {
     background: var(--card);
     border: 1px solid var(--border);
@@ -255,7 +257,7 @@
   .leaflet-tile-pane { filter: brightness(0.85) saturate(0.7); }
   .leaflet-control-attribution { display: none; }
   .leaflet-control-zoom { display: none; }
-  .safio-marker {
+  .spotafe-marker {
     background: #00E87A;
     color: #000;
     font-family: 'Syne', sans-serif;
@@ -267,7 +269,7 @@
     box-shadow: 0 4px 12px rgba(0,232,122,0.5);
     cursor: pointer;
   }
-  .safio-marker.orange {
+  .spotafe-marker.orange {
     background: #FF8C00;
     box-shadow: 0 4px 12px rgba(255,140,0,0.5);
   }
@@ -967,7 +969,9 @@
 <circle cx="35" cy="69" r="2"   fill="url(#Lgo)" opacity=".8"/>
 <circle cx="10" cy="38" r="1.5" fill="url(#Lgo)" opacity=".6"/>
 <circle cx="60" cy="38" r="1.5" fill="url(#Lgo)" opacity=".6"/>
-<text x="77" y="44" font-family="Outfit,sans-serif" font-weight="800" font-size="34" letter-spacing="-1" fill="#F5F5F0">safio</text>
+<text x="77" y="44" font-family="Outfit,sans-serif" font-weight="900" font-size="34" letter-spacing="-1">
+  <tspan fill="#00C878">S</tspan><tspan fill="rgba(240,240,248,0.3)" font-weight="300">pot</tspan><tspan fill="#00C878">afe</tspan>
+</text>
 <circle cx="170" cy="14" r="4.2" fill="url(#Lgo)"/>
 </svg></div>
         <div class="splash-tagline" style="margin-top:12px;font-size:13px;letter-spacing:0.5px;">Parce que chaque sortie compte</div>
@@ -1008,7 +1012,7 @@
   <div class="screen" id="client">
     <div class="client-header">
       <div class="header-top">
-        <div class="app-logo-small">safio</div>
+        <div class="app-logo-small"><span class="s">S</span><span class="pot">pot</span><span class="afe">afe</span></div>
         <div class="back-btn" onclick="goTo('splash')">← Retour</div>
       </div>
       <div class="location-pill" id="locationPill">
@@ -1334,7 +1338,7 @@
   <div id="clientSubProfile" class="client-sub" style="display:none;padding:0 24px 100px;">
     <div style="padding:16px 0 20px;">
       <div class="section-title" style="margin:0 0 4px;">Mon profil</div>
-      <div style="font-size:12px;color:var(--muted);">Utilisateur Safio</div>
+      <div style="font-size:12px;color:var(--muted);">Utilisateur Spotafe</div>
     </div>
     <!-- Avatar -->
     <div style="text-align:center;margin-bottom:24px;">
@@ -1393,7 +1397,7 @@
   <div class="screen" id="parent">
     <div class="client-header" style="padding-bottom:8px;">
       <div class="header-top">
-        <div class="app-logo-small">safio</div>
+        <div class="app-logo-small"><span class="s">S</span><span class="pot">pot</span><span class="afe">afe</span></div>
         <div class="back-btn" onclick="goTo('splash')">← Retour</div>
       </div>
       <div style="display:flex;align-items:center;gap:10px;margin-top:4px;">
@@ -1435,7 +1439,7 @@
           <div style="font-size:32px;" id="safetyIcon">✅</div>
           <div>
             <div style="font-size:13px;font-weight:800;color:var(--green);" id="safetyTitle">LIEU SÉCURISÉ</div>
-            <div style="font-size:11px;color:var(--muted);margin-top:2px;" id="safetySubtitle">Score Safio ≥ 85/100 · Vérifié</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px;" id="safetySubtitle">Score Spotafe ≥ 85/100 · Vérifié</div>
           </div>
           <div style="margin-left:auto;text-align:center;">
             <div style="font-size:26px;font-weight:900;" id="safetyScore" class="kpi-green">91</div>
@@ -1617,7 +1621,7 @@
     <div class="owner-sub active" id="ownerHome">
     <div class="bar-header">
       <div class="bar-header-top">
-        <div class="app-logo-small">safio</div>
+        <div class="app-logo-small"><span class="s">S</span><span class="pot">pot</span><span class="afe">afe</span></div>
         <div class="back-btn" onclick="goTo('splash')">← Retour</div>
       </div>
       <div class="establishment-name">Bar du Centre</div>
@@ -1763,7 +1767,7 @@
         <div class="action-btn-icon">👁️</div>
         <div class="action-btn-text">
           <div class="action-btn-title">Voir ma fiche publique</div>
-          <div class="action-btn-sub">Ce que voient vos clients sur Safio</div>
+          <div class="action-btn-sub">Ce que voient vos clients sur Spotafe</div>
         </div>
         <div class="action-btn-arrow">›</div>
       </div>
@@ -1987,7 +1991,7 @@
             <div style="font-size:18px;">📱</div>
             <div style="flex:1;">
               <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
-                <span style="font-size:12px;font-weight:600;color:var(--text);">Application Safio</span>
+                <span style="font-size:12px;font-weight:600;color:var(--text);">Application Spotafe</span>
                 <span style="font-size:12px;font-weight:700;color:var(--green);">58%</span>
               </div>
               <div style="background:var(--border);border-radius:4px;height:4px;"><div style="width:58%;height:100%;background:var(--green);border-radius:4px;"></div></div>
@@ -2029,7 +2033,7 @@
       <!-- Conseil -->
       <div style="margin:0 24px 100px;">
         <div style="background:rgba(0,200,120,0.06);border:1px solid rgba(0,200,120,0.2);border-radius:12px;padding:14px 16px;">
-          <div style="font-size:11px;color:var(--green);font-weight:700;margin-bottom:6px;">💡 CONSEIL SAFIO</div>
+          <div style="font-size:11px;color:var(--green);font-weight:700;margin-bottom:6px;">💡 CONSEIL SPOTAFE</div>
           <div style="font-size:11px;color:var(--muted);line-height:1.6;">Votre score de 82/100 vous place dans le <strong style="color:var(--text);">top 30%</strong> des bars de Tours. Corriger le point "Détecteurs fumée" vous ferait gagner <strong style="color:var(--green);">+8 points</strong> et passer en top 10%.</div>
         </div>
       </div>
@@ -2322,7 +2326,7 @@ function buildMap() {
   barCoords.forEach(function(b) {
     var icon = L.divIcon({
       className: '',
-      html: '<div class="safio-marker ' + b.cls + '">' + b.score + ' • ' + b.name + '</div>',
+      html: '<div class="spotafe-marker ' + b.cls + '">' + b.score + ' • ' + b.name + '</div>',
       iconAnchor: [0, 20]
     });
     L.marker([b.lat, b.lng], { icon: icon })
@@ -2479,7 +2483,7 @@ var partners = [
     city: "Tours (37) & France",
     phone: "umih.fr",
     services: ["Réseau 30 000 gérants", "Accompagnement réglementaire", "Événements CHR", "Veille législative"],
-    desc: "Premier partenaire Safio. L'UMIH référence Safio auprès de ses 30 000 adhérents gérants de bars, restaurants et hôtels en France."
+    desc: "Premier partenaire Spotafe. L'UMIH référence Spotafe auprès de ses 30 000 adhérents gérants de bars, restaurants et hôtels en France."
   },
   {
     name: "France Boissons (Heineken)",
@@ -2494,8 +2498,8 @@ var partners = [
     price: "Co-distribution",
     city: "France entière",
     phone: "franceboissons.com",
-    services: ["Distribution nationale CHR", "200 000 établissements/semaine", "Présentation Safio en tournée", "Commission apporteur d'affaires"],
-    desc: "Réseau de distribution Heineken présent chez 200 000 établissements CHR chaque semaine. Les commerciaux France Boissons présentent Safio lors de leurs tournées."
+    services: ["Distribution nationale CHR", "200 000 établissements/semaine", "Présentation Spotafe en tournée", "Commission apporteur d'affaires"],
+    desc: "Réseau de distribution Heineken présent chez 200 000 établissements CHR chaque semaine. Les commerciaux France Boissons présentent Spotafe lors de leurs tournées."
   },
   {
     name: "Apave Centre-Val de Loire",
@@ -2865,7 +2869,7 @@ function simulateLocation(idx) {
     icon.textContent  = '✅';
     title.textContent = 'LIEU SÉCURISÉ';
     title.style.color = 'var(--green)';
-    sub.textContent   = 'Score Safio ≥ 85/100 · Vérifié';
+    sub.textContent   = 'Score Spotafe ≥ 85/100 · Vérifié';
     score.style.color = 'var(--green)';
   } else {
     card.style.background = 'linear-gradient(135deg,rgba(255,140,0,0.12),rgba(255,140,0,0.04))';
@@ -2873,7 +2877,7 @@ function simulateLocation(idx) {
     icon.textContent  = '⚠️';
     title.textContent = 'LIEU NON CERTIFIÉ';
     title.style.color = 'var(--orange)';
-    sub.textContent   = 'Score Safio < 85/100 · Vérification recommandée';
+    sub.textContent   = 'Score Spotafe < 85/100 · Vérification recommandée';
     score.style.color = 'var(--orange)';
   }
   score.textContent = loc.score;
