@@ -2743,6 +2743,128 @@
 
   </div>
 
+
+  <!-- ════════ SOIRÉE SÉCURISÉE ════════ -->
+  <div class="screen" id="soiree" style="background:linear-gradient(160deg,#12002A 0%,#1A0038 35%,#0D001F 65%,#1C0035 100%);">
+
+    <!-- Halos déco (position:absolute pour rester dans le phone) -->
+    <div style="position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;overflow:hidden;z-index:0;">
+      <div style="position:absolute;top:5%;left:10%;width:200px;height:200px;background:radial-gradient(circle,rgba(160,40,255,.22) 0%,transparent 70%);border-radius:50%;"></div>
+      <div style="position:absolute;top:38%;right:-30px;width:140px;height:140px;background:radial-gradient(circle,rgba(255,60,180,.15) 0%,transparent 70%);border-radius:50%;"></div>
+      <div style="position:absolute;bottom:20%;left:15%;width:100px;height:100px;background:radial-gradient(circle,rgba(100,200,255,.1) 0%,transparent 70%);border-radius:50%;"></div>
+    </div>
+
+    <div style="position:relative;z-index:1;padding-bottom:100px;">
+
+      <!-- Header -->
+      <div style="padding:24px 20px 0;display:flex;align-items:flex-start;justify-content:space-between;">
+        <div>
+          <div style="font-size:10px;font-weight:700;color:rgba(200,160,255,.5);letter-spacing:.18em;text-transform:uppercase;margin-bottom:6px;">Ce soir on sort 🌙</div>
+          <div style="font-family:'Syne',sans-serif;font-size:24px;font-weight:900;color:#fff;line-height:1.15;letter-spacing:-.5px;">Soirée<br><span style="background:linear-gradient(90deg,#C060FF,#FF60C0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Sécurisée</span> ✨</div>
+          <div style="font-size:11px;color:rgba(200,160,255,.45);margin-top:6px;">Bars certifiés · Bonne ambiance garantie</div>
+        </div>
+        <div onclick="goTo('client')" style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:7px 14px;font-size:11px;color:rgba(255,255,255,.5);cursor:pointer;margin-top:4px;flex-shrink:0;">← Retour</div>
+      </div>
+
+      <!-- Divider lumineux -->
+      <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(160,40,255,.5),rgba(255,60,180,.4),transparent);margin:16px 0 20px;"></div>
+
+      <div style="padding:0 20px;">
+
+        <!-- WHERE YOU AT ? -->
+        <div style="font-size:10px;font-weight:800;color:rgba(200,160,255,.55);letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px;">📍 T'es où ce soir ?</div>
+        <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;" id="soireeZones">
+          <div class="s-zone active" data-zone="tours" onclick="selectSoireeZone(this)">📍 Tours Centre</div>
+          <div class="s-zone" data-zone="marais" onclick="selectSoireeZone(this)">🗼 Le Marais</div>
+          <div class="s-zone" data-zone="oberkampf" onclick="selectSoireeZone(this)">🎸 Oberkampf</div>
+          <div class="s-zone" data-zone="bastille" onclick="selectSoireeZone(this)">🔥 Bastille</div>
+        </div>
+
+        <!-- VIBE CHECK -->
+        <div style="font-size:10px;font-weight:800;color:rgba(200,160,255,.55);letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px;">🎭 Vibe check</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px;" id="soireeVibes">
+          <div class="s-vibe active" data-vibe="detente" onclick="selectVibe(this)">
+            <span style="font-size:20px;">🍷</span>
+            <div><div style="font-size:12px;font-weight:800;color:#fff;">Détendu</div><div style="font-size:10px;color:rgba(255,255,255,.4);">Chill &amp; talk</div></div>
+          </div>
+          <div class="s-vibe" data-vibe="festif" onclick="selectVibe(this)">
+            <span style="font-size:20px;">🎉</span>
+            <div><div style="font-size:12px;font-weight:800;color:#fff;">On se lâche</div><div style="font-size:10px;color:rgba(255,255,255,.4);">Full energy</div></div>
+          </div>
+          <div class="s-vibe" data-vibe="cocktail" onclick="selectVibe(this)">
+            <span style="font-size:20px;">🍸</span>
+            <div><div style="font-size:12px;font-weight:800;color:#fff;">Cocktails</div><div style="font-size:10px;color:rgba(255,255,255,.4);">Classy vibes</div></div>
+          </div>
+          <div class="s-vibe" data-vibe="live" onclick="selectVibe(this)">
+            <span style="font-size:20px;">🎵</span>
+            <div><div style="font-size:12px;font-weight:800;color:#fff;">Live music</div><div style="font-size:10px;color:rgba(255,255,255,.4);">Son à fond</div></div>
+          </div>
+        </div>
+
+        <!-- SCORE MIN -->
+        <div style="font-size:10px;font-weight:800;color:rgba(200,160,255,.55);letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px;">🛡️ Niveau sécu minimum</div>
+        <div style="display:flex;gap:8px;margin-bottom:24px;" id="soireeScores">
+          <div class="s-score" data-min="70" onclick="selectSoireeScore(this)">≥ 70 OK</div>
+          <div class="s-score active" data-min="80" onclick="selectSoireeScore(this)">≥ 80 ✓</div>
+          <div class="s-score" data-min="90" onclick="selectSoireeScore(this)">≥ 90 🔒</div>
+        </div>
+
+        <!-- CTA -->
+        <button onclick="generateItinerary()" style="width:100%;padding:16px;background:linear-gradient(135deg,#8020E0,#C040FF,#FF40C0);color:white;border:none;border-radius:18px;font-size:15px;font-weight:900;font-family:'Syne',sans-serif;cursor:pointer;box-shadow:0 6px 28px rgba(160,40,255,.4),0 0 0 1px rgba(255,255,255,.08);margin-bottom:24px;">
+          ✨ Lance ma soirée !
+        </button>
+
+        <!-- RÉSULTATS -->
+        <div id="soireeResults" style="display:none;">
+          <div id="soireeHeadline" style="text-align:center;margin-bottom:18px;">
+            <div style="font-size:26px;margin-bottom:6px;">🔥</div>
+            <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:900;color:#fff;letter-spacing:-.3px;" id="soireeResultTitle">Ta soirée est prête !</div>
+            <div style="font-size:11px;color:rgba(200,160,255,.6);margin-top:4px;" id="soireeResultSub">3 spots validés · Score moyen 87/100</div>
+          </div>
+
+          <div id="soireeItinerary" style="margin-bottom:18px;"></div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+            <button onclick="shareItinerary()" style="padding:13px;background:rgba(255,255,255,.07);color:#fff;border:1px solid rgba(255,255,255,.12);border-radius:14px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Syne',sans-serif;">
+              📤 Partager
+            </button>
+            <button onclick="generateItinerary()" style="padding:13px;background:rgba(160,40,255,.2);color:#C060FF;border:1px solid rgba(160,40,255,.35);border-radius:14px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Syne',sans-serif;">
+              🔀 Reshuffle
+            </button>
+          </div>
+
+          <div style="background:rgba(0,200,120,.07);border:1px solid rgba(0,200,120,.18);border-radius:14px;padding:13px 15px;display:flex;gap:10px;align-items:center;margin-bottom:24px;">
+            <div style="font-size:20px;flex-shrink:0;">🛡️</div>
+            <div>
+              <div style="font-size:12px;font-weight:800;color:#00C878;margin-bottom:2px;">100% certifiés Spotafe</div>
+              <div style="font-size:10px;color:rgba(255,255,255,.35);line-height:1.5;">Audités Apave / BV — t'as plus qu'à profiter 🎉</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- HISTORIQUE -->
+        <div style="font-size:10px;font-weight:800;color:rgba(200,160,255,.55);letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px;">📅 Tes dernières sorties</div>
+        <div class="s-history-card" onclick="replaySoiree(0)">
+          <div style="font-size:20px;">🎉</div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:#fff;">Tours Centre · 3 bars</div>
+            <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:2px;">Score moyen 86 · il y a 5 jours</div>
+          </div>
+          <div style="font-size:16px;color:rgba(255,255,255,.2);">›</div>
+        </div>
+        <div class="s-history-card" onclick="replaySoiree(1)">
+          <div style="font-size:20px;">🍷</div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:#fff;">Le Marais · 4 bars</div>
+            <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:2px;">Score moyen 91 · il y a 12 jours</div>
+          </div>
+          <div style="font-size:16px;color:rgba(255,255,255,.2);">›</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
   <!-- TOAST -->
   <div class="toast" id="toast"></div>
 
@@ -4467,136 +4589,5 @@ function replaySoiree(idx) {
   </div>
 
   <!-- ════════ MODE SOIRÉE SÉCURISÉE ════════ -->
-  <!-- ════════ SOIRÉE SÉCURISÉE ════════ -->
-  <div class="screen" id="soiree" style="background:linear-gradient(160deg,#12002A 0%,#1A0038 35%,#0D001F 65%,#1C0035 100%);overflow-y:auto;">
-
-    <!-- Particules déco -->
-    <div style="position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:0;overflow:hidden;">
-      <div style="position:absolute;top:8%;left:12%;width:180px;height:180px;background:radial-gradient(circle,rgba(160,100,255,.18) 0%,transparent 70%);border-radius:50%;"></div>
-      <div style="position:absolute;top:40%;right:5%;width:120px;height:120px;background:radial-gradient(circle,rgba(255,60,180,.12) 0%,transparent 70%);border-radius:50%;"></div>
-      <div style="position:absolute;bottom:25%;left:20%;width:90px;height:90px;background:radial-gradient(circle,rgba(100,200,255,.1) 0%,transparent 70%);border-radius:50%;"></div>
-    </div>
-
-    <div style="position:relative;z-index:1;">
-      <!-- Header -->
-      <div style="padding:24px 20px 0;display:flex;align-items:flex-start;justify-content:space-between;">
-        <div>
-          <div style="font-size:10px;font-weight:700;color:rgba(200,160,255,.5);letter-spacing:.18em;text-transform:uppercase;margin-bottom:6px;">Ce soir on sort 🌙</div>
-          <div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:900;color:#fff;line-height:1.1;letter-spacing:-.5px;">Soirée<br><span style="background:linear-gradient(90deg,#C060FF,#FF60C0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Sécurisée</span> ✨</div>
-          <div style="font-size:11px;color:rgba(200,160,255,.5);margin-top:6px;">Bars certifiés · Bonne ambiance garantie</div>
-        </div>
-        <div onclick="goTo('client')" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:7px 14px;font-size:12px;color:rgba(255,255,255,.5);cursor:pointer;margin-top:4px;">← Retour</div>
-      </div>
-
-      <!-- Divider lumineux -->
-      <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(160,100,255,.5),rgba(255,60,180,.4),transparent);margin:18px 0 0;"></div>
-
-      <div style="padding:20px 20px 100px;">
-
-        <!-- WHERE YOU AT ? -->
-        <div style="font-size:10px;font-weight:800;color:rgba(200,160,255,.55);letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px;">📍 T'es où ce soir ?</div>
-        <div style="display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap;" id="soireeZones">
-          <div class="s-zone active" data-zone="tours" onclick="selectSoireeZone(this)">📍 Tours Centre</div>
-          <div class="s-zone" data-zone="marais" onclick="selectSoireeZone(this)">🗼 Le Marais</div>
-          <div class="s-zone" data-zone="oberkampf" onclick="selectSoireeZone(this)">🎸 Oberkampf</div>
-          <div class="s-zone" data-zone="bastille" onclick="selectSoireeZone(this)">🔥 Bastille</div>
-        </div>
-
-        <!-- VIBE CHECK -->
-        <div style="font-size:10px;font-weight:800;color:rgba(200,160,255,.55);letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px;">🎭 Vibe check</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:22px;" id="soireeVibes">
-          <div class="s-vibe active" data-vibe="detente" onclick="selectVibe(this)">
-            <span style="font-size:22px;">🍷</span>
-            <div><div style="font-size:12px;font-weight:800;color:#fff;">Détendu</div><div style="font-size:10px;color:rgba(255,255,255,.4);">Chill & talk</div></div>
-          </div>
-          <div class="s-vibe" data-vibe="festif" onclick="selectVibe(this)">
-            <span style="font-size:22px;">🎉</span>
-            <div><div style="font-size:12px;font-weight:800;color:#fff;">On se lâche</div><div style="font-size:10px;color:rgba(255,255,255,.4);">Full energy</div></div>
-          </div>
-          <div class="s-vibe" data-vibe="cocktail" onclick="selectVibe(this)">
-            <span style="font-size:22px;">🍸</span>
-            <div><div style="font-size:12px;font-weight:800;color:#fff;">Cocktails</div><div style="font-size:10px;color:rgba(255,255,255,.4);">Classy vibes</div></div>
-          </div>
-          <div class="s-vibe" data-vibe="live" onclick="selectVibe(this)">
-            <span style="font-size:22px;">🎵</span>
-            <div><div style="font-size:12px;font-weight:800;color:#fff;">Live music</div><div style="font-size:10px;color:rgba(255,255,255,.4);">Son à fond</div></div>
-          </div>
-        </div>
-
-        <!-- CRITÈRE SÉCU -->
-        <div style="font-size:10px;font-weight:800;color:rgba(200,160,255,.55);letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px;">🛡️ Niveau sécu minimum</div>
-        <div style="display:flex;gap:8px;margin-bottom:28px;" id="soireeScores">
-          <div class="s-score" data-min="70" onclick="selectSoireeScore(this)">≥ 70 OK</div>
-          <div class="s-score active" data-min="80" onclick="selectSoireeScore(this)">≥ 80 ✓</div>
-          <div class="s-score" data-min="90" onclick="selectSoireeScore(this)">≥ 90 🔒</div>
-        </div>
-
-        <!-- CTA GÉNÉRATION -->
-        <div id="soireeGenBlock">
-          <button onclick="generateItinerary()" id="soireeGenBtn" style="width:100%;padding:18px;background:linear-gradient(135deg,#8020E0,#C040FF,#FF40C0);color:white;border:none;border-radius:20px;font-size:16px;font-weight:900;font-family:'Syne',sans-serif;cursor:pointer;letter-spacing:.02em;box-shadow:0 6px 32px rgba(160,40,255,.45),0 0 0 1px rgba(255,255,255,.08);position:relative;overflow:hidden;">
-            <span style="position:relative;z-index:1;">✨ Lance ma soirée !</span>
-          </button>
-        </div>
-
-        <!-- RÉSULTATS ITINÉRAIRE -->
-        <div id="soireeResults" style="display:none;margin-top:24px;">
-
-          <!-- Headline résultat -->
-          <div id="soireeHeadline" style="text-align:center;margin-bottom:20px;">
-            <div style="font-size:28px;margin-bottom:6px;">🔥</div>
-            <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:900;color:#fff;letter-spacing:-.3px;" id="soireeResultTitle">Ta soirée est prête !</div>
-            <div style="font-size:12px;color:rgba(200,160,255,.6);margin-top:4px;" id="soireeResultSub">3 spots validés · Score moyen 87/100</div>
-          </div>
-
-          <!-- Stops -->
-          <div id="soireeItinerary" style="display:flex;flex-direction:column;gap:0;margin-bottom:20px;"></div>
-
-          <!-- Actions -->
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
-            <button onclick="shareItinerary()" style="padding:14px;background:rgba(255,255,255,.07);color:#fff;border:1px solid rgba(255,255,255,.12);border-radius:16px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Syne',sans-serif;">
-              📤 Partager
-            </button>
-            <button onclick="generateItinerary()" style="padding:14px;background:rgba(160,40,255,.25);color:#C060FF;border:1px solid rgba(160,40,255,.35);border-radius:16px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Syne',sans-serif;">
-              🔀 Reshuffle
-            </button>
-          </div>
-
-          <!-- Badge sécu -->
-          <div style="background:rgba(0,200,120,.07);border:1px solid rgba(0,200,120,.18);border-radius:16px;padding:14px 16px;display:flex;gap:12px;align-items:center;">
-            <div style="font-size:22px;">🛡️</div>
-            <div>
-              <div style="font-size:12px;font-weight:800;color:#00C878;margin-bottom:3px;">100% certifiés Spotafe</div>
-              <div style="font-size:11px;color:rgba(255,255,255,.35);line-height:1.5;">Audités Apave / Bureau Veritas. Leurs scores sont vérifiés et à jour — t'as plus qu'à profiter 🎉</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- HISTORIQUE -->
-        <div style="margin-top:28px;">
-          <div style="font-size:10px;font-weight:800;color:rgba(200,160,255,.55);letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px;">📅 Tes dernières sorties</div>
-          <div id="soireeHistory">
-            <div class="s-history-card" onclick="replaySoiree(0)">
-              <div style="font-size:20px;">🎉</div>
-              <div style="flex:1;">
-                <div style="font-size:13px;font-weight:700;color:#fff;">Tours Centre · 3 bars</div>
-                <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:2px;">Score moyen 86 · il y a 5 jours</div>
-              </div>
-              <div style="font-size:18px;color:rgba(255,255,255,.2);">›</div>
-            </div>
-            <div class="s-history-card" onclick="replaySoiree(1)">
-              <div style="font-size:20px;">🍷</div>
-              <div style="flex:1;">
-                <div style="font-size:13px;font-weight:700;color:#fff;">Le Marais · 4 bars</div>
-                <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:2px;">Score moyen 91 · il y a 12 jours</div>
-              </div>
-              <div style="font-size:18px;color:rgba(255,255,255,.2);">›</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
 </body>
 </html>
