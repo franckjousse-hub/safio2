@@ -42,7 +42,9 @@
     height: 844px;
     background: var(--bg);
     border-radius: 54px;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: none;
     position: relative;
     box-shadow: 0 0 0 12px #1C1C1E, 0 0 0 14px #2C2C2E, 0 40px 120px rgba(0,0,0,0.8), 0 0 60px rgba(0,232,122,0.06);
   }
@@ -77,8 +79,9 @@
   /* SCREENS */
   .screen {
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    overflow-y: auto;
+    top: 0; left: 0; right: 0;
+    min-height: 100%;
+    overflow-y: visible;
     overflow-x: hidden;
     visibility: hidden;
     opacity: 0;
@@ -101,8 +104,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100%;
+    min-height: 100%;
+    padding-bottom: 40px;
   }
   .splash-logo {
     font-family: 'Syne', sans-serif;
@@ -426,8 +429,9 @@
 
   /* TAB BAR */
   .tab-bar {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
+    position: fixed;
+    bottom: 0;
+    width: 390px;
     height: 84px;
     background: rgba(10,10,15,0.97);
     backdrop-filter: blur(20px);
@@ -990,7 +994,7 @@
 
   <!-- ════════ SPLASH SCREEN ════════ -->
   <div class="screen active" id="splash">
-    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:40px 28px;">
+    <div style="display:flex;flex-direction:column;align-items:center;padding:40px 28px 48px;min-height:100%;">
       <div class="splash-orb"></div>
       <div style="position:relative;z-index:2;text-align:center;margin-bottom:60px;">
         <div class="splash-logo" style="font-size:0"><svg width="180" height="52" viewBox="0 0 268 76" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2765,6 +2769,7 @@ const bars = [
 ];
 function goTo(screen) {
   // Masquer tous les écrans
+  document.querySelector('.phone').scrollTop = 0;
   document.querySelectorAll('.screen').forEach(function(s) {
     s.classList.remove('active');
   });
