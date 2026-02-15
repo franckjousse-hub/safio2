@@ -781,10 +781,10 @@
     border-radius: 20px;
     padding: 6px 14px;
     font-size: 12px;
-    white-space: nowrap;
     cursor: pointer;
     transition: all 0.2s;
     color: var(--muted);
+    white-space: nowrap;
   }
   .filter-pill.active {
     background: rgba(0,232,122,0.12);
@@ -792,6 +792,15 @@
     color: var(--green);
   }
   .filter-pill:active { transform: scale(0.95); }
+  #clientMapFilters .filter-pill {
+    white-space: normal;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 10px;
+  }
+  #clientMapFilters .filter-pill.active {
+    font-weight: 700;
+  }
 
   .partner-card {
     background: var(--card);
@@ -980,6 +989,14 @@
           </div>
           <div class="role-arrow">›</div>
         </div>
+        <div class="role-card" onclick="goTo('parent')" style="border-color:rgba(160,100,255,0.3);">
+          <div class="role-icon" style="background:rgba(160,100,255,0.15);font-size:24px;">👨‍👩‍👧</div>
+          <div class="role-info">
+            <div class="role-title">Je suis parent</div>
+            <div class="role-desc">Suivez la position de votre enfant · Sachez s'il est dans un lieu sécurisé</div>
+          </div>
+          <div class="role-arrow">›</div>
+        </div>
       </div>
       <div style="margin-top:32px;font-size:12px;color:rgba(240,240,248,0.25);text-align:center;line-height:1.5;">
         Données ERP • Certificats de sécurité<br>Gratuit pour les gérants · Transparent pour tous
@@ -1000,6 +1017,15 @@
       </div>
       <div class="section-title">Bars près de vous</div>
       <div class="section-sub">7 établissements • Tours &amp; Paris — Pilote bêta</div>
+      <!-- Filtres score/distance -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;padding:8px 0 4px;" id="clientMapFilters">
+        <div class="filter-pill active" onclick="applyMapFilter('tous',this)" style="text-align:center;padding:6px 4px;">Tous</div>
+        <div class="filter-pill" onclick="applyMapFilter('top',this)" style="text-align:center;padding:6px 4px;">✅ &gt;85</div>
+        <div class="filter-pill" onclick="applyMapFilter('warning',this)" style="text-align:center;padding:6px 4px;">⚠️ Risque</div>
+        <div class="filter-pill" onclick="applyMapFilter('tours',this)" style="text-align:center;padding:6px 4px;">📍 Tours</div>
+        <div class="filter-pill" onclick="applyMapFilter('paris',this)" style="text-align:center;padding:6px 4px;">🗼 Paris</div>
+        <div class="filter-pill" onclick="applyMapFilter('open',this)" style="text-align:center;padding:6px 4px;">🕐 Ouvert</div>
+      </div>
     </div>
 
     <!-- MAP LEAFLET -->
@@ -1011,7 +1037,7 @@
     <div class="bars-list">
 
       <!-- Bar 1 -->
-      <div class="bar-card" onclick="openModal(0)">
+      <div class="bar-card" data-idx="0" onclick="openModal(0)">
         <div class="bar-card-top">
           <div>
             <div class="bar-name">Le Vieux Murier</div>
@@ -1039,7 +1065,7 @@
       </div>
 
       <!-- Bar 2 -->
-      <div class="bar-card" style="border-color:rgba(255,140,0,0.2);" onclick="openModal(1)">
+      <div class="bar-card" style="border-color:rgba(255,140,0,0.2);" data-idx="1" onclick="openModal(1)">
         <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--orange);border-radius:0 2px 2px 0;"></div>
         <div class="bar-card-top">
           <div>
@@ -1068,7 +1094,7 @@
       </div>
 
       <!-- Bar 3 -->
-      <div class="bar-card" onclick="openModal(2)">
+      <div class="bar-card" data-idx="2" onclick="openModal(2)">
         <div class="bar-card-top">
           <div>
             <div class="bar-name">La Guinguette</div>
@@ -1108,7 +1134,7 @@
     <div class="bars-list">
 
       <!-- Paris 1 — Le Marais -->
-      <div class="bar-card" onclick="openModal(3)">
+      <div class="bar-card" data-idx="3" onclick="openModal(3)">
         <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#E8B84B;border-radius:0 2px 2px 0;"></div>
         <div style="position:absolute;top:10px;right:10px;background:rgba(232,184,75,0.12);border:1px solid rgba(232,184,75,0.3);color:#E8B84B;font-size:8px;font-weight:700;padding:2px 7px;border-radius:100px;">🗼 Paris</div>
         <div class="bar-card-top" style="padding-right:60px;">
@@ -1138,7 +1164,7 @@
       </div>
 
       <!-- Paris 2 — Oberkampf -->
-      <div class="bar-card" style="border-color:rgba(255,140,0,0.2);" onclick="openModal(4)">
+      <div class="bar-card" style="border-color:rgba(255,140,0,0.2);" data-idx="4" onclick="openModal(4)">
         <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--orange);border-radius:0 2px 2px 0;"></div>
         <div style="position:absolute;top:10px;right:10px;background:rgba(232,184,75,0.12);border:1px solid rgba(232,184,75,0.3);color:#E8B84B;font-size:8px;font-weight:700;padding:2px 7px;border-radius:100px;">🗼 Paris</div>
         <div class="bar-card-top" style="padding-right:60px;">
@@ -1168,7 +1194,7 @@
       </div>
 
       <!-- Paris 3 — République -->
-      <div class="bar-card" onclick="openModal(5)">
+      <div class="bar-card" data-idx="5" onclick="openModal(5)">
         <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#E8B84B;border-radius:0 2px 2px 0;"></div>
         <div style="position:absolute;top:10px;right:10px;background:rgba(232,184,75,0.12);border:1px solid rgba(232,184,75,0.3);color:#E8B84B;font-size:8px;font-weight:700;padding:2px 7px;border-radius:100px;">🗼 Paris</div>
         <div class="bar-card-top" style="padding-right:60px;">
@@ -1198,7 +1224,7 @@
       </div>
 
       <!-- Paris 4 — Bastille -->
-      <div class="bar-card" style="border-color:rgba(255,140,0,0.2);" onclick="openModal(6)">
+      <div class="bar-card" style="border-color:rgba(255,140,0,0.2);" data-idx="6" onclick="openModal(6)">
         <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--orange);border-radius:0 2px 2px 0;"></div>
         <div style="position:absolute;top:10px;right:10px;background:rgba(232,184,75,0.12);border:1px solid rgba(232,184,75,0.3);color:#E8B84B;font-size:8px;font-weight:700;padding:2px 7px;border-radius:100px;">🗼 Paris</div>
         <div class="bar-card-top" style="padding-right:60px;">
@@ -1261,6 +1287,327 @@
       </div>
     </div>
 
+  </div>
+
+  <!-- ── CLIENT SUB-SCREENS ── -->
+
+  <!-- CARTE (déjà affichée via client-header + map + bars-list = vue par défaut) -->
+  <div id="clientSubMap" class="client-sub active"></div>
+
+  <!-- FAVORIS -->
+  <div id="clientSubFavorites" class="client-sub" style="display:none;padding:0 24px 100px;">
+    <div style="padding:16px 0 12px;display:flex;justify-content:space-between;align-items:center;">
+      <div class="section-title" style="margin:0;">Mes favoris</div>
+      <div style="font-size:11px;color:var(--muted);" id="favCount">0 bar</div>
+    </div>
+    <div id="favList"></div>
+    <div id="favEmpty" style="text-align:center;padding:60px 0;color:var(--muted);">
+      <div style="font-size:48px;margin-bottom:12px;">⭐</div>
+      <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px;">Aucun favori</div>
+      <div style="font-size:12px;">Appuyez sur ⭐ dans la fiche d'un bar pour le sauvegarder</div>
+    </div>
+  </div>
+
+  <!-- RECHERCHE -->
+  <div id="clientSubSearch" class="client-sub" style="display:none;padding:0 24px 100px;">
+    <div style="padding:16px 0 12px;">
+      <div class="section-title" style="margin:0 0 12px;">Rechercher</div>
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="clientSearchInput" placeholder="Nom, adresse, ville…" oninput="doClientSearch()" style="font-size:14px;">
+      </div>
+      <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;" id="searchFilters">
+        <div class="filter-pill active" onclick="setSearchFilter('tous',this)">Tous</div>
+        <div class="filter-pill" onclick="setSearchFilter('top',this)">Score > 85</div>
+        <div class="filter-pill" onclick="setSearchFilter('tours',this)">Tours</div>
+        <div class="filter-pill" onclick="setSearchFilter('paris',this)">Paris</div>
+      </div>
+    </div>
+    <div id="searchResults"></div>
+    <div id="searchEmpty" style="text-align:center;padding:40px 0;color:var(--muted);display:none;">
+      <div style="font-size:36px;margin-bottom:10px;">🔍</div>
+      <div style="font-size:13px;">Aucun résultat pour cette recherche</div>
+    </div>
+  </div>
+
+  <!-- PROFIL -->
+  <div id="clientSubProfile" class="client-sub" style="display:none;padding:0 24px 100px;">
+    <div style="padding:16px 0 20px;">
+      <div class="section-title" style="margin:0 0 4px;">Mon profil</div>
+      <div style="font-size:12px;color:var(--muted);">Utilisateur Safio</div>
+    </div>
+    <!-- Avatar -->
+    <div style="text-align:center;margin-bottom:24px;">
+      <div style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,rgba(0,200,120,0.2),rgba(0,200,120,0.05));border:2px solid rgba(0,200,120,0.3);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 10px;">👤</div>
+      <div style="font-size:15px;font-weight:700;color:var(--text);">Utilisateur</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:2px;">Membre depuis fév. 2026</div>
+    </div>
+    <!-- Stats perso -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px;">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;">
+        <div style="font-size:22px;font-weight:900;color:var(--green);" id="profileFavCount">0</div>
+        <div style="font-size:9px;color:var(--muted);margin-top:3px;">Favoris</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;">
+        <div style="font-size:22px;font-weight:900;color:var(--text);" id="profileScanCount">7</div>
+        <div style="font-size:9px;color:var(--muted);margin-top:3px;">Fiches vues</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;">
+        <div style="font-size:22px;font-weight:900;color:#E8B84B;">84</div>
+        <div style="font-size:9px;color:var(--muted);margin-top:3px;">Score moy.</div>
+      </div>
+    </div>
+    <!-- Alertes -->
+    <div style="font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.06em;margin-bottom:10px;">ALERTES VOISINAGE</div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:16px;" id="alertList">
+      <div style="padding:14px 16px;border-bottom:1px solid var(--border);display:flex;gap:12px;align-items:flex-start;">
+        <div style="font-size:18px;margin-top:2px;">🔔</div>
+        <div>
+          <div style="font-size:12px;font-weight:600;color:var(--text);">Le Vieux Murier a amélioré son score</div>
+          <div style="font-size:10px;color:var(--green);margin-top:2px;">+5 points → 82/100 · il y a 2 jours</div>
+        </div>
+      </div>
+      <div style="padding:14px 16px;display:flex;gap:12px;align-items:flex-start;">
+        <div style="font-size:18px;margin-top:2px;">⚠️</div>
+        <div>
+          <div style="font-size:12px;font-weight:600;color:var(--text);">Café Oberkampf : point en attente</div>
+          <div style="font-size:10px;color:var(--orange);margin-top:2px;">Issues de secours · il y a 5 jours</div>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.06em;margin-bottom:10px;">PARAMÈTRES</div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;">
+      <div onclick="showToast('🔔 Notifications activées')" style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer;">
+        <span style="font-size:13px;color:var(--text);">Notifications de score</span>
+        <span style="font-size:11px;color:var(--green);font-weight:700;">Activées</span>
+      </div>
+      <div onclick="showToast('📍 Rayon mis à jour')" style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;">
+        <span style="font-size:13px;color:var(--text);">Rayon d'alerte</span>
+        <span style="font-size:11px;color:var(--muted);">500m ›</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════ PARENT SCREEN ════════ -->
+  <div class="screen" id="parent">
+    <div class="client-header" style="padding-bottom:8px;">
+      <div class="header-top">
+        <div class="app-logo-small">safio</div>
+        <div class="back-btn" onclick="goTo('splash')">← Retour</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:4px;">
+        <div class="section-title" style="margin:0;">Je suis parent</div>
+        <div style="background:rgba(160,100,255,0.15);border:1px solid rgba(160,100,255,0.35);color:#A064FF;font-size:9px;font-weight:700;padding:3px 8px;border-radius:100px;letter-spacing:.04em;">🔒 CONSENTEMENT REQUIS</div>
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-top:3px;">Suivi activé uniquement avec l'accord de votre enfant</div>
+    </div>
+
+    <!-- ONGLETS PARENT -->
+    <div style="display:flex;border-bottom:1px solid var(--border);margin:0 24px 0;">
+      <div id="ptab-live" onclick="switchParentTab('live')" style="flex:1;padding:10px 0;text-align:center;font-size:12px;font-weight:700;color:#A064FF;border-bottom:2px solid #A064FF;cursor:pointer;">📍 En direct</div>
+      <div id="ptab-history" onclick="switchParentTab('history')" style="flex:1;padding:10px 0;text-align:center;font-size:12px;font-weight:600;color:var(--muted);border-bottom:2px solid transparent;cursor:pointer;">🕐 Historique</div>
+      <div id="ptab-settings" onclick="switchParentTab('settings')" style="flex:1;padding:10px 0;text-align:center;font-size:12px;font-weight:600;color:var(--muted);border-bottom:2px solid transparent;cursor:pointer;">⚙️ Réglages</div>
+    </div>
+
+    <!-- SUB : EN DIRECT -->
+    <div id="psub-live" style="padding:16px 24px 100px;">
+
+      <!-- Profil enfant -->
+      <div style="display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:16px;">
+        <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,rgba(160,100,255,0.25),rgba(160,100,255,0.05));border:2px solid rgba(160,100,255,0.4);display:flex;align-items:center;justify-content:center;font-size:22px;">🧑</div>
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:700;color:var(--text);">Léa</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px;">Mis à jour il y a <span id="lastUpdate">2 min</span></div>
+        </div>
+        <div style="text-align:right;">
+          <div id="childOnline" style="display:flex;align-items:center;gap:5px;justify-content:flex-end;">
+            <div style="width:7px;height:7px;border-radius:50%;background:#00C878;animation:pulse-dot 1.5s infinite;"></div>
+            <span style="font-size:11px;color:var(--green);font-weight:700;">En ligne</span>
+          </div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px;">Batterie 78%</div>
+        </div>
+      </div>
+
+      <!-- Statut sécurité -->
+      <div id="safetyCard" style="border-radius:16px;padding:18px;margin-bottom:16px;background:linear-gradient(135deg,rgba(0,200,120,0.12),rgba(0,200,120,0.04));border:1px solid rgba(0,200,120,0.35);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+          <div style="font-size:32px;" id="safetyIcon">✅</div>
+          <div>
+            <div style="font-size:13px;font-weight:800;color:var(--green);" id="safetyTitle">LIEU SÉCURISÉ</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px;" id="safetySubtitle">Score Safio ≥ 85/100 · Vérifié</div>
+          </div>
+          <div style="margin-left:auto;text-align:center;">
+            <div style="font-size:26px;font-weight:900;" id="safetyScore" class="kpi-green">91</div>
+            <div style="font-size:8px;color:var(--muted);">/100</div>
+          </div>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:10px 12px;">
+          <div style="font-size:12px;font-weight:700;color:var(--text);" id="currentVenue">📍 Le Marais Social Club</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:2px;" id="currentAddr">18 Rue de Bretagne, Paris 3e</div>
+          <div style="display:flex;gap:12px;margin-top:8px;">
+            <span style="font-size:10px;color:var(--green);">✓ Extincteurs OK</span>
+            <span style="font-size:10px;color:var(--green);">✓ Issues OK</span>
+            <span style="font-size:10px;color:var(--green);">✓ Détecteurs OK</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mini carte -->
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:16px;">
+        <canvas id="parentMapCanvas" width="320" height="140" style="width:100%;height:140px;display:block;"></canvas>
+        <div style="padding:10px 14px;display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-size:11px;color:var(--muted);">Paris 3e · Rue de Bretagne</div>
+          <div onclick="showToast('🗺️ Navigation lancée')" style="background:rgba(160,100,255,0.15);border:1px solid rgba(160,100,255,0.3);color:#A064FF;font-size:10px;font-weight:700;padding:5px 12px;border-radius:100px;cursor:pointer;">Y aller ›</div>
+        </div>
+      </div>
+
+      <!-- Actions rapides -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+        <div onclick="showToast('📱 Message envoyé à Léa')" style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;cursor:pointer;">
+          <div style="font-size:22px;margin-bottom:6px;">💬</div>
+          <div style="font-size:11px;font-weight:700;color:var(--text);">Envoyer message</div>
+        </div>
+        <div onclick="showToast('📞 Appel lancé vers Léa')" style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;cursor:pointer;">
+          <div style="font-size:22px;margin-bottom:6px;">📞</div>
+          <div style="font-size:11px;font-weight:700;color:var(--text);">Appeler</div>
+        </div>
+      </div>
+
+      <!-- Simulateur : changer le lieu -->
+      <div style="font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.06em;margin-bottom:10px;">SIMULER UN DÉPLACEMENT</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div onclick="simulateLocation(0)" class="sim-loc-btn" style="background:var(--card);border:1px solid rgba(0,200,120,0.3);border-radius:12px;padding:12px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="font-size:12px;font-weight:700;color:var(--text);">Le Marais Social Club · Paris 3e</div><div style="font-size:10px;color:var(--green);margin-top:2px;">Score 91/100 ✅ Sécurisé</div></div>
+          <div style="font-size:16px;">›</div>
+        </div>
+        <div onclick="simulateLocation(1)" class="sim-loc-btn" style="background:var(--card);border:1px solid rgba(255,140,0,0.3);border-radius:12px;padding:12px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="font-size:12px;font-weight:700;color:var(--text);">Café Oberkampf · Paris 11e</div><div style="font-size:10px;color:var(--orange);margin-top:2px;">Score 74/100 ⚠️ Non certifié</div></div>
+          <div style="font-size:16px;">›</div>
+        </div>
+        <div onclick="simulateLocation(2)" class="sim-loc-btn" style="background:var(--card);border:1px solid rgba(0,200,120,0.3);border-radius:12px;padding:12px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="font-size:12px;font-weight:700;color:var(--text);">La Guinguette · Tours</div><div style="font-size:10px;color:var(--green);margin-top:2px;">Score 85/100 ✅ Sécurisé</div></div>
+          <div style="font-size:16px;">›</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUB : HISTORIQUE -->
+    <div id="psub-history" style="display:none;padding:16px 24px 100px;">
+      <div style="font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.06em;margin-bottom:12px;">LIEUX VISITÉS — 7 DERNIERS JOURS</div>
+      <div style="display:flex;flex-direction:column;gap:2px;">
+
+        <div style="font-size:10px;color:var(--muted);font-weight:700;padding:8px 0 4px;letter-spacing:.04em;">AUJOURD'HUI</div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:13px 14px;display:flex;gap:12px;align-items:center;">
+          <div style="width:36px;height:36px;border-radius:10px;background:rgba(0,200,120,0.12);border:1px solid rgba(0,200,120,0.3);display:flex;align-items:center;justify-content:center;font-size:16px;">✅</div>
+          <div style="flex:1;">
+            <div style="font-size:12px;font-weight:700;color:var(--text);">Le Marais Social Club</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:2px;">Paris 3e · 22h14 → En cours · Score 91</div>
+          </div>
+          <div style="font-size:13px;font-weight:900;color:var(--green);">91</div>
+        </div>
+
+        <div style="font-size:10px;color:var(--muted);font-weight:700;padding:12px 0 4px;letter-spacing:.04em;">HIER</div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:13px 14px;display:flex;gap:12px;align-items:center;margin-bottom:2px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:rgba(255,140,0,0.1);border:1px solid rgba(255,140,0,0.3);display:flex;align-items:center;justify-content:center;font-size:16px;">⚠️</div>
+          <div style="flex:1;">
+            <div style="font-size:12px;font-weight:700;color:var(--text);">Café Oberkampf</div>
+            <div style="font-size:10px;color:var(--orange);margin-top:2px;">Paris 11e · 21h02→23h45 · Score 74 ⚠️</div>
+          </div>
+          <div style="font-size:13px;font-weight:900;color:var(--orange);">74</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:13px 14px;display:flex;gap:12px;align-items:center;">
+          <div style="width:36px;height:36px;border-radius:10px;background:rgba(0,200,120,0.12);border:1px solid rgba(0,200,120,0.3);display:flex;align-items:center;justify-content:center;font-size:16px;">✅</div>
+          <div style="flex:1;">
+            <div style="font-size:12px;font-weight:700;color:var(--text);">Bar République</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:2px;">Paris 3e · 18h30→20h15 · Score 88</div>
+          </div>
+          <div style="font-size:13px;font-weight:900;color:var(--green);">88</div>
+        </div>
+
+        <div style="font-size:10px;color:var(--muted);font-weight:700;padding:12px 0 4px;letter-spacing:.04em;">VENDREDI 14 FÉV.</div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:13px 14px;display:flex;gap:12px;align-items:center;">
+          <div style="width:36px;height:36px;border-radius:10px;background:rgba(0,200,120,0.12);border:1px solid rgba(0,200,120,0.3);display:flex;align-items:center;justify-content:center;font-size:16px;">✅</div>
+          <div style="flex:1;">
+            <div style="font-size:12px;font-weight:700;color:var(--text);">Le Vieux Murier</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:2px;">Tours · 20h00→01h30 · Score 82</div>
+          </div>
+          <div style="font-size:13px;font-weight:900;color:var(--green);">82</div>
+        </div>
+
+        <!-- Résumé semaine -->
+        <div style="margin-top:16px;background:rgba(160,100,255,0.08);border:1px solid rgba(160,100,255,0.2);border-radius:12px;padding:14px;">
+          <div style="font-size:11px;color:#A064FF;font-weight:700;margin-bottom:8px;">📊 RÉSUMÉ DE LA SEMAINE</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;">
+            <div><div style="font-size:20px;font-weight:900;color:var(--green);">3</div><div style="font-size:9px;color:var(--muted);">Lieux sécurisés</div></div>
+            <div><div style="font-size:20px;font-weight:900;color:var(--orange);">1</div><div style="font-size:9px;color:var(--muted);">À surveiller</div></div>
+            <div><div style="font-size:20px;font-weight:900;color:var(--text);">84</div><div style="font-size:9px;color:var(--muted);">Score moyen</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUB : RÉGLAGES -->
+    <div id="psub-settings" style="display:none;padding:16px 24px 100px;">
+      <div style="font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.06em;margin-bottom:12px;">PROFIL SUIVI</div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:16px;">
+        <div style="padding:14px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="font-size:13px;font-weight:700;color:var(--text);">Léa</div><div style="font-size:10px;color:var(--muted);">Consentement donné le 12/02/2026</div></div>
+          <div style="background:rgba(0,200,120,0.12);border:1px solid rgba(0,200,120,0.3);color:var(--green);font-size:9px;font-weight:700;padding:4px 8px;border-radius:100px;">✓ Actif</div>
+        </div>
+        <div onclick="showToast('📱 Lien envoyé à Léa')" style="padding:14px 16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;">
+          <span style="font-size:13px;color:var(--text);">Ajouter un autre enfant</span>
+          <span style="font-size:16px;color:var(--muted);">+</span>
+        </div>
+      </div>
+
+      <div style="font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.06em;margin-bottom:12px;">ALERTES</div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:16px;">
+        <div onclick="showToast('⚙️ Seuil mis à jour')" style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer;">
+          <div>
+            <div style="font-size:13px;color:var(--text);">Alerte si lieu non certifié</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:2px;">Score &lt; 85/100</div>
+          </div>
+          <div style="background:rgba(0,200,120,0.12);border:1px solid rgba(0,200,120,0.3);color:var(--green);font-size:9px;font-weight:700;padding:4px 8px;border-radius:100px;">Activée</div>
+        </div>
+        <div onclick="showToast('⚙️ Paramètre mis à jour')" style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer;">
+          <div>
+            <div style="font-size:13px;color:var(--text);">Notification d'arrivée</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:2px;">Quand l'enfant entre dans un ERP</div>
+          </div>
+          <div style="background:rgba(0,200,120,0.12);border:1px solid rgba(0,200,120,0.3);color:var(--green);font-size:9px;font-weight:700;padding:4px 8px;border-radius:100px;">Activée</div>
+        </div>
+        <div onclick="showToast('⚙️ Heure de retour mise à jour')" style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;cursor:pointer;">
+          <div>
+            <div style="font-size:13px;color:var(--text);">Heure de retour attendue</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:2px;">Alerte si dépassée</div>
+          </div>
+          <span style="font-size:12px;color:var(--muted);">01h00 ›</span>
+        </div>
+      </div>
+
+      <!-- Consentement info -->
+      <div style="background:rgba(160,100,255,0.08);border:1px solid rgba(160,100,255,0.2);border-radius:12px;padding:14px 16px;">
+        <div style="font-size:11px;color:#A064FF;font-weight:700;margin-bottom:6px;">🔒 RESPECT DE LA VIE PRIVÉE</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.6;">Le suivi est <strong style="color:var(--text);">toujours soumis au consentement explicite</strong> de l'enfant. Il peut le désactiver à tout moment depuis son profil. La localisation n'est partagée qu'avec le parent autorisé.</div>
+      </div>
+    </div>
+
+    <!-- Tab bar parent -->
+    <div class="tab-bar visible" id="tabParent">
+      <div class="tab-item" onclick="switchParentTab('live')">
+        <div class="tab-icon active" id="ptabLiveIcon">📍</div>
+        <div class="tab-txt active" id="ptabLiveTxt">En direct</div>
+      </div>
+      <div class="tab-item" onclick="switchParentTab('history')">
+        <div class="tab-icon" id="ptabHistoryIcon">🕐</div>
+        <div class="tab-txt" id="ptabHistoryTxt">Historique</div>
+      </div>
+      <div class="tab-item" onclick="switchParentTab('settings')">
+        <div class="tab-icon" id="ptabSettingsIcon">⚙️</div>
+        <div class="tab-txt" id="ptabSettingsTxt">Réglages</div>
+      </div>
+    </div>
   </div>
 
   <!-- ════════ BAR OWNER SCREEN ════════ -->
@@ -1426,21 +1773,21 @@
 
   <!-- TAB BAR CLIENT -->
   <div class="tab-bar" id="tabClient">
-    <div class="tab-item">
-      <div class="tab-icon active">🗺️</div>
-      <div class="tab-txt active">Carte</div>
+    <div class="tab-item" onclick="switchClientTab('map')">
+      <div class="tab-icon active" id="ctabMap">🗺️</div>
+      <div class="tab-txt active" id="ctabMapTxt">Carte</div>
     </div>
-    <div class="tab-item">
-      <div class="tab-icon">⭐</div>
-      <div class="tab-txt">Favoris</div>
+    <div class="tab-item" onclick="switchClientTab('favorites')">
+      <div class="tab-icon" id="ctabFavorites">⭐</div>
+      <div class="tab-txt" id="ctabFavoritesTxt">Favoris</div>
     </div>
-    <div class="tab-item">
-      <div class="tab-icon">🔍</div>
-      <div class="tab-txt">Chercher</div>
+    <div class="tab-item" onclick="switchClientTab('search')">
+      <div class="tab-icon" id="ctabSearch">🔍</div>
+      <div class="tab-txt" id="ctabSearchTxt">Chercher</div>
     </div>
-    <div class="tab-item">
-      <div class="tab-icon">👤</div>
-      <div class="tab-txt">Profil</div>
+    <div class="tab-item" onclick="switchClientTab('profile')">
+      <div class="tab-icon" id="ctabProfile">👤</div>
+      <div class="tab-txt" id="ctabProfileTxt">Profil</div>
     </div>
   </div>
 
@@ -1684,6 +2031,76 @@
         <div style="background:rgba(0,200,120,0.06);border:1px solid rgba(0,200,120,0.2);border-radius:12px;padding:14px 16px;">
           <div style="font-size:11px;color:var(--green);font-weight:700;margin-bottom:6px;">💡 CONSEIL SAFIO</div>
           <div style="font-size:11px;color:var(--muted);line-height:1.6;">Votre score de 82/100 vous place dans le <strong style="color:var(--text);">top 30%</strong> des bars de Tours. Corriger le point "Détecteurs fumée" vous ferait gagner <strong style="color:var(--green);">+8 points</strong> et passer en top 10%.</div>
+        </div>
+      </div>
+
+      <!-- Comparatif concurrents -->
+      <div style="margin:0 24px 16px;">
+        <div style="font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.06em;margin-bottom:10px;">COMPARATIF — VOS 3 CONCURRENTS LES PLUS PROCHES</div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;">
+          <!-- Vous -->
+          <div style="padding:12px 16px;border-bottom:1px solid var(--border);background:rgba(0,200,120,0.05);">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <span style="font-size:12px;font-weight:700;color:var(--green);">📍 Vous — Bar du Centre</span>
+              <span style="font-size:14px;font-weight:900;color:var(--green);">82</span>
+            </div>
+            <div style="background:var(--border);border-radius:4px;height:5px;"><div style="width:82%;height:100%;background:var(--green);border-radius:4px;"></div></div>
+          </div>
+          <!-- Concurrent 1 -->
+          <div style="padding:12px 16px;border-bottom:1px solid var(--border);">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <span style="font-size:12px;font-weight:600;color:var(--text);">Le Vieux Murier <span style="color:var(--muted);font-size:10px;">· 170m</span></span>
+              <span style="font-size:14px;font-weight:900;color:var(--text);">82</span>
+            </div>
+            <div style="background:var(--border);border-radius:4px;height:5px;"><div style="width:82%;height:100%;background:rgba(255,255,255,0.3);border-radius:4px;"></div></div>
+          </div>
+          <!-- Concurrent 2 -->
+          <div style="padding:12px 16px;border-bottom:1px solid var(--border);">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <span style="font-size:12px;font-weight:600;color:var(--text);">La Guinguette <span style="color:var(--muted);font-size:10px;">· 330m</span></span>
+              <span style="font-size:14px;font-weight:900;color:var(--green);">85 ↑</span>
+            </div>
+            <div style="background:var(--border);border-radius:4px;height:5px;"><div style="width:85%;height:100%;background:var(--green);border-radius:4px;"></div></div>
+          </div>
+          <!-- Concurrent 3 -->
+          <div style="padding:12px 16px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <span style="font-size:12px;font-weight:600;color:var(--text);">Le Petit Zinc <span style="color:var(--muted);font-size:10px;">· 420m</span></span>
+              <span style="font-size:14px;font-weight:900;color:var(--orange);">71</span>
+            </div>
+            <div style="background:var(--border);border-radius:4px;height:5px;"><div style="width:71%;height:100%;background:var(--orange);border-radius:4px;"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Score historique 12 mois -->
+      <div style="margin:0 24px 16px;">
+        <div style="font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.06em;margin-bottom:10px;">ÉVOLUTION DU SCORE — 12 DERNIERS MOIS</div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;">
+          <canvas id="scoreHistoryChart" width="270" height="80" style="width:100%;height:80px;"></canvas>
+          <div style="display:flex;justify-content:space-between;margin-top:8px;">
+            <span style="font-size:9px;color:var(--muted);">Fév 2025</span>
+            <span style="font-size:9px;color:var(--muted);">Août 2025</span>
+            <span style="font-size:9px;color:var(--green);font-weight:700;">Fév 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Export rapport -->
+      <div style="margin:0 24px 100px;">
+        <div style="font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.06em;margin-bottom:10px;">RAPPORT MENSUEL</div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+            <div>
+              <div style="font-size:13px;font-weight:700;color:var(--text);">Rapport Janvier 2026</div>
+              <div style="font-size:10px;color:var(--muted);margin-top:2px;">847 vues · 134 scans · score moyen 82</div>
+            </div>
+            <div style="font-size:24px;">📊</div>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button onclick="showToast('📥 Rapport PDF téléchargé')" style="flex:1;background:rgba(0,200,120,0.12);border:1px solid rgba(0,200,120,0.3);color:var(--green);border-radius:10px;padding:10px;font-size:11px;font-weight:700;cursor:pointer;">📥 Télécharger PDF</button>
+            <button onclick="showToast('📧 Rapport envoyé par email')" style="flex:1;background:var(--card);border:1px solid var(--border);color:var(--text);border-radius:10px;padding:10px;font-size:11px;font-weight:600;cursor:pointer;">📧 Envoyer email</button>
+          </div>
         </div>
       </div>
     </div>
@@ -2254,13 +2671,378 @@ function switchOwnerTab(tab) {
     if (icon) icon.classList.add('active');
     if (txt)  { txt.classList.add('active'); txt.style.color = 'var(--green)'; }
     if (tab === 'partners') renderPartners(partners);
-    if (tab === 'analytics') { setTimeout(drawChart, 80); }
+    if (tab === 'analytics') { setTimeout(function(){ drawChart(); drawScoreHistory(); }, 80); }
     document.getElementById('barowner').scrollTop = 0;
   }
 }
 
+// ── CLIENT NAVIGATION ──
+var currentClientTab = 'map';
+var favorites = [];
+var searchFilter = 'tous';
+
+function switchClientTab(tab) {
+  currentClientTab = tab;
+  var tabs = ['Map','Favorites','Search','Profile'];
+  tabs.forEach(function(t) {
+    var ic = document.getElementById('ctab'+t);
+    var tx = document.getElementById('ctab'+t+'Txt');
+    if (ic) { ic.classList.remove('active'); }
+    if (tx) { tx.classList.remove('active'); tx.style.color = ''; }
+  });
+  var ic = document.getElementById('ctab'+ tab.charAt(0).toUpperCase()+tab.slice(1));
+  var tx = document.getElementById('ctab'+ tab.charAt(0).toUpperCase()+tab.slice(1)+'Txt');
+  if (ic) ic.classList.add('active');
+  if (tx) { tx.classList.add('active'); tx.style.color='var(--green)'; }
+
+  // Afficher/masquer les éléments selon l'onglet
+  var mapEls = ['mapContainer', 'clientMainContent'];
+  var header = document.querySelector('#client .client-header');
+
+  // Masquer tous les sub-screens client
+  ['clientSubFavorites','clientSubSearch','clientSubProfile'].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+
+  if (tab === 'map') {
+    if (header) header.style.display = '';
+    document.getElementById('mapContainer') && (document.getElementById('mapContainer').style.display = '');
+    document.querySelectorAll('#client .bars-list').forEach(function(el){ el.style.display=''; });
+    document.querySelectorAll('#client .section-title, #client .section-sub').forEach(function(el){ el.style.display=''; });
+  } else {
+    if (header) header.style.display = 'none';
+    document.getElementById('mapContainer') && (document.getElementById('mapContainer').style.display = 'none');
+    document.querySelectorAll('#client .bars-list').forEach(function(el){ el.style.display='none'; });
+    var sub = document.getElementById('clientSub' + tab.charAt(0).toUpperCase()+tab.slice(1));
+    if (sub) sub.style.display = '';
+    if (tab === 'favorites') renderFavorites();
+    if (tab === 'search')    { doClientSearch(); }
+    if (tab === 'profile')   { document.getElementById('profileFavCount').textContent = favorites.length; }
+  }
+}
+
+// ── FAVORIS ──
+function toggleFavorite(idx) {
+  var pos = favorites.indexOf(idx);
+  if (pos === -1) {
+    favorites.push(idx);
+    showToast('⭐ ' + bars[idx].name + ' ajouté aux favoris');
+  } else {
+    favorites.splice(pos, 1);
+    showToast('🗑 Retiré des favoris');
+  }
+  renderFavorites();
+}
+
+function renderFavorites() {
+  var list = document.getElementById('favList');
+  var empty = document.getElementById('favEmpty');
+  var count = document.getElementById('favCount');
+  if (!list) return;
+  if (favorites.length === 0) {
+    list.innerHTML = '';
+    if (empty) empty.style.display = '';
+    if (count) count.textContent = '0 bar';
+    return;
+  }
+  if (empty) empty.style.display = 'none';
+  if (count) count.textContent = favorites.length + ' bar' + (favorites.length > 1 ? 's' : '');
+  list.innerHTML = favorites.map(function(idx) {
+    var b = bars[idx];
+    var cls = b.scoreClass === 'orange' ? 'orange' : '';
+    return '<div class="bar-card" onclick="openModal('+idx+')" style="position:relative;">' +
+      '<div style="position:absolute;top:10px;right:10px;cursor:pointer;font-size:16px;" onclick="event.stopPropagation();toggleFavorite('+idx+')">⭐</div>' +
+      '<div class="bar-card-top" style="padding-right:36px;">' +
+        '<div><div class="bar-name">'+b.name+'</div><div class="bar-type">'+b.addr+'</div></div>' +
+        '<div class="score-badge '+cls+'"><div class="score-num '+cls+'">'+b.score+'</div><div class="score-label">/100</div></div>' +
+      '</div>' +
+      '<div class="score-bar-wrap"><div class="score-bar-track"><div class="score-bar-fill '+cls+'" style="width:'+b.score+'%"></div></div><div class="score-pct">'+b.score+'%</div></div>' +
+    '</div>';
+  }).join('');
+}
+
+// ── RECHERCHE ──
+function setSearchFilter(f, el) {
+  searchFilter = f;
+  document.querySelectorAll('#searchFilters .filter-pill').forEach(function(p){ p.classList.remove('active'); });
+  el.classList.add('active');
+  doClientSearch();
+}
+
+function doClientSearch() {
+  var q = (document.getElementById('clientSearchInput').value || '').toLowerCase().trim();
+  var results = bars.filter(function(b) {
+    var matchQ = !q || b.name.toLowerCase().includes(q) || b.addr.toLowerCase().includes(q) || b.type.toLowerCase().includes(q);
+    var matchF = searchFilter === 'tous' ? true
+      : searchFilter === 'top'   ? b.score >= 85
+      : searchFilter === 'tours' ? b.addr.toLowerCase().includes('tours')
+      : searchFilter === 'paris' ? b.addr.toLowerCase().includes('paris')
+      : true;
+    return matchQ && matchF;
+  });
+
+  var container = document.getElementById('searchResults');
+  var empty = document.getElementById('searchEmpty');
+  if (!container) return;
+
+  if (results.length === 0) {
+    container.innerHTML = '';
+    if (empty) empty.style.display = '';
+    return;
+  }
+  if (empty) empty.style.display = 'none';
+
+  // Trier par score décroissant
+  results.sort(function(a,b){ return b.score - a.score; });
+
+  container.innerHTML = results.map(function(b) {
+    var idx = bars.indexOf(b);
+    var cls = b.scoreClass === 'orange' ? 'orange' : '';
+    var isFav = favorites.indexOf(idx) !== -1;
+    return '<div class="bar-card" onclick="openModal('+idx+')" style="position:relative;">' +
+      '<div style="position:absolute;top:10px;right:10px;cursor:pointer;font-size:15px;" onclick="event.stopPropagation();toggleFavorite('+idx+')">'+(isFav?'⭐':'☆')+'</div>' +
+      '<div class="bar-card-top" style="padding-right:36px;">' +
+        '<div><div class="bar-name">'+b.name+'</div><div class="bar-type">'+b.addr+'</div></div>' +
+        '<div class="score-badge '+cls+'"><div class="score-num '+cls+'">'+b.score+'</div><div class="score-label">/100</div></div>' +
+      '</div>' +
+      '<div class="score-bar-wrap"><div class="score-bar-track"><div class="score-bar-fill '+cls+'" style="width:'+b.score+'%"></div></div><div class="score-pct">'+b.score+'%</div></div>' +
+      '<div style="font-size:10px;color:var(--muted);margin-top:6px;">'+b.type+'</div>' +
+    '</div>';
+  }).join('');
+}
+
+// ── PARENT MODULE ──
+var parentCurrentTab = 'live';
+
+var parentLocations = [
+  { name:'Le Marais Social Club', addr:'18 Rue de Bretagne, Paris 3e', score:91, safe:true,
+    dot:{x:0.55,y:0.42}, color:'#00C878' },
+  { name:'Café Oberkampf',        addr:'3 Rue Oberkampf, Paris 11e',   score:74, safe:false,
+    dot:{x:0.72,y:0.55}, color:'#FF8C00' },
+  { name:'La Guinguette',         addr:'8 Quai du Portillon, Tours',   score:85, safe:true,
+    dot:{x:0.30,y:0.65}, color:'#00C878' }
+];
+var parentCurrentLoc = 0;
+
+function switchParentTab(tab) {
+  parentCurrentTab = tab;
+  ['live','history','settings'].forEach(function(t) {
+    var sub  = document.getElementById('psub-'+t);
+    var tabEl= document.getElementById('ptab-'+t);
+    var icon = document.getElementById('ptabIcon' in window ? 'ptab'+t.charAt(0).toUpperCase()+t.slice(1)+'Icon' : '');
+    var txt  = document.getElementById('ptab'+t.charAt(0).toUpperCase()+t.slice(1)+'Txt');
+    if (sub)  sub.style.display  = t===tab ? '' : 'none';
+    if (tabEl){
+      tabEl.style.color       = t===tab ? '#A064FF' : 'var(--muted)';
+      tabEl.style.borderBottom= t===tab ? '2px solid #A064FF' : '2px solid transparent';
+      tabEl.style.fontWeight  = t===tab ? '700' : '600';
+    }
+    // tab bar bottom icons
+    var bi = document.getElementById('ptab'+t.charAt(0).toUpperCase()+t.slice(1)+'Icon');
+    var bt = document.getElementById('ptab'+t.charAt(0).toUpperCase()+t.slice(1)+'Txt');
+    if (bi) { bi.classList.toggle('active', t===tab); }
+    if (bt) { bt.classList.toggle('active', t===tab); bt.style.color = t===tab ? '#A064FF' : ''; }
+  });
+  if (tab === 'live') setTimeout(drawParentMap, 80);
+}
+
+function simulateLocation(idx) {
+  parentCurrentLoc = idx;
+  var loc = parentLocations[idx];
+  var card = document.getElementById('safetyCard');
+  var icon = document.getElementById('safetyIcon');
+  var title= document.getElementById('safetyTitle');
+  var sub  = document.getElementById('safetySubtitle');
+  var score= document.getElementById('safetyScore');
+  var venue= document.getElementById('currentVenue');
+  var addr = document.getElementById('currentAddr');
+  var upd  = document.getElementById('lastUpdate');
+
+  if (loc.safe) {
+    card.style.background = 'linear-gradient(135deg,rgba(0,200,120,0.12),rgba(0,200,120,0.04))';
+    card.style.borderColor= 'rgba(0,200,120,0.35)';
+    icon.textContent  = '✅';
+    title.textContent = 'LIEU SÉCURISÉ';
+    title.style.color = 'var(--green)';
+    sub.textContent   = 'Score Safio ≥ 85/100 · Vérifié';
+    score.style.color = 'var(--green)';
+  } else {
+    card.style.background = 'linear-gradient(135deg,rgba(255,140,0,0.12),rgba(255,140,0,0.04))';
+    card.style.borderColor= 'rgba(255,140,0,0.4)';
+    icon.textContent  = '⚠️';
+    title.textContent = 'LIEU NON CERTIFIÉ';
+    title.style.color = 'var(--orange)';
+    sub.textContent   = 'Score Safio < 85/100 · Vérification recommandée';
+    score.style.color = 'var(--orange)';
+  }
+  score.textContent = loc.score;
+  venue.textContent = '📍 ' + loc.name;
+  addr.textContent  = loc.addr;
+  upd.textContent   = 'À l\'instant';
+  if (!loc.safe) showToast('⚠️ Alerte : Léa est dans un lieu non certifié !');
+  else showToast('✅ Léa est dans un lieu sécurisé');
+  drawParentMap();
+}
+
+function drawParentMap() {
+  var canvas = document.getElementById('parentMapCanvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var dpr = window.devicePixelRatio || 1;
+  var rect = canvas.getBoundingClientRect();
+  canvas.width  = rect.width  * dpr;
+  canvas.height = rect.height * dpr;
+  ctx.scale(dpr, dpr);
+  var W = rect.width, H = rect.height;
+  var loc = parentLocations[parentCurrentLoc];
+
+  // Fond carte simplifié
+  ctx.fillStyle = '#0D0D18'; ctx.fillRect(0,0,W,H);
+
+  // Rues simulées
+  ctx.strokeStyle='rgba(255,255,255,0.06)'; ctx.lineWidth=6;
+  [[0,H*0.35,W,H*0.35],[0,H*0.65,W,H*0.65],[W*0.25,0,W*0.25,H],[W*0.6,0,W*0.6,H],[W*0.45,0,W*0.45,H]].forEach(function(l){
+    ctx.beginPath(); ctx.moveTo(l[0],l[1]); ctx.lineTo(l[2],l[3]); ctx.stroke();
+  });
+  ctx.strokeStyle='rgba(255,255,255,0.04)'; ctx.lineWidth=3;
+  [[0,H*0.5,W,H*0.5],[W*0.15,0,W*0.15,H],[W*0.75,0,W*0.75,H]].forEach(function(l){
+    ctx.beginPath(); ctx.moveTo(l[0],l[1]); ctx.lineTo(l[2],l[3]); ctx.stroke();
+  });
+
+  // Zone de rayon autour de la position
+  var px = loc.dot.x * W, py = loc.dot.y * H;
+  var rg = ctx.createRadialGradient(px,py,0,px,py,50);
+  rg.addColorStop(0, loc.safe ? 'rgba(0,200,120,0.18)' : 'rgba(255,140,0,0.18)');
+  rg.addColorStop(1, 'transparent');
+  ctx.fillStyle = rg; ctx.beginPath(); ctx.arc(px,py,50,0,Math.PI*2); ctx.fill();
+
+  // Point de position enfant
+  ctx.beginPath(); ctx.arc(px,py,10,0,Math.PI*2);
+  ctx.fillStyle = loc.color; ctx.fill();
+  ctx.strokeStyle = '#07080A'; ctx.lineWidth=2; ctx.stroke();
+  // Icône enfant
+  ctx.fillStyle='#fff'; ctx.font='bold 10px sans-serif'; ctx.textAlign='center';
+  ctx.fillText('🧑', px, py+4);
+
+  // Label lieu
+  ctx.fillStyle='rgba(10,10,20,0.85)';
+  var lw = ctx.measureText(loc.name).width + 16;
+  ctx.roundRect ? ctx.roundRect(px-lw/2, py-30, lw, 16, 4) : ctx.rect(px-lw/2,py-30,lw,16);
+  ctx.fill();
+  ctx.fillStyle=loc.color; ctx.font='bold 9px sans-serif';
+  ctx.fillText(loc.name, px, py-19);
+}
+
+// Initialiser la carte parent au chargement de l'écran
+var _origGoTo = goTo;
+goTo = function(screen) {
+  _origGoTo(screen);
+  if (screen === 'parent') {
+    // Afficher la tab bar parent, masquer les autres
+    document.querySelectorAll('.tab-bar').forEach(function(tb){ tb.classList.remove('visible'); });
+    var tp = document.getElementById('tabParent');
+    if (tp) tp.classList.add('visible');
+    switchParentTab('live');
+  }
+};
+
+// ── FILTRE CARTE CLIENT ──
+var mapFilter = 'tous';
+function applyMapFilter(f, el) {
+  mapFilter = f;
+  document.querySelectorAll('#clientMapFilters .filter-pill').forEach(function(p){ p.classList.remove('active'); });
+  if (el) el.classList.add('active');
+  document.querySelectorAll('#client .bar-card').forEach(function(card) {
+    var idx = parseInt(card.getAttribute('data-idx'));
+    if (isNaN(idx)) { card.style.display=''; return; }
+    var b = bars[idx];
+    var show = f==='tous' ? true
+      : f==='top'     ? b.score >= 85
+      : f==='warning' ? b.score < 80
+      : f==='tours'   ? b.addr.toLowerCase().includes('tours')
+      : f==='paris'   ? b.addr.toLowerCase().includes('paris')
+      : f==='open'    ? !card.innerHTML.includes('Fermé')
+      : true;
+    card.style.display = show ? '' : 'none';
+  });
+}
+
 // ── ANALYTICS ──
 var currentPeriod = 30;
+
+// Données simulées pour le graphe historique 12 mois
+var scoreHistory = [71, 71, 73, 74, 75, 76, 77, 78, 78, 80, 81, 82];
+var scoreMonths  = ['F','M','A','M','J','J','A','S','O','N','D','J'];
+
+function drawScoreHistory() {
+  var canvas = document.getElementById('scoreHistoryChart');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var dpr = window.devicePixelRatio || 1;
+  var rect = canvas.getBoundingClientRect();
+  canvas.width  = rect.width  * dpr;
+  canvas.height = rect.height * dpr;
+  ctx.scale(dpr, dpr);
+  var W = rect.width, H = rect.height;
+  var data = scoreHistory;
+  var minV = 60, maxV = 100;
+  var pad  = {l:22, r:8, t:8, b:14};
+  var cw = W - pad.l - pad.r;
+  var ch = H - pad.t - pad.b;
+  var step = cw / (data.length - 1);
+
+  ctx.clearRect(0,0,W,H);
+
+  // Grille
+  ctx.strokeStyle = 'rgba(255,255,255,0.05)'; ctx.lineWidth = 0.7;
+  [60,70,80,90,100].forEach(function(v){
+    var y = pad.t + ch - ((v-minV)/(maxV-minV))*ch;
+    ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(W-pad.r,y); ctx.stroke();
+    ctx.fillStyle='rgba(85,85,106,0.7)'; ctx.font='7px sans-serif'; ctx.textAlign='right';
+    ctx.fillText(v, pad.l-3, y+3);
+  });
+
+  // Aire
+  var grad = ctx.createLinearGradient(0,pad.t,0,pad.t+ch);
+  grad.addColorStop(0,'rgba(232,184,75,0.25)'); grad.addColorStop(1,'rgba(232,184,75,0.02)');
+  ctx.beginPath(); ctx.moveTo(pad.l, pad.t+ch);
+  data.forEach(function(v,i){
+    var x=pad.l+i*step; var y=pad.t+ch-((v-minV)/(maxV-minV))*ch;
+    ctx.lineTo(x,y);
+  });
+  ctx.lineTo(pad.l+(data.length-1)*step, pad.t+ch); ctx.closePath();
+  ctx.fillStyle=grad; ctx.fill();
+
+  // Ligne
+  ctx.beginPath(); ctx.strokeStyle='#E8B84B'; ctx.lineWidth=2; ctx.lineJoin='round';
+  data.forEach(function(v,i){
+    var x=pad.l+i*step; var y=pad.t+ch-((v-minV)/(maxV-minV))*ch;
+    i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+  }); ctx.stroke();
+
+  // Point final (aujourd'hui)
+  var lx=pad.l+(data.length-1)*step;
+  var ly=pad.t+ch-((data[data.length-1]-minV)/(maxV-minV))*ch;
+  ctx.beginPath(); ctx.arc(lx,ly,4,0,Math.PI*2);
+  ctx.fillStyle='#E8B84B'; ctx.fill();
+  ctx.strokeStyle='#07080A'; ctx.lineWidth=2; ctx.stroke();
+
+  // Valeur du dernier point
+  ctx.fillStyle='#E8B84B'; ctx.font='bold 8px sans-serif'; ctx.textAlign='center';
+  ctx.fillText(data[data.length-1], lx, ly-7);
+
+  // Labels mois
+  ctx.fillStyle='rgba(85,85,106,0.8)'; ctx.font='7px sans-serif'; ctx.textAlign='center';
+  data.forEach(function(_,i){
+    if(i%2===0||i===data.length-1){
+      ctx.fillText(scoreMonths[i], pad.l+i*step, H-1);
+    }
+  });
+}
+
+// Appeler drawScoreHistory après drawChart
+
 
 var visitData = {
   7:  [18,22,15,30,27,19,24],
