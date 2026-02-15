@@ -204,6 +204,45 @@
   .app-logo-small .s   { color: var(--green); }
   .app-logo-small .pot { color: rgba(240,240,248,0.65); font-weight: 300; }
   .app-logo-small .afe { color: var(--green); }
+
+  /* ── ALERTES ── */
+  .alert-threshold {
+    padding: 8px 14px; background: var(--card); border: 1px solid var(--border);
+    border-radius: 20px; font-size: 12px; font-weight: 600; color: var(--muted);
+    cursor: pointer; transition: all .15s;
+  }
+  .alert-threshold.active { background: rgba(232,184,75,.12); border-color: #E8B84B; color: #E8B84B; }
+  .alert-card {
+    background: var(--card); border-radius: 14px; padding: 14px 16px;
+    margin-bottom: 10px; display: flex; align-items: flex-start; gap: 12px;
+    border-left: 3px solid transparent;
+  }
+  .alert-down     { border-left-color: #FF6B6B; }
+  .alert-up       { border-left-color: var(--green); }
+  .alert-critical { border-left-color: #FF3B3B; background: rgba(255,59,59,.05); }
+  .alert-icon     { font-size: 22px; padding-top: 2px; flex-shrink: 0; }
+  .alert-body     { flex: 1; }
+  .alert-name     { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+  .alert-detail   { font-size: 12px; color: var(--muted); }
+  .alert-time     { font-size: 10px; color: var(--muted); margin-top: 4px; opacity: .7; }
+  .alert-action   { font-size: 12px; color: var(--green); font-weight: 700; cursor: pointer; padding-top: 2px; white-space: nowrap; }
+  .alert-tag      { display: inline-block; border-radius: 6px; padding: 2px 7px; font-size: 10px; font-weight: 800; margin-left: 6px; }
+  .tag-down       { background: rgba(255,107,107,.15); color: #FF6B6B; }
+  .tag-up         { background: rgba(0,200,120,.12); color: var(--green); }
+  .tag-critical   { background: rgba(255,59,59,.15); color: #FF3B3B; }
+  .watchlist-item {
+    background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+    padding: 12px 16px; margin-bottom: 8px; display: flex; align-items: center; gap: 12px;
+  }
+  .watchlist-score { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 15px; flex-shrink: 0; }
+
+  /* ── SIGNALEMENT ── */
+  .report-type-btn {
+    background: var(--card); border: 1.5px solid var(--border); border-radius: 14px;
+    padding: 14px 10px; text-align: center; font-size: 12px; font-weight: 600;
+    color: var(--text); cursor: pointer; transition: all .15s;
+  }
+  .report-type-btn.active { border-color: var(--green); background: rgba(0,200,120,.08); color: var(--green); }
   .back-btn {
     background: var(--card);
     border: 1px solid var(--border);
@@ -1775,6 +1814,243 @@
 
   </div>
 
+  <!-- ═══════════════════════════════════════════
+       SOUS-ÉCRAN ALERTES SCORE
+  ═══════════════════════════════════════════ -->
+  <div id="clientSubAlerts" class="client-sub" style="display:none;padding:0 20px 100px;">
+
+    <div style="padding:20px 0 8px;">
+      <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--text);">Mes alertes score</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:3px;">Soyez notifié dès qu'un score change</div>
+    </div>
+
+    <!-- Bascule globale alertes -->
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 18px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <div style="font-size:14px;font-weight:700;color:var(--text);">Alertes activées</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">Notifications push en temps réel</div>
+      </div>
+      <div id="alertMasterToggle" onclick="toggleMasterAlert()" style="width:44px;height:24px;background:var(--green);border-radius:12px;position:relative;cursor:pointer;transition:background .2s;">
+        <div style="position:absolute;top:3px;right:3px;width:18px;height:18px;background:white;border-radius:50%;transition:right .2s;" id="alertToggleKnob"></div>
+      </div>
+    </div>
+
+    <!-- Seuil d'alerte -->
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 18px;margin-bottom:20px;">
+      <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:12px;">Seuil d'alerte</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <div class="alert-threshold active" data-val="10" onclick="setThreshold(this)">±10 pts</div>
+        <div class="alert-threshold" data-val="5"  onclick="setThreshold(this)">±5 pts</div>
+        <div class="alert-threshold" data-val="1"  onclick="setThreshold(this)">Moindre changement</div>
+      </div>
+    </div>
+
+    <!-- Titre liste alertes récentes -->
+    <div style="font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">Alertes récentes</div>
+
+    <!-- Alerte 1 — baisse -->
+    <div class="alert-card alert-down">
+      <div class="alert-icon">📉</div>
+      <div class="alert-body">
+        <div class="alert-name">Le Vieux Murier <span class="alert-tag tag-down">−9 pts</span></div>
+        <div class="alert-detail">Score passé de <b>91</b> → <b>82</b> après contrôle</div>
+        <div class="alert-time">Il y a 2h · Tours</div>
+      </div>
+      <div class="alert-action" onclick="openModal(0)">Voir →</div>
+    </div>
+
+    <!-- Alerte 2 — hausse -->
+    <div class="alert-card alert-up">
+      <div class="alert-icon">📈</div>
+      <div class="alert-body">
+        <div class="alert-name">Café Promenade <span class="alert-tag tag-up">+12 pts</span></div>
+        <div class="alert-detail">Score passé de <b>71</b> → <b>83</b> après audit</div>
+        <div class="alert-time">Hier · Tours</div>
+      </div>
+      <div class="alert-action" onclick="openModal(2)">Voir →</div>
+    </div>
+
+    <!-- Alerte 3 — baisse critique -->
+    <div class="alert-card alert-critical">
+      <div class="alert-icon">🚨</div>
+      <div class="alert-body">
+        <div class="alert-name">Chez Marcel <span class="alert-tag tag-critical">Score critique</span></div>
+        <div class="alert-detail">Score tombé à <b>48</b> — certification suspendue</div>
+        <div class="alert-time">Il y a 3j · Paris</div>
+      </div>
+      <div class="alert-action" onclick="openModal(5)">Voir →</div>
+    </div>
+
+    <!-- Mes établissements surveillés -->
+    <div style="font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin:20px 0 10px;">Établissements surveillés</div>
+
+    <div id="watchlistContainer">
+      <!-- généré dynamiquement par renderWatchlist() -->
+    </div>
+
+    <div onclick="switchClientTab('map')" style="margin-top:12px;padding:14px;background:rgba(0,200,120,0.07);border:1px dashed rgba(0,200,120,0.3);border-radius:14px;text-align:center;font-size:13px;color:var(--green);cursor:pointer;">
+      + Ajouter un établissement à surveiller
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SOUS-ÉCRAN SIGNALEMENT CITOYEN
+  ═══════════════════════════════════════════ -->
+  <div id="clientSubReport" class="client-sub" style="display:none;padding:0 20px 100px;">
+
+    <div style="padding:20px 0 8px;">
+      <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--text);">Signalement citoyen</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:3px;">Signalez un problème de sécurité observé</div>
+    </div>
+
+    <!-- Étapes du formulaire -->
+    <div id="reportStep1">
+
+      <!-- Sélection établissement -->
+      <div style="font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">1 · Quel établissement ?</div>
+
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:4px 6px;margin-bottom:16px;">
+        <input id="reportSearch" type="text" placeholder="Rechercher un établissement…"
+          oninput="filterReportBars(this.value)"
+          style="width:100%;background:none;border:none;outline:none;padding:12px 10px;font-size:14px;color:var(--text);font-family:'DM Sans',sans-serif;" />
+      </div>
+
+      <div id="reportBarList" style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;"></div>
+
+      <!-- Type de problème -->
+      <div style="font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">2 · Type de problème</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px;" id="reportTypeGrid">
+        <div class="report-type-btn active" data-type="extincteur" onclick="selectReportType(this)">
+          <div style="font-size:22px;margin-bottom:4px;">🧯</div>
+          <div>Extincteur</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:2px;">Manquant / expiré</div>
+        </div>
+        <div class="report-type-btn" data-type="sortie" onclick="selectReportType(this)">
+          <div style="font-size:22px;margin-bottom:4px;">🚪</div>
+          <div>Sortie secours</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:2px;">Bloquée / absente</div>
+        </div>
+        <div class="report-type-btn" data-type="eclairage" onclick="selectReportType(this)">
+          <div style="font-size:22px;margin-bottom:4px;">💡</div>
+          <div>Éclairage sécurité</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:2px;">Défaillant / absent</div>
+        </div>
+        <div class="report-type-btn" data-type="affichage" onclick="selectReportType(this)">
+          <div style="font-size:22px;margin-bottom:4px;">📋</div>
+          <div>Affichage</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:2px;">Plans évacuation</div>
+        </div>
+        <div class="report-type-btn" data-type="surcharge" onclick="selectReportType(this)">
+          <div style="font-size:22px;margin-bottom:4px;">👥</div>
+          <div>Surcharge</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:2px;">Capacité dépassée</div>
+        </div>
+        <div class="report-type-btn" data-type="autre" onclick="selectReportType(this)">
+          <div style="font-size:22px;margin-bottom:4px;">⚠️</div>
+          <div>Autre</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:2px;">Préciser ci-dessous</div>
+        </div>
+      </div>
+
+      <!-- Photo + description -->
+      <div style="font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">3 · Photo & description</div>
+
+      <!-- Zone photo -->
+      <div id="photoZone" onclick="simulatePhotoCapture()"
+        style="background:var(--card);border:2px dashed var(--border);border-radius:16px;padding:28px 20px;text-align:center;cursor:pointer;margin-bottom:12px;transition:border-color .2s;"
+        onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="font-size:32px;margin-bottom:8px;">📷</div>
+        <div style="font-size:13px;color:var(--text);font-weight:600;">Prendre une photo</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px;">Ou appuyer pour sélectionner depuis la galerie</div>
+      </div>
+
+      <!-- Prévisualisation photo (cachée par défaut) -->
+      <div id="photoPreview" style="display:none;position:relative;margin-bottom:12px;border-radius:16px;overflow:hidden;">
+        <div style="background:linear-gradient(135deg,#1a2a1a,#0d1f0d);height:140px;display:flex;align-items:center;justify-content:center;border-radius:16px;border:1px solid rgba(0,200,120,0.2);">
+          <div style="text-align:center;">
+            <div style="font-size:36px;">🧯</div>
+            <div style="font-size:11px;color:var(--green);margin-top:6px;">Photo ajoutée ✓</div>
+          </div>
+        </div>
+        <div onclick="removePhoto()" style="position:absolute;top:8px;right:8px;background:rgba(0,0,0,0.6);color:white;border-radius:20px;padding:4px 10px;font-size:11px;cursor:pointer;">✕ Supprimer</div>
+      </div>
+
+      <textarea id="reportDesc" placeholder="Décrivez le problème observé… (optionnel)"
+        style="width:100%;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;font-size:13px;color:var(--text);font-family:'DM Sans',sans-serif;resize:none;height:80px;outline:none;margin-bottom:16px;box-sizing:border-box;"></textarea>
+
+      <!-- Anonymat -->
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:20px;display:flex;align-items:center;gap:12px;">
+        <div id="anonToggle" onclick="toggleAnon()" style="width:36px;height:20px;background:var(--green);border-radius:10px;position:relative;cursor:pointer;flex-shrink:0;">
+          <div id="anonKnob" style="position:absolute;top:2px;right:2px;width:16px;height:16px;background:white;border-radius:50%;transition:right .2s;"></div>
+        </div>
+        <div>
+          <div style="font-size:13px;color:var(--text);font-weight:600;">Signalement anonyme</div>
+          <div style="font-size:11px;color:var(--muted);">Votre identité ne sera pas communiquée au gérant</div>
+        </div>
+      </div>
+
+      <!-- Bouton envoyer -->
+      <button onclick="submitReport()" id="reportSubmitBtn"
+        style="width:100%;padding:16px;background:var(--green);color:#07080F;border:none;border-radius:16px;font-size:15px;font-weight:800;font-family:'Syne',sans-serif;cursor:pointer;letter-spacing:.03em;transition:opacity .2s;">
+        Envoyer le signalement
+      </button>
+
+      <div style="font-size:11px;color:var(--muted);text-align:center;margin-top:12px;line-height:1.5;">
+        Votre signalement sera traité par notre équipe.<br>Un certificateur Apave/Bureau Veritas sera alerté si nécessaire.
+      </div>
+    </div>
+
+    <!-- Confirmation envoi -->
+    <div id="reportStep2" style="display:none;text-align:center;padding:40px 20px;">
+      <div style="font-size:64px;margin-bottom:16px;animation:pulse 1.5s ease-in-out 3;">✅</div>
+      <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--text);margin-bottom:8px;">Signalement envoyé !</div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:28px;">
+        Merci pour votre vigilance citoyenne.<br>
+        Notre équipe va examiner votre signalement<br>sous <b style="color:var(--green);">48h maximum</b>.
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:24px;text-align:left;">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:8px;">RÉCAPITULATIF</div>
+        <div id="reportSummary" style="font-size:13px;color:var(--text);line-height:1.8;"></div>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <button onclick="resetReport()" style="flex:1;padding:14px;background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:14px;font-size:13px;font-weight:700;cursor:pointer;">
+          Nouveau signalement
+        </button>
+        <button onclick="switchClientTab('map')" style="flex:1;padding:14px;background:var(--green);color:#07080F;border:none;border-radius:14px;font-size:13px;font-weight:800;cursor:pointer;">
+          Retour carte
+        </button>
+      </div>
+    </div>
+
+    <!-- Historique signalements -->
+    <div id="reportHistory" style="margin-top:24px;">
+      <div style="font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">Mes signalements</div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;">
+        <div style="padding:14px 16px;border-bottom:1px solid var(--border);display:flex;gap:12px;align-items:flex-start;">
+          <div style="font-size:20px;padding-top:2px;">🧯</div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:var(--text);">Le Vieux Murier</div>
+            <div style="font-size:11px;color:var(--muted);">Extincteur absent dans les toilettes</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:3px;">Il y a 5 jours</div>
+          </div>
+          <div style="background:rgba(232,184,75,0.15);color:#E8B84B;border-radius:8px;padding:4px 8px;font-size:10px;font-weight:700;white-space:nowrap;">En cours</div>
+        </div>
+        <div style="padding:14px 16px;display:flex;gap:12px;align-items:flex-start;">
+          <div style="font-size:20px;padding-top:2px;">🚪</div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:var(--text);">Bar Oberkampf</div>
+            <div style="font-size:11px;color:var(--muted);">Sortie de secours bloquée par cartons</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:3px;">Il y a 12 jours</div>
+          </div>
+          <div style="background:rgba(0,200,120,0.12);color:var(--green);border-radius:8px;padding:4px 8px;font-size:10px;font-weight:700;white-space:nowrap;">✓ Résolu</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
   <!-- TAB BAR CLIENT -->
   <div class="tab-bar" id="tabClient">
     <div class="tab-item" onclick="switchClientTab('map')">
@@ -1788,6 +2064,15 @@
     <div class="tab-item" onclick="switchClientTab('search')">
       <div class="tab-icon" id="ctabSearch">🔍</div>
       <div class="tab-txt" id="ctabSearchTxt">Chercher</div>
+    </div>
+    <div class="tab-item" onclick="switchClientTab('alerts')" style="position:relative;">
+      <div class="tab-icon" id="ctabAlerts">🔔</div>
+      <div class="tab-txt" id="ctabAlertsTxt">Alertes</div>
+      <div id="alertBadge" style="position:absolute;top:6px;right:14px;background:#E8B84B;color:#07080F;border-radius:10px;font-size:9px;font-weight:900;padding:1px 5px;display:none;">3</div>
+    </div>
+    <div class="tab-item" onclick="switchClientTab('report')">
+      <div class="tab-icon" id="ctabReport">📸</div>
+      <div class="tab-txt" id="ctabReportTxt">Signaler</div>
     </div>
     <div class="tab-item" onclick="switchClientTab('profile')">
       <div class="tab-icon" id="ctabProfile">👤</div>
@@ -2687,7 +2972,7 @@ var searchFilter = 'tous';
 
 function switchClientTab(tab) {
   currentClientTab = tab;
-  var tabs = ['Map','Favorites','Search','Profile'];
+  var tabs = ['Map','Favorites','Search','Alerts','Report','Profile'];
   tabs.forEach(function(t) {
     var ic = document.getElementById('ctab'+t);
     var tx = document.getElementById('ctab'+t+'Txt');
@@ -2699,12 +2984,10 @@ function switchClientTab(tab) {
   if (ic) ic.classList.add('active');
   if (tx) { tx.classList.add('active'); tx.style.color='var(--green)'; }
 
-  // Afficher/masquer les éléments selon l'onglet
-  var mapEls = ['mapContainer', 'clientMainContent'];
   var header = document.querySelector('#client .client-header');
 
   // Masquer tous les sub-screens client
-  ['clientSubFavorites','clientSubSearch','clientSubProfile'].forEach(function(id){
+  ['clientSubFavorites','clientSubSearch','clientSubProfile','clientSubAlerts','clientSubReport'].forEach(function(id){
     var el = document.getElementById(id);
     if (el) el.style.display = 'none';
   });
@@ -2723,6 +3006,8 @@ function switchClientTab(tab) {
     if (tab === 'favorites') renderFavorites();
     if (tab === 'search')    { doClientSearch(); }
     if (tab === 'profile')   { document.getElementById('profileFavCount').textContent = favorites.length; }
+    if (tab === 'alerts')    { renderWatchlist(); var b=document.getElementById('alertBadge'); if(b) b.style.display='none'; }
+    if (tab === 'report')    { renderReportBarList(); }
   }
 }
 
@@ -3182,6 +3467,199 @@ function updateClock() {
 }
 updateClock();
 setInterval(updateClock, 1000);
+
+// ════════════════════════════════════════════
+// 🔔 ALERTES SCORE
+// ════════════════════════════════════════════
+var alertsEnabled = true;
+var alertThreshold = 10;
+var watchlist = [0, 2, 4]; // indices bars surveillés par défaut
+
+function toggleMasterAlert() {
+  alertsEnabled = !alertsEnabled;
+  var toggle = document.getElementById('alertMasterToggle');
+  var knob   = document.getElementById('alertToggleKnob');
+  if (alertsEnabled) {
+    toggle.style.background = 'var(--green)';
+    knob.style.right = '3px';
+    showToast('🔔 Alertes activées');
+  } else {
+    toggle.style.background = 'var(--muted)';
+    knob.style.right = '22px';
+    showToast('🔕 Alertes désactivées');
+  }
+}
+
+function setThreshold(el) {
+  document.querySelectorAll('.alert-threshold').forEach(function(b){ b.classList.remove('active'); });
+  el.classList.add('active');
+  alertThreshold = parseInt(el.dataset.val);
+  showToast('✅ Seuil réglé sur ±' + alertThreshold + ' pts');
+}
+
+function renderWatchlist() {
+  var container = document.getElementById('watchlistContainer');
+  if (!container) return;
+  if (watchlist.length === 0) {
+    container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--muted);font-size:13px;">Aucun établissement surveillé</div>';
+    return;
+  }
+  container.innerHTML = watchlist.map(function(idx) {
+    var b = bars[idx];
+    var scoreColor = b.score >= 85 ? 'var(--green)' : b.score >= 70 ? '#E8B84B' : '#FF6B6B';
+    var scoreBg    = b.score >= 85 ? 'rgba(0,200,120,.12)' : b.score >= 70 ? 'rgba(232,184,75,.12)' : 'rgba(255,107,107,.12)';
+    return '<div class="watchlist-item">' +
+      '<div class="watchlist-score" style="background:'+scoreBg+';color:'+scoreColor+';">' + b.score + '</div>' +
+      '<div style="flex:1;">' +
+        '<div style="font-size:13px;font-weight:700;color:var(--text);">' + b.name + '</div>' +
+        '<div style="font-size:11px;color:var(--muted);">' + b.address + '</div>' +
+      '</div>' +
+      '<div onclick="removeFromWatchlist('+idx+')" style="color:var(--muted);font-size:18px;cursor:pointer;padding:4px 8px;" title="Retirer">×</div>' +
+    '</div>';
+  }).join('');
+}
+
+function removeFromWatchlist(idx) {
+  watchlist = watchlist.filter(function(i){ return i !== idx; });
+  renderWatchlist();
+  showToast('🗑 Retiré de la surveillance');
+}
+
+// Simuler une notification d'alerte après 8s sur l'écran client
+setTimeout(function() {
+  var badge = document.getElementById('alertBadge');
+  if (badge && currentClientTab !== 'alerts') {
+    badge.style.display = 'block';
+    badge.textContent = '!';
+    badge.style.animation = 'pulse 1.5s ease-in-out 3';
+  }
+}, 8000);
+
+// ════════════════════════════════════════════
+// 📸 SIGNALEMENT CITOYEN
+// ════════════════════════════════════════════
+var selectedReportBar  = null;
+var selectedReportType = 'extincteur';
+var reportAnon         = true;
+var photoAdded         = false;
+
+function renderReportBarList() {
+  var list = document.getElementById('reportBarList');
+  if (!list) return;
+  list.innerHTML = bars.map(function(b, idx) {
+    var scoreColor = b.score >= 85 ? 'var(--green)' : b.score >= 70 ? '#E8B84B' : '#FF6B6B';
+    var active = selectedReportBar === idx;
+    return '<div onclick="selectReportBar('+idx+')" style="' +
+      'background:var(--card);border:' + (active ? '1.5px solid var(--green)' : '1px solid var(--border)') + ';' +
+      'border-radius:12px;padding:12px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;' +
+      'transition:border-color .15s;">' +
+      '<div style="width:36px;height:36px;background:rgba(255,255,255,.05);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:'+scoreColor+';">'+b.score+'</div>' +
+      '<div><div style="font-size:13px;font-weight:700;color:var(--text);">' + b.name + '</div>' +
+      '<div style="font-size:11px;color:var(--muted);">' + b.address + '</div></div>' +
+      (active ? '<div style="margin-left:auto;color:var(--green);font-size:16px;">✓</div>' : '') +
+    '</div>';
+  }).join('');
+}
+
+function filterReportBars(q) {
+  var list = document.getElementById('reportBarList');
+  if (!list) return;
+  var filtered = bars.filter(function(b){ return b.name.toLowerCase().includes(q.toLowerCase()) || b.address.toLowerCase().includes(q.toLowerCase()); });
+  if (filtered.length === 0) {
+    list.innerHTML = '<div style="text-align:center;padding:16px;color:var(--muted);font-size:13px;">Aucun résultat</div>';
+    return;
+  }
+  list.innerHTML = filtered.map(function(b) {
+    var idx = bars.indexOf(b);
+    var scoreColor = b.score >= 85 ? 'var(--green)' : b.score >= 70 ? '#E8B84B' : '#FF6B6B';
+    return '<div onclick="selectReportBar('+idx+')" style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;">' +
+      '<div style="width:36px;height:36px;background:rgba(255,255,255,.05);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:'+scoreColor+';">'+b.score+'</div>' +
+      '<div><div style="font-size:13px;font-weight:700;color:var(--text);">' + b.name + '</div>' +
+      '<div style="font-size:11px;color:var(--muted);">' + b.address + '</div></div>' +
+    '</div>';
+  }).join('');
+}
+
+function selectReportBar(idx) {
+  selectedReportBar = idx;
+  renderReportBarList();
+  document.getElementById('reportSearch').value = bars[idx].name;
+  showToast('📍 ' + bars[idx].name + ' sélectionné');
+}
+
+function selectReportType(el) {
+  document.querySelectorAll('.report-type-btn').forEach(function(b){ b.classList.remove('active'); });
+  el.classList.add('active');
+  selectedReportType = el.dataset.type;
+}
+
+function simulatePhotoCapture() {
+  photoAdded = true;
+  document.getElementById('photoZone').style.display = 'none';
+  document.getElementById('photoPreview').style.display = 'block';
+  showToast('📸 Photo ajoutée');
+}
+
+function removePhoto() {
+  photoAdded = false;
+  document.getElementById('photoZone').style.display = 'block';
+  document.getElementById('photoPreview').style.display = 'none';
+}
+
+var anonOn = true;
+function toggleAnon() {
+  anonOn = !anonOn;
+  var knob   = document.getElementById('anonKnob');
+  var toggle = document.getElementById('anonToggle');
+  if (anonOn) {
+    toggle.style.background = 'var(--green)';
+    knob.style.right = '2px';
+  } else {
+    toggle.style.background = 'var(--muted)';
+    knob.style.right = '18px';
+  }
+}
+
+var typeLabels = { extincteur:'🧯 Extincteur manquant/expiré', sortie:'🚪 Sortie de secours bloquée', eclairage:'💡 Éclairage défaillant', affichage:'📋 Affichage absent', surcharge:'👥 Surcharge capacité', autre:'⚠️ Autre problème' };
+
+function submitReport() {
+  if (!selectedReportBar) { showToast('⚠️ Sélectionnez un établissement'); return; }
+  var bar  = bars[selectedReportBar];
+  var type = typeLabels[selectedReportType] || selectedReportType;
+  var desc = document.getElementById('reportDesc').value.trim();
+
+  // Afficher confirmation
+  document.getElementById('reportStep1').style.display = 'none';
+  document.getElementById('reportHistory').style.display = 'none';
+  document.getElementById('reportStep2').style.display = 'block';
+
+  var summary = '📍 <b>' + bar.name + '</b><br>' +
+    '🔍 ' + type + '<br>' +
+    (desc ? '💬 ' + desc + '<br>' : '') +
+    (photoAdded ? '📸 Photo jointe<br>' : '') +
+    '👤 ' + (anonOn ? 'Anonyme' : 'Identifié') + '<br>' +
+    '🕐 ' + new Date().toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'});
+  document.getElementById('reportSummary').innerHTML = summary;
+
+  // Simuler impact score après 3s
+  setTimeout(function() {
+    showToast('⚡ Certificateur alerté — score en cours de réévaluation');
+  }, 3000);
+}
+
+function resetReport() {
+  selectedReportBar  = null;
+  selectedReportType = 'extincteur';
+  photoAdded         = false;
+  document.getElementById('reportStep1').style.display = '';
+  document.getElementById('reportStep2').style.display = 'none';
+  document.getElementById('reportHistory').style.display = '';
+  document.getElementById('reportDesc').value = '';
+  document.getElementById('reportSearch').value = '';
+  document.querySelectorAll('.report-type-btn').forEach(function(b,i){ b.classList.toggle('active', i===0); });
+  removePhoto();
+  renderReportBarList();
+}
 </script>
 </body>
 </html>
