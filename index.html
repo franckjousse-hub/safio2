@@ -985,29 +985,69 @@
     40%{transform:translateX(8px)} 60%{transform:translateX(-5px)} 80%{transform:translateX(5px)}
   }
 
-  /* ── MODE SOIRÉE ── */
-  .soiree-zone {
-    padding: 8px 16px; background: var(--card); border: 1.5px solid var(--border);
-    border-radius: 20px; font-size: 12px; font-weight: 600; color: var(--muted);
-    cursor: pointer; transition: all .15s; white-space: nowrap;
+  /* ── MODE SOIRÉE — style festif ── */
+  .s-zone {
+    padding: 8px 16px;
+    background: rgba(255,255,255,.06);
+    border: 1.5px solid rgba(255,255,255,.1);
+    border-radius: 20px; font-size: 12px; font-weight: 700;
+    color: rgba(255,255,255,.5); cursor: pointer;
+    transition: all .2s; white-space: nowrap;
   }
-  .soiree-zone.active { border-color: #A064FF; color: #A064FF; background: rgba(160,100,255,.1); }
-  .soiree-vibe {
-    background: var(--card); border: 1.5px solid var(--border); border-radius: 14px;
-    padding: 12px; display: flex; flex-direction: column; align-items: center; gap: 6px;
-    cursor: pointer; transition: all .15s;
+  .s-zone.active {
+    border-color: #C060FF; color: #fff;
+    background: rgba(160,40,255,.25);
+    box-shadow: 0 0 14px rgba(160,40,255,.3);
   }
-  .soiree-vibe.active { border-color: #A064FF; background: rgba(160,100,255,.1); }
-  .soiree-score {
-    padding: 8px 16px; background: var(--card); border: 1.5px solid var(--border);
-    border-radius: 20px; font-size: 12px; font-weight: 700; color: var(--muted);
-    cursor: pointer; transition: all .15s;
+  .s-vibe {
+    background: rgba(255,255,255,.05);
+    border: 1.5px solid rgba(255,255,255,.08);
+    border-radius: 16px; padding: 14px 12px;
+    display: flex; align-items: center; gap: 10px;
+    cursor: pointer; transition: all .2s;
   }
-  .soiree-score.active { border-color: var(--green); color: var(--green); background: rgba(0,200,120,.1); }
-  .soiree-stop {
-    display: flex; align-items: flex-start; gap: 14px; padding: 14px 0;
-    border-bottom: 1px solid var(--border); position: relative;
+  .s-vibe.active {
+    border-color: #C060FF;
+    background: rgba(160,40,255,.2);
+    box-shadow: 0 0 18px rgba(160,40,255,.25);
   }
+  .s-score {
+    padding: 8px 16px;
+    background: rgba(255,255,255,.05);
+    border: 1.5px solid rgba(255,255,255,.08);
+    border-radius: 20px; font-size: 12px; font-weight: 700;
+    color: rgba(255,255,255,.45); cursor: pointer; transition: all .2s;
+  }
+  .s-score.active {
+    border-color: #00C878; color: #00C878;
+    background: rgba(0,200,120,.15);
+    box-shadow: 0 0 14px rgba(0,200,120,.2);
+  }
+  .s-stop {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.08);
+    position: relative;
+  }
+  .s-stop:last-child { border-bottom: none; }
+  .s-stop-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 900; flex-shrink: 0; margin-top: 2px;
+  }
+  .s-history-card {
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 16px; padding: 14px 16px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; margin-bottom: 8px;
+    transition: background .2s;
+  }
+  .s-history-card:active { background: rgba(255,255,255,.09); }
+  /* Anciennes classes rétrocompat */
+  .soiree-zone  { display:none; }
+  .soiree-vibe  { display:none; }
+  .soiree-score { display:none; }
+  .soiree-stop  { display:none; }
   .soiree-number {
     width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center;
     justify-content: center; font-size: 12px; font-weight: 900; flex-shrink: 0;
@@ -4113,17 +4153,17 @@ function renderGeoList() {
   var c = document.getElementById('geoList'); if(!c) return;
   c.innerHTML = geoData.map(function(g){
     return '<div style="display:flex;align-items:center;gap:8px;margin-bottom:7px;">' +
-      '<div style="font-family:\'DM Mono\',monospace;font-size:9px;color:rgba(240,240,248,.3);width:68px;flex-shrink:0;letter-spacing:.04em;">'+ g.city +'</div>' +
+      '<div style="font-family:\'DM Mono\',monospace;font-size:9px;color:rgba(240,240,248,.3);width:80px;flex-shrink:0;letter-spacing:.04em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+ g.city.toUpperCase() +'</div>' +
       '<div style="flex:1;height:1px;background:rgba(255,255,255,.06);position:relative;"><div style="position:absolute;top:-0.5px;left:0;height:2px;width:'+ g.pct +'%;background:'+ g.color +';transition:width .6s;"></div></div>' +
       '<div style="font-family:\'DM Mono\',monospace;font-size:9px;font-weight:700;color:'+ g.color +';width:28px;text-align:right;">'+ g.pct +'%</div>' +
-      '<div style="font-family:\'DM Mono\',monospace;font-size:8px;color:rgba(240,240,248,.2);width:30px;text-align:right;">'+ g.count +'</div></div>';
+      '<div style="font-family:\'DM Mono\',monospace;font-size:8px;color:rgba(240,240,248,.2);width:32px;text-align:right;">'+ g.erp +'</div></div>';
   }).join('');
 }
 function renderContractTypes() {
   var c = document.getElementById('contractTypes'); if(!c) return;
   c.innerHTML = contractData.map(function(ct){
     return '<div style="display:flex;align-items:center;gap:8px;margin-bottom:7px;">' +
-      '<div style="font-family:\'DM Mono\',monospace;font-size:9px;color:rgba(240,240,248,.3);width:88px;flex-shrink:0;letter-spacing:.03em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+ ct.label.toUpperCase() +'</div>' +
+      '<div style="font-family:\'DM Mono\',monospace;font-size:9px;color:rgba(240,240,248,.3);width:88px;flex-shrink:0;letter-spacing:.03em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+ ct.type.toUpperCase() +'</div>' +
       '<div style="flex:1;height:1px;background:rgba(255,255,255,.06);position:relative;"><div style="position:absolute;top:-0.5px;left:0;height:2px;width:'+ ct.pct +'%;background:#F5C842;"></div></div>' +
       '<div style="font-family:\'DM Mono\',monospace;font-size:9px;font-weight:700;color:#F5C842;width:28px;text-align:right;">'+ ct.pct +'%</div></div>';
   }).join('');
@@ -4178,6 +4218,195 @@ function setAdminPeriod(el,period){
   document.querySelectorAll('.admin-period').forEach(function(b){b.style.background='transparent';b.style.color='rgba(240,240,248,.25)';b.style.borderColor='rgba(255,255,255,.07)';});
   el.style.background='rgba(0,232,122,.12)';el.style.color='#00E87A';el.style.borderColor='rgba(0,232,122,.25)';
   adminPeriod=period; drawAdminChart(period);
+}
+
+// ══════════════════════════════════════════════
+// 🌙 MODE SOIRÉE — variables & données
+// ══════════════════════════════════════════════
+var soireeZoneSel  = 'tours';
+var soireeVibeSel  = 'detente';
+var soireeMinScore = 80;
+
+var soireePools = {
+  tours:      [0, 2, 3, 5],
+  marais:     [4, 5, 6],
+  oberkampf:  [1, 4, 6],
+  bastille:   [1, 3, 5, 6]
+};
+
+var vibeTexts = {
+  detente:  { label:'Détendu',    emoji:'🍷', tag:'Chill & talk'   },
+  festif:   { label:'On se lâche',emoji:'🎉', tag:'Full energy'    },
+  cocktail: { label:'Cocktails',  emoji:'🍸', tag:'Classy vibes'   },
+  live:     { label:'Live music', emoji:'🎵', tag:'Son à fond'     }
+};
+
+var zoneLabels = { tours:'Tours Centre', marais:'Le Marais', oberkampf:'Oberkampf', bastille:'Bastille' };
+
+// Historique en mémoire (2 exemples)
+var soireeHistoryData = [
+  { zone:'tours',    barNames:['Le Vieux Murier','Le Piano','Café Promenade'], avgScore:86, daysAgo:5,  emoji:'🎉' },
+  { zone:'marais',   barNames:['L\'Entrepôt','Bar Oberkampf','Le Labo','Chez Paul'], avgScore:91, daysAgo:12, emoji:'🍷' }
+];
+
+function openSoireeMode() {
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+  document.querySelectorAll('.tab-bar').forEach(function(b){ b.classList.remove('visible'); });
+  document.getElementById('soiree').classList.add('active');
+  document.querySelector('.phone').scrollTop = 0;
+  // Cacher résultats à l'ouverture
+  var res = document.getElementById('soireeResults');
+  if (res) res.style.display = 'none';
+}
+
+function selectSoireeZone(el) {
+  document.querySelectorAll('#soireeZones .s-zone').forEach(function(z){ z.classList.remove('active'); });
+  el.classList.add('active');
+  soireeZoneSel = el.dataset.zone;
+  // Masquer résultats au changement
+  var res = document.getElementById('soireeResults');
+  if (res) res.style.display = 'none';
+}
+
+function selectVibe(el) {
+  document.querySelectorAll('#soireeVibes .s-vibe').forEach(function(v){ v.classList.remove('active'); });
+  el.classList.add('active');
+  soireeVibeSel = el.dataset.vibe;
+}
+
+function selectSoireeScore(el) {
+  document.querySelectorAll('#soireeScores .s-score').forEach(function(s){
+    s.classList.remove('active');
+  });
+  el.classList.add('active');
+  soireeMinScore = parseInt(el.dataset.min);
+}
+
+function generateItinerary() {
+  var pool = soireePools[soireeZoneSel] || [0,1,2];
+
+  // Filtrer par score minimum
+  var eligible = pool.filter(function(i){ return bars[i] && bars[i].score >= soireeMinScore; });
+  if (eligible.length < 2) eligible = pool.slice(); // fallback : tous les bars du pool
+
+  // Shuffle Fisher-Yates
+  for (var i = eligible.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = eligible[i]; eligible[i] = eligible[j]; eligible[j] = tmp;
+  }
+
+  // Prendre 3 à 4 bars
+  var nbPicks = Math.min(eligible.length, 3 + Math.floor(Math.random() * 2));
+  var picks = eligible.slice(0, nbPicks);
+
+  // Calcul score moyen
+  var avgScore = Math.round(picks.reduce(function(s, i){ return s + (bars[i] ? bars[i].score : 80); }, 0) / picks.length);
+
+  // Vibe courant
+  var vibe = vibeTexts[soireeVibeSel] || vibeTexts.detente;
+
+  // Titres dynamiques selon zone & vibe
+  var titleOptions = {
+    festif:   ['Soirée de folie 🔥', 'Ce soir ça déchire !', 'On va tout défoncer 🎉'],
+    detente:  ['Soirée tranquille 🍷', 'Le bon plan ce soir', 'Chill guaranteed ✌️'],
+    cocktail: ['La soirée cocktail 🍸', 'Shaker en main 🍹', 'Classy as always'],
+    live:     ['Son à donf ce soir 🎵', 'La soirée live !', 'Musique & bonne humeur 🎸']
+  };
+  var titles = titleOptions[soireeVibeSel] || titleOptions.detente;
+  var chosenTitle = titles[Math.floor(Math.random() * titles.length)];
+
+  // Afficher headline
+  var titleEl = document.getElementById('soireeResultTitle');
+  var subEl   = document.getElementById('soireeResultSub');
+  if (titleEl) titleEl.textContent = chosenTitle;
+  if (subEl)   subEl.textContent   = picks.length + ' spots validés · Score moyen ' + avgScore + '/100';
+
+  // Générer les stops
+  var itinEl = document.getElementById('soireeItinerary');
+  if (itinEl) {
+    var stopColors = ['rgba(0,200,120,.2)','rgba(160,40,255,.2)','rgba(255,60,180,.2)','rgba(255,180,0,.2)'];
+    var stopTxtColors = ['#00C878','#C060FF','#FF60C0','#FFB400'];
+    var estHeures = ['21h30','22h45','00h00','01h30'];
+
+    itinEl.innerHTML = picks.map(function(barIdx, idx) {
+      var bar = bars[barIdx] || { name:'Bar', address:'', score:80 };
+      var isLast = idx === picks.length - 1;
+      var scoreColor = bar.score >= 85 ? '#00C878' : bar.score >= 70 ? '#E8B84B' : '#FF6B6B';
+
+      return '<div class="s-stop">' +
+        // Numéro + connecteur vertical
+        '<div style="display:flex;flex-direction:column;align-items:center;gap:0;flex-shrink:0;">' +
+          '<div class="s-stop-num" style="background:' + stopColors[idx%4] + ';color:' + stopTxtColors[idx%4] + ';">' + (idx+1) + '</div>' +
+          (!isLast ? '<div style="width:1px;flex:1;min-height:16px;background:linear-gradient(to bottom,'+stopTxtColors[idx%4]+'40,transparent);margin-top:4px;"></div>' : '') +
+        '</div>' +
+        // Contenu
+        '<div style="flex:1;padding-bottom:' + (isLast ? '0' : '4px') + ';">' +
+          '<div style="font-size:14px;font-weight:800;color:#fff;margin-bottom:3px;">' + bar.name + '</div>' +
+          '<div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:6px;">' + (bar.address || bar.type || '') + '</div>' +
+          '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">' +
+            '<div style="background:rgba(0,0,0,.3);border:1px solid ' + scoreColor + '40;border-radius:8px;padding:3px 8px;font-size:11px;font-weight:700;color:' + scoreColor + ';">' + bar.score + '/100</div>' +
+            '<div style="background:rgba(160,40,255,.15);border:1px solid rgba(160,40,255,.25);border-radius:8px;padding:3px 8px;font-size:10px;color:#C060FF;">' + vibe.emoji + ' ' + vibe.tag + '</div>' +
+            '<div style="font-size:10px;color:rgba(255,255,255,.3);">≈ ' + (estHeures[idx] || '') + '</div>' +
+          '</div>' +
+        '</div>' +
+        // Bouton voir
+        '<div onclick="openModal(' + barIdx + ')" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:8px 10px;font-size:11px;color:rgba(255,255,255,.5);cursor:pointer;flex-shrink:0;margin-top:2px;font-weight:700;">Voir ›</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  // Afficher les résultats avec animation
+  var res = document.getElementById('soireeResults');
+  if (res) {
+    res.style.display = 'block';
+    res.style.opacity = '0';
+    res.style.transform = 'translateY(12px)';
+    setTimeout(function(){
+      res.style.transition = 'opacity .35s ease, transform .35s ease';
+      res.style.opacity = '1';
+      res.style.transform = 'translateY(0)';
+    }, 20);
+    setTimeout(function(){ res.scrollIntoView({ behavior:'smooth', block:'start' }); }, 100);
+  }
+
+  showToast('✨ ' + picks.length + ' spots trouvés — bonne soirée ! 🎉');
+}
+
+function shareItinerary() {
+  showToast('📤 Lien copié ! Envoie ça à tes potes 🔥');
+}
+
+function replaySoiree(idx) {
+  var h = soireeHistoryData[idx];
+  if (!h) return;
+  // Restaurer la zone
+  soireeZoneSel = h.zone;
+  document.querySelectorAll('#soireeZones .s-zone').forEach(function(z){
+    z.classList.toggle('active', z.dataset.zone === h.zone);
+  });
+  // Rebuild itinéraire depuis l'historique
+  var titleEl = document.getElementById('soireeResultTitle');
+  var subEl   = document.getElementById('soireeResultSub');
+  if (titleEl) titleEl.textContent = 'Soirée ' + zoneLabels[h.zone];
+  if (subEl)   subEl.textContent   = h.barNames.length + ' bars · Score moyen ' + h.avgScore + '/100';
+
+  var itinEl = document.getElementById('soireeItinerary');
+  var stopColors = ['rgba(0,200,120,.2)','rgba(160,40,255,.2)','rgba(255,60,180,.2)','rgba(255,180,0,.2)'];
+  var stopTxt    = ['#00C878','#C060FF','#FF60C0','#FFB400'];
+  var estH = ['21h30','22h45','00h00','01h30'];
+  if (itinEl) {
+    itinEl.innerHTML = h.barNames.map(function(name, i){
+      return '<div class="s-stop">' +
+        '<div class="s-stop-num" style="background:'+stopColors[i%4]+';color:'+stopTxt[i%4]+';">'+(i+1)+'</div>' +
+        '<div style="flex:1;"><div style="font-size:14px;font-weight:800;color:#fff;margin-bottom:3px;">'+name+'</div>' +
+        '<div style="font-size:10px;color:rgba(255,255,255,.3);">≈ '+estH[i]+'</div></div>' +
+      '</div>';
+    }).join('');
+  }
+  var res = document.getElementById('soireeResults');
+  if (res) { res.style.display='block'; res.style.opacity='1'; res.style.transform='none'; }
+  document.querySelector('.phone').scrollTop = 0;
+  showToast('📅 Soirée du ' + h.daysAgo + ' jours chargée !');
 }
 </script>
 
@@ -4238,111 +4467,134 @@ function setAdminPeriod(el,period){
   </div>
 
   <!-- ════════ MODE SOIRÉE SÉCURISÉE ════════ -->
-  <div class="screen" id="soiree">
-    <div style="padding:20px 20px 0;display:flex;align-items:center;justify-content:space-between;">
-      <div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <div style="background:linear-gradient(135deg,#1a0040,#2d006b);border-radius:10px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-              <path d="M12 2L9 9H2l5.5 4-2 7L12 16l6.5 4-2-7L22 9h-7z" fill="rgba(160,100,255,.3)" stroke="#A064FF" stroke-width="1.5" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--text);">Soirée Sécurisée</div>
-        </div>
-        <div style="font-size:11px;color:var(--muted);margin-top:2px;padding-left:40px;">Itinéraire de bars certifiés</div>
-      </div>
-      <div class="back-btn" onclick="goTo('client')">← Carte</div>
+  <!-- ════════ SOIRÉE SÉCURISÉE ════════ -->
+  <div class="screen" id="soiree" style="background:linear-gradient(160deg,#12002A 0%,#1A0038 35%,#0D001F 65%,#1C0035 100%);overflow-y:auto;">
+
+    <!-- Particules déco -->
+    <div style="position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:0;overflow:hidden;">
+      <div style="position:absolute;top:8%;left:12%;width:180px;height:180px;background:radial-gradient(circle,rgba(160,100,255,.18) 0%,transparent 70%);border-radius:50%;"></div>
+      <div style="position:absolute;top:40%;right:5%;width:120px;height:120px;background:radial-gradient(circle,rgba(255,60,180,.12) 0%,transparent 70%);border-radius:50%;"></div>
+      <div style="position:absolute;bottom:25%;left:20%;width:90px;height:90px;background:radial-gradient(circle,rgba(100,200,255,.1) 0%,transparent 70%);border-radius:50%;"></div>
     </div>
-    <div style="height:1px;background:linear-gradient(90deg,rgba(160,100,255,.4),transparent);margin:14px 20px 0;"></div>
 
-    <div style="padding:16px 20px;">
-
-      <!-- Sélection secteur -->
-      <div style="font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">Votre secteur ce soir</div>
-      <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;" id="soireeZones">
-        <div class="soiree-zone active" data-zone="tours" onclick="selectSoireeZone(this)">📍 Tours Centre</div>
-        <div class="soiree-zone" data-zone="marais" onclick="selectSoireeZone(this)">🗼 Le Marais</div>
-        <div class="soiree-zone" data-zone="oberkampf" onclick="selectSoireeZone(this)">🎸 Oberkampf</div>
+    <div style="position:relative;z-index:1;">
+      <!-- Header -->
+      <div style="padding:24px 20px 0;display:flex;align-items:flex-start;justify-content:space-between;">
+        <div>
+          <div style="font-size:10px;font-weight:700;color:rgba(200,160,255,.5);letter-spacing:.18em;text-transform:uppercase;margin-bottom:6px;">Ce soir on sort 🌙</div>
+          <div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:900;color:#fff;line-height:1.1;letter-spacing:-.5px;">Soirée<br><span style="background:linear-gradient(90deg,#C060FF,#FF60C0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Sécurisée</span> ✨</div>
+          <div style="font-size:11px;color:rgba(200,160,255,.5);margin-top:6px;">Bars certifiés · Bonne ambiance garantie</div>
+        </div>
+        <div onclick="goTo('client')" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:7px 14px;font-size:12px;color:rgba(255,255,255,.5);cursor:pointer;margin-top:4px;">← Retour</div>
       </div>
 
-      <!-- Ambiance -->
-      <div style="font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">Ambiance recherchée</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px;">
-        <div class="soiree-vibe active" data-vibe="detente" onclick="selectVibe(this)">
-          <span style="font-size:18px;">🍷</span><span style="font-size:12px;font-weight:600;">Détendu</span>
-        </div>
-        <div class="soiree-vibe" data-vibe="festif" onclick="selectVibe(this)">
-          <span style="font-size:18px;">🎉</span><span style="font-size:12px;font-weight:600;">Festif</span>
-        </div>
-        <div class="soiree-vibe" data-vibe="cocktail" onclick="selectVibe(this)">
-          <span style="font-size:18px;">🍸</span><span style="font-size:12px;font-weight:600;">Cocktails</span>
-        </div>
-        <div class="soiree-vibe" data-vibe="live" onclick="selectVibe(this)">
-          <span style="font-size:18px;">🎵</span><span style="font-size:12px;font-weight:600;">Live music</span>
-        </div>
-      </div>
+      <!-- Divider lumineux -->
+      <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(160,100,255,.5),rgba(255,60,180,.4),transparent);margin:18px 0 0;"></div>
 
-      <!-- Score minimum -->
-      <div style="font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">Score minimum</div>
-      <div style="display:flex;gap:8px;margin-bottom:24px;">
-        <div class="soiree-score" data-min="70" onclick="selectSoireeScore(this)">≥ 70</div>
-        <div class="soiree-score active" data-min="80" onclick="selectSoireeScore(this)">≥ 80 ✓</div>
-        <div class="soiree-score" data-min="90" onclick="selectSoireeScore(this)">≥ 90 ⭐</div>
-      </div>
+      <div style="padding:20px 20px 100px;">
 
-      <!-- Bouton générer -->
-      <button onclick="generateItinerary()" style="width:100%;padding:16px;background:linear-gradient(135deg,#6030CC,#A064FF);color:white;border:none;border-radius:16px;font-size:15px;font-weight:800;font-family:'Syne',sans-serif;cursor:pointer;letter-spacing:.03em;margin-bottom:24px;box-shadow:0 4px 24px rgba(160,100,255,.3);">
-        ✨ Générer mon itinéraire
-      </button>
+        <!-- WHERE YOU AT ? -->
+        <div style="font-size:10px;font-weight:800;color:rgba(200,160,255,.55);letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px;">📍 T'es où ce soir ?</div>
+        <div style="display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap;" id="soireeZones">
+          <div class="s-zone active" data-zone="tours" onclick="selectSoireeZone(this)">📍 Tours Centre</div>
+          <div class="s-zone" data-zone="marais" onclick="selectSoireeZone(this)">🗼 Le Marais</div>
+          <div class="s-zone" data-zone="oberkampf" onclick="selectSoireeZone(this)">🎸 Oberkampf</div>
+          <div class="s-zone" data-zone="bastille" onclick="selectSoireeZone(this)">🔥 Bastille</div>
+        </div>
 
-      <!-- Résultats -->
-      <div id="soireeResults" style="display:none;">
-        <div style="font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">Votre itinéraire du soir</div>
-        <div id="soireeItinerary" style="display:flex;flex-direction:column;gap:0;"></div>
+        <!-- VIBE CHECK -->
+        <div style="font-size:10px;font-weight:800;color:rgba(200,160,255,.55);letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px;">🎭 Vibe check</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:22px;" id="soireeVibes">
+          <div class="s-vibe active" data-vibe="detente" onclick="selectVibe(this)">
+            <span style="font-size:22px;">🍷</span>
+            <div><div style="font-size:12px;font-weight:800;color:#fff;">Détendu</div><div style="font-size:10px;color:rgba(255,255,255,.4);">Chill & talk</div></div>
+          </div>
+          <div class="s-vibe" data-vibe="festif" onclick="selectVibe(this)">
+            <span style="font-size:22px;">🎉</span>
+            <div><div style="font-size:12px;font-weight:800;color:#fff;">On se lâche</div><div style="font-size:10px;color:rgba(255,255,255,.4);">Full energy</div></div>
+          </div>
+          <div class="s-vibe" data-vibe="cocktail" onclick="selectVibe(this)">
+            <span style="font-size:22px;">🍸</span>
+            <div><div style="font-size:12px;font-weight:800;color:#fff;">Cocktails</div><div style="font-size:10px;color:rgba(255,255,255,.4);">Classy vibes</div></div>
+          </div>
+          <div class="s-vibe" data-vibe="live" onclick="selectVibe(this)">
+            <span style="font-size:22px;">🎵</span>
+            <div><div style="font-size:12px;font-weight:800;color:#fff;">Live music</div><div style="font-size:10px;color:rgba(255,255,255,.4);">Son à fond</div></div>
+          </div>
+        </div>
 
-        <!-- Partager -->
-        <div style="display:flex;gap:10px;margin-top:20px;">
-          <button onclick="shareItinerary()" style="flex:1;padding:14px;background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:14px;font-size:13px;font-weight:700;cursor:pointer;">
-            📤 Partager la soirée
+        <!-- CRITÈRE SÉCU -->
+        <div style="font-size:10px;font-weight:800;color:rgba(200,160,255,.55);letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px;">🛡️ Niveau sécu minimum</div>
+        <div style="display:flex;gap:8px;margin-bottom:28px;" id="soireeScores">
+          <div class="s-score" data-min="70" onclick="selectSoireeScore(this)">≥ 70 OK</div>
+          <div class="s-score active" data-min="80" onclick="selectSoireeScore(this)">≥ 80 ✓</div>
+          <div class="s-score" data-min="90" onclick="selectSoireeScore(this)">≥ 90 🔒</div>
+        </div>
+
+        <!-- CTA GÉNÉRATION -->
+        <div id="soireeGenBlock">
+          <button onclick="generateItinerary()" id="soireeGenBtn" style="width:100%;padding:18px;background:linear-gradient(135deg,#8020E0,#C040FF,#FF40C0);color:white;border:none;border-radius:20px;font-size:16px;font-weight:900;font-family:'Syne',sans-serif;cursor:pointer;letter-spacing:.02em;box-shadow:0 6px 32px rgba(160,40,255,.45),0 0 0 1px rgba(255,255,255,.08);position:relative;overflow:hidden;">
+            <span style="position:relative;z-index:1;">✨ Lance ma soirée !</span>
           </button>
-          <button onclick="generateItinerary()" style="flex:1;padding:14px;background:rgba(160,100,255,.15);color:#A064FF;border:1px solid rgba(160,100,255,.3);border-radius:14px;font-size:13px;font-weight:700;cursor:pointer;">
-            🔀 Autre suggestion
-          </button>
         </div>
 
-        <!-- Note sécurité -->
-        <div style="background:rgba(0,200,120,.06);border:1px solid rgba(0,200,120,.15);border-radius:14px;padding:14px;margin-top:16px;display:flex;gap:10px;align-items:flex-start;">
-          <div style="font-size:18px;">🛡️</div>
-          <div>
-            <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:3px;">Tous certifiés Spotafe</div>
-            <div style="font-size:11px;color:var(--muted);line-height:1.5;">Ces établissements ont été audités par nos certificateurs partenaires (Apave / Bureau Veritas). Leurs scores sont vérifiés et mis à jour régulièrement.</div>
+        <!-- RÉSULTATS ITINÉRAIRE -->
+        <div id="soireeResults" style="display:none;margin-top:24px;">
+
+          <!-- Headline résultat -->
+          <div id="soireeHeadline" style="text-align:center;margin-bottom:20px;">
+            <div style="font-size:28px;margin-bottom:6px;">🔥</div>
+            <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:900;color:#fff;letter-spacing:-.3px;" id="soireeResultTitle">Ta soirée est prête !</div>
+            <div style="font-size:12px;color:rgba(200,160,255,.6);margin-top:4px;" id="soireeResultSub">3 spots validés · Score moyen 87/100</div>
           </div>
-        </div>
-      </div>
 
-      <!-- Historique soirées -->
-      <div style="margin-top:24px;padding-bottom:40px;">
-        <div style="font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">Soirées précédentes</div>
-        <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;">
-          <div style="padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;">
-            <div style="font-size:18px;">🎉</div>
-            <div style="flex:1;">
-              <div style="font-size:13px;font-weight:700;color:var(--text);">Soirée Tours Centre · 3 bars</div>
-              <div style="font-size:11px;color:var(--muted);">Score moyen : 86/100 · Il y a 5 jours</div>
+          <!-- Stops -->
+          <div id="soireeItinerary" style="display:flex;flex-direction:column;gap:0;margin-bottom:20px;"></div>
+
+          <!-- Actions -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+            <button onclick="shareItinerary()" style="padding:14px;background:rgba(255,255,255,.07);color:#fff;border:1px solid rgba(255,255,255,.12);border-radius:16px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Syne',sans-serif;">
+              📤 Partager
+            </button>
+            <button onclick="generateItinerary()" style="padding:14px;background:rgba(160,40,255,.25);color:#C060FF;border:1px solid rgba(160,40,255,.35);border-radius:16px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Syne',sans-serif;">
+              🔀 Reshuffle
+            </button>
+          </div>
+
+          <!-- Badge sécu -->
+          <div style="background:rgba(0,200,120,.07);border:1px solid rgba(0,200,120,.18);border-radius:16px;padding:14px 16px;display:flex;gap:12px;align-items:center;">
+            <div style="font-size:22px;">🛡️</div>
+            <div>
+              <div style="font-size:12px;font-weight:800;color:#00C878;margin-bottom:3px;">100% certifiés Spotafe</div>
+              <div style="font-size:11px;color:rgba(255,255,255,.35);line-height:1.5;">Audités Apave / Bureau Veritas. Leurs scores sont vérifiés et à jour — t'as plus qu'à profiter 🎉</div>
             </div>
-            <div style="font-size:11px;color:#A064FF;font-weight:700;cursor:pointer;">Revoir</div>
-          </div>
-          <div style="padding:14px 16px;display:flex;align-items:center;gap:12px;">
-            <div style="font-size:18px;">🍷</div>
-            <div style="flex:1;">
-              <div style="font-size:13px;font-weight:700;color:var(--text);">Soirée Marais · 4 bars</div>
-              <div style="font-size:11px;color:var(--muted);">Score moyen : 91/100 · Il y a 12 jours</div>
-            </div>
-            <div style="font-size:11px;color:#A064FF;font-weight:700;cursor:pointer;">Revoir</div>
           </div>
         </div>
-      </div>
 
+        <!-- HISTORIQUE -->
+        <div style="margin-top:28px;">
+          <div style="font-size:10px;font-weight:800;color:rgba(200,160,255,.55);letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px;">📅 Tes dernières sorties</div>
+          <div id="soireeHistory">
+            <div class="s-history-card" onclick="replaySoiree(0)">
+              <div style="font-size:20px;">🎉</div>
+              <div style="flex:1;">
+                <div style="font-size:13px;font-weight:700;color:#fff;">Tours Centre · 3 bars</div>
+                <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:2px;">Score moyen 86 · il y a 5 jours</div>
+              </div>
+              <div style="font-size:18px;color:rgba(255,255,255,.2);">›</div>
+            </div>
+            <div class="s-history-card" onclick="replaySoiree(1)">
+              <div style="font-size:20px;">🍷</div>
+              <div style="flex:1;">
+                <div style="font-size:13px;font-weight:700;color:#fff;">Le Marais · 4 bars</div>
+                <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:2px;">Score moyen 91 · il y a 12 jours</div>
+              </div>
+              <div style="font-size:18px;color:rgba(255,255,255,.2);">›</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 
