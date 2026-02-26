@@ -2528,6 +2528,55 @@
         </div>
 
         <div style="font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.06em;margin-bottom:10px;">DOCUMENTS À FOURNIR</div>
+
+        <!-- Demo IA extraction -->
+        <div style="background:linear-gradient(135deg,rgba(160,100,255,0.12),rgba(160,100,255,0.04));border:1px solid rgba(160,100,255,0.3);border-radius:12px;padding:16px;margin-bottom:16px;">
+          <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;">
+            <div style="font-size:32px;">✨</div>
+            <div style="flex:1;">
+              <div style="font-size:12px;font-weight:700;color:#A064FF;margin-bottom:6px;">EXTRACTION AUTOMATIQUE PAR IA</div>
+              <div style="font-size:11px;color:var(--muted);line-height:1.6;">Téléchargez simplement vos documents — notre IA analyse automatiquement les certificats et extrait les données clés : <strong style="color:var(--text);">dates de validité, scores, organismes délivreurs, références</strong>. Aucune saisie manuelle nécessaire.</div>
+            </div>
+          </div>
+          <div style="background:rgba(0,0,0,0.15);border-radius:10px;padding:12px;margin-bottom:12px;">
+            <div style="font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.05em;margin-bottom:8px;">📄 DÉMO — TESTEZ L'EXTRACTION IA</div>
+            <div style="font-size:10px;color:var(--muted);margin-bottom:10px;">Simulez l'upload d'un certificat Apave pour voir l'extraction en action</div>
+            <input type="file" id="demoUpload" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="handleDemoUpload(this)">
+            <button onclick="document.getElementById('demoUpload').click()" style="width:100%;background:rgba(160,100,255,0.2);color:#A064FF;border:1px solid rgba(160,100,255,0.4);border-radius:8px;padding:10px;font-size:11px;font-weight:700;cursor:pointer;">📤 Tester l'extraction IA sur un document</button>
+          </div>
+          <div id="demoExtraction" style="display:none;">
+            <div style="background:rgba(0,200,120,0.12);border:1px solid rgba(0,200,120,0.3);border-radius:8px;padding:12px;">
+              <div style="font-size:10px;color:var(--green);font-weight:700;margin-bottom:8px;">✅ DONNÉES EXTRAITES AUTOMATIQUEMENT</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;">
+                <div style="background:rgba(0,0,0,0.15);border-radius:6px;padding:6px 8px;">
+                  <div style="font-size:8px;color:var(--muted);margin-bottom:1px;">Organisme</div>
+                  <div style="font-size:10px;font-weight:700;color:var(--text);">Apave CVL</div>
+                </div>
+                <div style="background:rgba(0,0,0,0.15);border-radius:6px;padding:6px 8px;">
+                  <div style="font-size:8px;color:var(--muted);margin-bottom:1px;">Référence</div>
+                  <div style="font-size:10px;font-weight:700;color:var(--text);">APV-2025-4471</div>
+                </div>
+                <div style="background:rgba(0,0,0,0.15);border-radius:6px;padding:6px 8px;">
+                  <div style="font-size:8px;color:var(--muted);margin-bottom:1px;">Date délivrance</div>
+                  <div style="font-size:10px;font-weight:700;color:var(--text);">14/06/2025</div>
+                </div>
+                <div style="background:rgba(0,0,0,0.15);border-radius:6px;padding:6px 8px;">
+                  <div style="font-size:8px;color:var(--muted);margin-bottom:1px;">Validité</div>
+                  <div style="font-size:10px;font-weight:700;color:var(--text);">14/06/2026</div>
+                </div>
+                <div style="background:rgba(0,0,0,0.15);border-radius:6px;padding:6px 8px;">
+                  <div style="font-size:8px;color:var(--muted);margin-bottom:1px;">Type ERP</div>
+                  <div style="font-size:10px;font-weight:700;color:var(--text);">Type N — 3e cat.</div>
+                </div>
+                <div style="background:rgba(0,0,0,0.15);border-radius:6px;padding:6px 8px;">
+                  <div style="font-size:8px;color:var(--muted);margin-bottom:1px;">Score calculé</div>
+                  <div style="font-size:10px;font-weight:700;color:var(--green);">82/100</div>
+                </div>
+              </div>
+              <div style="font-size:9px;color:var(--muted);font-style:italic;">⚡ Extraction effectuée en 1,2 secondes — Confiance 98%</div>
+            </div>
+          </div>
+        </div>
         
         <!-- Checklist documents -->
         <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:16px;">
@@ -3267,6 +3316,32 @@ function animateScore() {
 // ── TOAST ──
 // ── Upload documents functions ──
 var uploadedDocs = { conformite: false, registre: false, extincteurs: false, assurance: false };
+
+function handleDemoUpload(input) {
+  if (!input.files || !input.files[0]) return;
+  
+  var file = input.files[0];
+  var fileName = file.name;
+  
+  // Afficher un loader
+  showToast('🤖 Analyse IA en cours...');
+  
+  // Simuler l'extraction IA avec un délai
+  setTimeout(function() {
+    var demoDiv = document.getElementById('demoExtraction');
+    demoDiv.style.display = 'block';
+    
+    // Scroll vers le résultat
+    setTimeout(function() {
+      demoDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
+    
+    showToast('✨ Extraction terminée — 6 champs reconnus');
+  }, 1800); // 1.8s pour simuler le traitement IA
+  
+  // Reset le input
+  input.value = '';
+}
 
 function goToBadgeUpgrade() {
   document.getElementById('badgeSilver').style.display = 'none';
