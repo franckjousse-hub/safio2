@@ -2473,81 +2473,159 @@
     <div class="owner-sub" id="ownerDocs">
       <div style="padding:16px 24px 0;">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-          <div class="section-title" style="margin:0;">Certificats & documents</div>
+          <div class="section-title" style="margin:0;">Certification & Documents</div>
           <div class="back-btn" onclick="switchOwnerTab('home')">← Retour</div>
         </div>
         <div style="font-size:12px;color:var(--muted);margin-bottom:20px;">Bar du Centre • Tours</div>
       </div>
 
-      <!-- Certificat actif -->
+      <!-- Badge actuel -->
       <div style="margin:0 24px 16px;">
-        <div style="background:linear-gradient(135deg,rgba(0,200,120,0.1),rgba(0,200,120,0.04));border:1px solid rgba(0,200,120,0.3);border-radius:16px;padding:18px;">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
-            <div>
-              <div style="font-size:11px;color:var(--green);font-weight:700;letter-spacing:.06em;margin-bottom:4px;">✅ CERTIFICAT ACTIF</div>
-              <div style="font-size:15px;font-weight:700;color:var(--text);">Certificat de conformité ERP</div>
-              <div style="font-size:11px;color:var(--muted);margin-top:2px;">Délivré par Apave Centre-Val de Loire</div>
+        <div id="badgeSilver" style="background:linear-gradient(135deg,rgba(192,192,192,0.12),rgba(192,192,192,0.04));border:1px solid rgba(192,192,192,0.35);border-radius:16px;padding:18px;">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
+            <div style="font-size:48px;">🥈</div>
+            <div style="flex:1;">
+              <div style="font-size:11px;color:#A8A8A8;font-weight:700;letter-spacing:.06em;margin-bottom:4px;">✓ BADGE ACTIF</div>
+              <div style="font-size:16px;font-weight:800;color:var(--text);">SpotySAFE Silver</div>
+              <div style="font-size:11px;color:var(--muted);margin-top:3px;">Auto-déclaration • Visible sur votre fiche</div>
             </div>
-            <div style="background:rgba(0,200,120,0.15);border-radius:10px;padding:8px 12px;text-align:center;">
-              <div style="font-size:22px;font-weight:900;color:var(--green);line-height:1;">82</div>
-              <div style="font-size:8px;color:var(--muted);">/100</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.15);border-radius:10px;padding:12px;margin-bottom:14px;">
+            <div style="font-size:11px;color:var(--muted);margin-bottom:6px;">Le badge <strong style="color:var(--text);">Silver</strong> atteste que vous avez déclaré posséder les équipements de sécurité obligatoires. Il est visible sur votre fiche client et améliore votre visibilité dans les recherches.</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:8px;font-style:italic;">💡 Passez au badge <strong style="color:#E8B84B;">Gold</strong> en téléchargeant vos certificats d'organismes agréés pour un score vérifié officiel.</div>
+          </div>
+          <button onclick="goToBadgeUpgrade()" style="width:100%;background:linear-gradient(135deg,#E8B84B,#D4A030);color:#000;border:none;border-radius:10px;padding:12px;font-size:13px;font-weight:700;cursor:pointer;">🏆 Passer au badge Gold</button>
+        </div>
+
+        <div id="badgeGold" style="display:none;background:linear-gradient(135deg,rgba(232,184,75,0.15),rgba(232,184,75,0.05));border:1px solid rgba(232,184,75,0.4);border-radius:16px;padding:18px;">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
+            <div style="font-size:48px;">🥇</div>
+            <div style="flex:1;">
+              <div style="font-size:11px;color:#E8B84B;font-weight:700;letter-spacing:.06em;margin-bottom:4px;">✅ BADGE VÉRIFIÉ</div>
+              <div style="font-size:16px;font-weight:800;color:var(--text);">SpotySAFE Gold</div>
+              <div style="font-size:11px;color:var(--muted);margin-top:3px;">Certificats vérifiés • Score officiel 82/100</div>
             </div>
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
-            <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:8px 10px;">
-              <div style="font-size:9px;color:var(--muted);margin-bottom:2px;">Délivré le</div>
-              <div style="font-size:11px;font-weight:600;color:var(--text);">14 juin 2025</div>
+            <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:10px;">
+              <div style="font-size:9px;color:var(--muted);margin-bottom:2px;">Certificat Apave</div>
+              <div style="font-size:11px;font-weight:700;color:var(--text);">✓ Actif</div>
             </div>
-            <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:8px 10px;">
+            <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:10px;">
               <div style="font-size:9px;color:var(--muted);margin-bottom:2px;">Valide jusqu'au</div>
-              <div style="font-size:11px;font-weight:600;color:var(--text);">14 juin 2026</div>
-            </div>
-            <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:8px 10px;">
-              <div style="font-size:9px;color:var(--muted);margin-bottom:2px;">Référence</div>
-              <div style="font-size:11px;font-weight:600;color:var(--text);">APV-2025-4471</div>
-            </div>
-            <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:8px 10px;">
-              <div style="font-size:9px;color:var(--muted);margin-bottom:2px;">Catégorie ERP</div>
-              <div style="font-size:11px;font-weight:600;color:var(--text);">Type N — 3e cat.</div>
+              <div style="font-size:11px;font-weight:700;color:var(--text);">14/06/2026</div>
             </div>
           </div>
-          <div style="display:flex;gap:8px;">
-            <button onclick="showToast('📥 Certificat téléchargé')" style="flex:1;background:var(--green);color:#000;border:none;border-radius:10px;padding:10px;font-size:12px;font-weight:700;cursor:pointer;">📥 Télécharger PDF</button>
-            <button onclick="showToast('📤 Certificat partagé')" style="flex:1;background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:10px;font-size:12px;font-weight:600;cursor:pointer;">📤 Partager</button>
-          </div>
+          <button onclick="showToast('📥 Certificat téléchargé')" style="width:100%;background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:11px;font-size:12px;font-weight:600;cursor:pointer;">📥 Télécharger mon certificat</button>
         </div>
       </div>
 
-      <!-- Rapport de visite -->
-      <div style="margin:0 24px 16px;">
-        <div style="font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.06em;margin-bottom:10px;">RAPPORTS DE VISITE</div>
-        <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
-          <div onclick="showToast('📋 Rapport ouvert')" style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer;">
-            <div style="font-size:22px;">📄</div>
-            <div style="flex:1;">
-              <div style="font-size:12px;font-weight:600;color:var(--text);">Rapport visite Apave — juin 2025</div>
-              <div style="font-size:10px;color:var(--muted);margin-top:2px;">PDF • 3 pages • 245 Ko</div>
+      <!-- Upgrade flow (hidden initialement) -->
+      <div id="uploadFlow" style="display:none;margin:0 24px 100px;">
+        <div style="background:rgba(232,184,75,0.08);border:1px solid rgba(232,184,75,0.25);border-radius:12px;padding:16px;margin-bottom:16px;">
+          <div style="font-size:12px;font-weight:700;color:#E8B84B;margin-bottom:8px;">🎯 DÉBLOQUEZ LE BADGE GOLD</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.6;">Téléchargez vos certificats d'organismes agréés (Apave, Bureau Veritas, Socotec...) pour obtenir un <strong style="color:var(--text);">score vérifié officiel</strong>. Votre badge Gold augmente votre visibilité de <strong style="color:#E8B84B;">+47%</strong> et votre taux de conversion de <strong style="color:#E8B84B;">+23%</strong>.</div>
+        </div>
+
+        <div style="font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.06em;margin-bottom:10px;">DOCUMENTS À FOURNIR</div>
+        
+        <!-- Checklist documents -->
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:16px;">
+          
+          <!-- Doc 1 : Certificat conformité -->
+          <div class="upload-doc-item" data-doc="conformite">
+            <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border);">
+              <div class="upload-checkbox">☐</div>
+              <div style="flex:1;">
+                <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">1. Certificat de conformité ERP</div>
+                <div style="font-size:10px;color:var(--muted);line-height:1.5;margin-bottom:8px;">Document délivré par un organisme agréé (Apave, Bureau Veritas, Socotec...) attestant de la conformité globale de votre établissement aux normes de sécurité.</div>
+                <div style="font-size:9px;color:#E8B84B;background:rgba(232,184,75,0.1);border:1px solid rgba(232,184,75,0.2);border-radius:6px;padding:6px 8px;display:inline-block;">💡 Ce document est le plus important — il génère 70% de votre score</div>
+              </div>
             </div>
-            <div style="color:var(--muted);font-size:16px;">›</div>
-          </div>
-          <div onclick="showToast('📋 Rapport ouvert')" style="display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;">
-            <div style="font-size:22px;">📄</div>
-            <div style="flex:1;">
-              <div style="font-size:12px;font-weight:600;color:var(--text);">Rapport visite Apave — juin 2024</div>
-              <div style="font-size:10px;color:var(--muted);margin-top:2px;">PDF • 3 pages • 218 Ko</div>
+            <div style="padding:12px 16px;background:rgba(0,0,0,0.02);border-bottom:1px solid var(--border);">
+              <input type="file" id="uploadConformite" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="handleUpload('conformite', this)">
+              <button onclick="document.getElementById('uploadConformite').click()" style="background:var(--green);color:#000;border:none;border-radius:8px;padding:9px 14px;font-size:11px;font-weight:700;cursor:pointer;width:100%;">📤 Télécharger le certificat</button>
             </div>
-            <div style="color:var(--muted);font-size:16px;">›</div>
           </div>
+
+          <!-- Doc 2 : Registre sécurité -->
+          <div class="upload-doc-item" data-doc="registre">
+            <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border);">
+              <div class="upload-checkbox">☐</div>
+              <div style="flex:1;">
+                <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">2. Registre de sécurité</div>
+                <div style="font-size:10px;color:var(--muted);line-height:1.5;margin-bottom:8px;">Registre tenu à jour avec les contrôles périodiques des équipements (extincteurs, alarme incendie, éclairage de secours...)</div>
+                <div style="font-size:9px;color:var(--muted);font-style:italic;">Optionnel mais recommandé • Améliore votre score de +5 à +8 points</div>
+              </div>
+            </div>
+            <div style="padding:12px 16px;background:rgba(0,0,0,0.02);border-bottom:1px solid var(--border);">
+              <input type="file" id="uploadRegistre" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="handleUpload('registre', this)">
+              <button onclick="document.getElementById('uploadRegistre').click()" style="background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:9px 14px;font-size:11px;font-weight:600;cursor:pointer;width:100%;">📤 Télécharger le registre</button>
+            </div>
+          </div>
+
+          <!-- Doc 3 : Attestation extincteurs -->
+          <div class="upload-doc-item" data-doc="extincteurs">
+            <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border);">
+              <div class="upload-checkbox">☐</div>
+              <div style="flex:1;">
+                <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">3. Attestation contrôle extincteurs</div>
+                <div style="font-size:10px;color:var(--muted);line-height:1.5;margin-bottom:8px;">Certificat de vérification annuelle des extincteurs par un organisme agréé (contrôle obligatoire tous les ans)</div>
+                <div style="font-size:9px;color:var(--muted);font-style:italic;">Optionnel • Améliore votre score de +3 à +5 points</div>
+              </div>
+            </div>
+            <div style="padding:12px 16px;background:rgba(0,0,0,0.02);border-bottom:1px solid var(--border);">
+              <input type="file" id="uploadExtincteurs" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="handleUpload('extincteurs', this)">
+              <button onclick="document.getElementById('uploadExtincteurs').click()" style="background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:9px 14px;font-size:11px;font-weight:600;cursor:pointer;width:100%;">📤 Télécharger l'attestation</button>
+            </div>
+          </div>
+
+          <!-- Doc 4 : Assurance RC -->
+          <div class="upload-doc-item" data-doc="assurance">
+            <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;">
+              <div class="upload-checkbox">☐</div>
+              <div style="flex:1;">
+                <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">4. Attestation assurance RC</div>
+                <div style="font-size:10px;color:var(--muted);line-height:1.5;margin-bottom:8px;">Attestation d'assurance responsabilité civile en cours de validité</div>
+                <div style="font-size:9px;color:var(--muted);font-style:italic;">Optionnel • Améliore votre score de +2 à +4 points</div>
+              </div>
+            </div>
+            <div style="padding:12px 16px;background:rgba(0,0,0,0.02);">
+              <input type="file" id="uploadAssurance" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="handleUpload('assurance', this)">
+              <button onclick="document.getElementById('uploadAssurance').click()" style="background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:9px 14px;font-size:11px;font-weight:600;cursor:pointer;width:100%;">📤 Télécharger l'attestation</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progression -->
+        <div id="uploadProgress" style="display:none;background:rgba(0,200,120,0.08);border:1px solid rgba(0,200,120,0.25);border-radius:12px;padding:14px;margin-bottom:16px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div style="font-size:11px;color:var(--green);font-weight:700;flex:1;">DOCUMENTS TÉLÉCHARGÉS</div>
+            <div style="font-size:13px;font-weight:800;color:var(--green);"><span id="uploadCount">0</span>/4</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.15);border-radius:6px;height:6px;overflow:hidden;">
+            <div id="uploadBar" style="width:0%;height:100%;background:var(--green);transition:width .3s;"></div>
+          </div>
+        </div>
+
+        <!-- Bouton validation -->
+        <button id="validateBtn" onclick="validateDocuments()" disabled style="width:100%;background:var(--card);color:var(--muted);border:1px solid var(--border);border-radius:10px;padding:13px;font-size:13px;font-weight:700;cursor:not-allowed;margin-bottom:16px;">🔒 Valider mes documents</button>
+
+        <!-- Info délai -->
+        <div style="background:rgba(160,100,255,0.08);border:1px solid rgba(160,100,255,0.2);border-radius:12px;padding:14px;">
+          <div style="font-size:11px;color:#A064FF;font-weight:700;margin-bottom:6px;">⏱️ DÉLAI DE VÉRIFICATION</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.6;">Une fois vos documents validés, notre équipe les vérifie sous <strong style="color:var(--text);">48h ouvrées</strong>. Vous recevrez une notification dès que votre badge Gold sera actif.</div>
         </div>
       </div>
 
-      <!-- Prochain renouvellement -->
-      <div style="margin:0 24px 100px;">
-        <div style="background:rgba(255,140,0,0.08);border:1px solid rgba(255,140,0,0.25);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px;">
-          <div style="font-size:24px;">⏰</div>
-          <div>
-            <div style="font-size:12px;font-weight:700;color:var(--orange);">Renouvellement dans 4 mois</div>
-            <div style="font-size:10px;color:var(--muted);margin-top:2px;">Planifier une visite Apave avant le 14 juin 2026</div>
+      <!-- Documents téléchargés (si badge Silver actif) -->
+      <div id="silverDocs" style="margin:0 24px 100px;">
+        <div style="font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.06em;margin-bottom:10px;">MES DOCUMENTS AUTO-DÉCLARÉS</div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;">
+          <div style="font-size:11px;color:var(--muted);text-align:center;padding:20px 0;">
+            <div style="font-size:32px;margin-bottom:8px;">📋</div>
+            <div>Aucun document téléchargé</div>
+            <div style="font-size:10px;margin-top:4px;">Cliquez sur "Passer au badge Gold" ci-dessus pour ajouter vos certificats officiels</div>
           </div>
         </div>
       </div>
@@ -3187,6 +3265,102 @@ function animateScore() {
 }
 
 // ── TOAST ──
+// ── Upload documents functions ──
+var uploadedDocs = { conformite: false, registre: false, extincteurs: false, assurance: false };
+
+function goToBadgeUpgrade() {
+  document.getElementById('badgeSilver').style.display = 'none';
+  document.getElementById('silverDocs').style.display = 'none';
+  document.getElementById('uploadFlow').style.display = 'block';
+  showToast('📄 Téléchargez vos certificats pour débloquer le badge Gold');
+}
+
+function handleUpload(docType, input) {
+  if (!input.files || !input.files[0]) return;
+  
+  var file = input.files[0];
+  var maxSize = 10 * 1024 * 1024; // 10 MB
+  
+  if (file.size > maxSize) {
+    showToast('❌ Fichier trop volumineux (max 10 MB)');
+    input.value = '';
+    return;
+  }
+  
+  // Valider le type
+  var allowedTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png'];
+  if (!allowedTypes.includes(file.type)) {
+    showToast('❌ Format non supporté (PDF, JPG ou PNG uniquement)');
+    input.value = '';
+    return;
+  }
+  
+  // Marquer comme uploadé
+  uploadedDocs[docType] = true;
+  
+  // Mettre à jour la checkbox
+  var item = document.querySelector('.upload-doc-item[data-doc="' + docType + '"]');
+  if (item) {
+    var checkbox = item.querySelector('.upload-checkbox');
+    checkbox.textContent = '✓';
+    checkbox.style.color = 'var(--green)';
+    checkbox.style.fontWeight = '900';
+  }
+  
+  updateUploadProgress();
+  showToast('✅ ' + file.name + ' téléchargé');
+}
+
+function updateUploadProgress() {
+  var count = Object.values(uploadedDocs).filter(Boolean).length;
+  var progress = document.getElementById('uploadProgress');
+  var countEl = document.getElementById('uploadCount');
+  var bar = document.getElementById('uploadBar');
+  var validateBtn = document.getElementById('validateBtn');
+  
+  if (count > 0) {
+    progress.style.display = 'block';
+    countEl.textContent = count;
+    bar.style.width = (count / 4 * 100) + '%';
+    
+    // Activer le bouton si au moins le certificat de conformité est uploadé
+    if (uploadedDocs.conformite) {
+      validateBtn.disabled = false;
+      validateBtn.style.background = 'linear-gradient(135deg,#E8B84B,#D4A030)';
+      validateBtn.style.color = '#000';
+      validateBtn.style.cursor = 'pointer';
+      validateBtn.style.borderColor = '#E8B84B';
+      validateBtn.innerHTML = '🏆 Valider et obtenir le badge Gold';
+    }
+  }
+}
+
+function validateDocuments() {
+  if (!uploadedDocs.conformite) {
+    showToast('❌ Le certificat de conformité est obligatoire');
+    return;
+  }
+  
+  // Simulation validation
+  showToast('📤 Documents envoyés pour vérification...');
+  
+  setTimeout(function() {
+    // Masquer l'upload flow
+    document.getElementById('uploadFlow').style.display = 'none';
+    document.getElementById('silverDocs').style.display = 'none';
+    
+    // Afficher le badge Gold
+    document.getElementById('badgeSilver').style.display = 'none';
+    document.getElementById('badgeGold').style.display = 'block';
+    
+    showToast('🎉 Badge Gold activé ! Vos documents ont été vérifiés.');
+    
+    // Scroll to top
+    document.querySelector('.phone').scrollTop = 0;
+  }, 1500);
+}
+
+// ── Existing functions below ──
 function showToast(msg) {
   const toast = document.getElementById('toast');
   toast.textContent = msg;
