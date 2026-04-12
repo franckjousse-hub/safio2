@@ -1,8 +1,5 @@
-import { prisma } from "@/lib/prisma";
+import { PARTNERS } from "@/lib/data";
 
 export async function GET() {
-  const partners = await prisma.partner.findMany({
-    orderBy: { rating: "desc" },
-  });
-  return Response.json(partners);
+  return Response.json(PARTNERS);
 }

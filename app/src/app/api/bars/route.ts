@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { BARS } from "@/lib/data";
 import { type NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -8,29 +8,29 @@ export async function GET(request: NextRequest) {
   const isOpen = searchParams.get("isOpen");
   const search = searchParams.get("search");
 
-  const where: Record<string, unknown> = {};
+  let results = [...BARS];
 
   if (city && city !== "tous") {
-    where.city = city === "tours" ? "Tours" : "Paris";
+    const cityName = city === "tours" ? "Tours" : "Paris";
+    results = results.filter((b) => b.city === cityName);
   }
   if (minScore) {
-    where.score = { gte: parseInt(minScore) };
+    results = results.filter((b) => b.score >= parseInt(minScore));
   }
   if (isOpen === "true") {
-    where.isOpen = true;
+    results = results.filter((b) => b.isOpen);
   }
   if (search) {
-    where.OR = [
-      { name: { contains: search } },
-      { address: { contains: search } },
-      { city: { contains: search } },
-    ];
+    const q = search.toLowerCase();
+    results = results.filter(
+      (b) =>
+        b.name.toLowerCase().includes(q) ||
+        b.address.toLowerCase().includes(q) ||
+        b.city.toLowerCase().includes(q)
+    );
   }
 
-  const bars = await prisma.bar.findMany({
-    where,
-    orderBy: { score: "desc" },
-  });
+  results.sort((a, b) => b.score - a.score);
 
-  return Response.json(bars);
+  return Response.json(results);
 }

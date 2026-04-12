@@ -1,11 +1,9 @@
-import { prisma } from "@/lib/prisma";
 import { type NextRequest } from "next/server";
 
+// In-memory store for demo purposes
+const reports: Array<Record<string, unknown>> = [];
+
 export async function GET() {
-  const reports = await prisma.report.findMany({
-    include: { bar: true },
-    orderBy: { createdAt: "desc" },
-  });
   return Response.json(reports);
 }
 
@@ -17,15 +15,17 @@ export async function POST(request: NextRequest) {
     return Response.json({ error: "barId and type are required" }, { status: 400 });
   }
 
-  const report = await prisma.report.create({
-    data: {
-      barId,
-      type,
-      description: description || null,
-      isAnonymous: isAnonymous ?? true,
-      status: "pending",
-    },
-  });
+  const report = {
+    id: `report-${Date.now()}`,
+    barId,
+    type,
+    description: description || null,
+    isAnonymous: isAnonymous ?? true,
+    status: "pending",
+    createdAt: new Date().toISOString(),
+  };
+
+  reports.push(report);
 
   return Response.json(report, { status: 201 });
 }
