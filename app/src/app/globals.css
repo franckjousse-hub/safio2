@@ -1,0 +1,96 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500;600;700&display=swap');
+
+:root {
+  --green: #00E87A;
+  --green-dark: #00C065;
+  --green-glow: rgba(0,232,122,0.2);
+  --red: #FF3B5C;
+  --orange: #FF8C00;
+  --gold: #E8B84B;
+  --purple: #A064FF;
+  --blue: #4A9EFF;
+  --bg: #0A0A0F;
+  --bg2: #111118;
+  --bg3: #1A1A24;
+  --card: #16161F;
+  --border: rgba(255,255,255,0.07);
+  --text: #F0F0F8;
+  --muted: rgba(240,240,248,0.45);
+}
+
+@theme inline {
+  --color-ss-green: #00E87A;
+  --color-ss-green-dark: #00C065;
+  --color-ss-red: #FF3B5C;
+  --color-ss-orange: #FF8C00;
+  --color-ss-gold: #E8B84B;
+  --color-ss-purple: #A064FF;
+  --color-ss-blue: #4A9EFF;
+  --color-ss-bg: #0A0A0F;
+  --color-ss-bg2: #111118;
+  --color-ss-bg3: #1A1A24;
+  --color-ss-card: #16161F;
+  --color-ss-border: rgba(255,255,255,0.07);
+  --color-ss-text: #F0F0F8;
+  --color-ss-muted: rgba(240,240,248,0.45);
+  --font-syne: 'Syne', sans-serif;
+  --font-dm: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Hide scrollbar */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+/* Leaflet overrides */
+.leaflet-tile-pane { filter: brightness(0.85) saturate(0.7); }
+.leaflet-control-attribution { display: none !important; }
+.leaflet-control-zoom { display: none !important; }
+
+.spotysafe-marker {
+  background: #00E87A;
+  color: #000;
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 8px;
+  border-radius: 10px;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0,232,122,0.5);
+  cursor: pointer;
+}
+.spotysafe-marker.orange {
+  background: #FF8C00;
+  box-shadow: 0 4px 12px rgba(255,140,0,0.5);
+}
+
+/* Animations */
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-15px)} }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.7} }
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+@keyframes shake {
+  0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)}
+  40%{transform:translateX(8px)} 60%{transform:translateX(-5px)} 80%{transform:translateX(5px)}
+}
+
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-pulse-custom { animation: pulse 2s ease-in-out infinite; }
+.animate-blink { animation: blink 1.5s ease-in-out infinite; }
+.animate-slide-up { animation: slideUp 0.4s ease both; }

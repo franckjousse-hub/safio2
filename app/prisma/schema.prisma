@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Bar {
+  id             String   @id @default(cuid())
+  name           String
+  address        String
+  city           String
+  type           String   // Bar, Bar brasserie, Bar concert, Bar cocktails, Bar PMU, Brasserie
+  erpType        String   // Type N, Type L
+  erpCategory    String   // 5e catégorie, 3e catégorie, 2e catégorie
+  capacity       Int
+  score          Int      // 0-100
+  lat            Float
+  lng            Float
+  isOpen         Boolean  @default(true)
+  distance       String?
+  lastInspection String?
+  nextInspection String?
+  certifications Json     // JSON array of certif details
+  details        Json     // JSON array of detail items
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  reports        Report[]
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  role      String   // client, barowner, parent, admin
+  favorites Json     @default("[]") // JSON array of bar IDs
+  watchlist Json     @default("[]") // JSON array of bar IDs
+  createdAt DateTime @default(now())
+  reports   Report[]
+}
+
+model Report {
+  id          String   @id @default(cuid())
+  barId       String
+  bar         Bar      @relation(fields: [barId], references: [id])
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id])
+  type        String   // extincteur, sortie, eclairage, affichage, surcharge, autre
+  description String?
+  isAnonymous Boolean  @default(true)
+  status      String   @default("pending") // pending, in_progress, resolved
+  createdAt   DateTime @default(now())
+}
+
+model Partner {
+  id         String @id @default(cuid())
+  name       String
+  type       String
+  logo       String
+  logoColor  String
+  badges     Json   // JSON array of badge objects
+  tags       Json   // JSON array of strings
+  rating     Float
+  reviews    Int
+  delay      String
+  price      String
+  city       String
+  phone      String
+  services   Json   // JSON array of strings
+  description String
+}
