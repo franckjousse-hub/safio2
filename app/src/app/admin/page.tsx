@@ -60,7 +60,7 @@ function AdminContent() {
 
   if (!unlocked) {
     return (
-      <div className="min-h-screen bg-[#080A0F] flex flex-col items-center justify-center px-8 max-w-md mx-auto">
+      <div className="min-h-screen bg-[#080A0F] flex flex-col items-center justify-center px-8 app-container">
         <div className="text-center mb-8">
           <div className="font-[var(--font-mono)] text-[11px] font-medium text-ss-text/20 tracking-[0.16em] uppercase mb-3">SPOTYSAFE ADMINISTRATION</div>
           <div className="font-[var(--font-syne)] text-xl font-bold mb-2">Acces restreint</div>
@@ -96,9 +96,9 @@ function AdminContent() {
   }
 
   return (
-    <div className="min-h-screen bg-[#080A0F] max-w-md mx-auto">
+    <div className="min-h-screen bg-[#080A0F] app-container">
       {/* Header */}
-      <div className="px-[18px] pt-5 pb-3.5 border-b border-white/[0.06]">
+      <div className="px-[18px] md:px-8 pt-5 pb-3.5 border-b border-white/[0.06]">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <span className="font-[var(--font-mono)] text-[11px] font-medium text-ss-text/20 tracking-[0.16em] uppercase">SPOTYSAFE</span>
@@ -114,15 +114,17 @@ function AdminContent() {
         </div>
       </div>
 
-      <div className="px-[18px] pb-24">
+      <div className="px-[18px] md:px-8 pb-24">
         {/* KPIs Grid */}
         <div className="border border-white/[0.07] mt-4 overflow-hidden">
           {/* Row headers */}
-          <div className="grid grid-cols-2 border-b border-white/[0.06]">
+          <div className="grid grid-cols-2 lg:grid-cols-4 border-b border-white/[0.06]">
             <div className="px-3 py-1 font-[var(--font-mono)] text-[8px] font-semibold text-ss-text/20 tracking-[0.14em] border-r border-white/[0.06]">REVENUS RECURRENTS</div>
-            <div className="px-3 py-1 font-[var(--font-mono)] text-[8px] font-semibold text-ss-text/20 tracking-[0.14em]">UTILISATEURS ACTIFS</div>
+            <div className="px-3 py-1 font-[var(--font-mono)] text-[8px] font-semibold text-ss-text/20 tracking-[0.14em] lg:border-r lg:border-white/[0.06]">UTILISATEURS ACTIFS</div>
+            <div className="hidden lg:block px-3 py-1 font-[var(--font-mono)] text-[8px] font-semibold text-ss-text/20 tracking-[0.14em] border-r border-white/[0.06]">CONTRATS ERP</div>
+            <div className="hidden lg:block px-3 py-1 font-[var(--font-mono)] text-[8px] font-semibold text-ss-text/20 tracking-[0.14em]">SIGNALEMENTS</div>
           </div>
-          <div className="grid grid-cols-2 border-b border-white/[0.06]">
+          <div className="grid grid-cols-2 lg:grid-cols-4 border-b border-white/[0.06] lg:border-b-0">
             <div className="p-3.5 border-r border-white/[0.06]">
               <div className="font-[var(--font-mono)] text-[28px] font-bold text-ss-green tracking-tight leading-none">258 K€</div>
               <div className="flex items-center gap-1.5 mt-1.5">
@@ -132,7 +134,7 @@ function AdminContent() {
               <div className="mt-2 h-px bg-white/[0.06] relative"><div className="absolute top-0 left-0 h-full w-[29%] bg-ss-green" /></div>
               <div className="font-[var(--font-mono)] text-[8px] text-ss-text/20 mt-1">OBJ AN 1 - 885 K€ - 29%</div>
             </div>
-            <div className="p-3.5">
+            <div className="p-3.5 lg:border-r lg:border-white/[0.06]">
               <div className="font-[var(--font-mono)] text-[28px] font-bold text-ss-blue tracking-tight leading-none">4 821</div>
               <div className="flex items-center gap-1.5 mt-1.5">
                 <span className="font-[var(--font-mono)] text-[9px] text-ss-blue">▲ +12.3%</span>
@@ -141,12 +143,28 @@ function AdminContent() {
               <div className="mt-2 h-px bg-white/[0.06] relative"><div className="absolute top-0 left-0 h-full w-[48%] bg-ss-blue" /></div>
               <div className="font-[var(--font-mono)] text-[8px] text-ss-text/20 mt-1">OBJ AN 1 - 10 000 - 48%</div>
             </div>
+            <div className="hidden lg:block p-3.5 border-r border-white/[0.06]">
+              <div className="font-[var(--font-mono)] text-[28px] font-bold text-ss-gold tracking-tight leading-none">1 247</div>
+              <div className="flex items-center gap-1.5 mt-1.5">
+                <span className="font-[var(--font-mono)] text-[9px] text-ss-gold">▲ +89</span>
+                <span className="font-[var(--font-mono)] text-[9px] text-ss-text/20">ce mois</span>
+              </div>
+              <div className="font-[var(--font-mono)] text-[8px] text-ss-text/20 mt-2">FREE 743 - PRO 504</div>
+            </div>
+            <div className="hidden lg:block p-3.5">
+              <div className="font-[var(--font-mono)] text-[28px] font-bold text-[#FF6B6B] tracking-tight leading-none">312</div>
+              <div className="flex items-center gap-1.5 mt-1.5">
+                <span className="font-[var(--font-mono)] text-[9px] text-ss-green">✓ 214</span>
+                <span className="font-[var(--font-mono)] text-[9px] text-ss-gold">⧖ 98</span>
+              </div>
+              <div className="font-[var(--font-mono)] text-[8px] text-ss-text/20 mt-2">RESOLUS 69% - EN COURS 31%</div>
+            </div>
           </div>
-          <div className="grid grid-cols-2 border-b border-white/[0.06]">
+          <div className="grid grid-cols-2 border-b border-white/[0.06] lg:hidden">
             <div className="px-3 py-1 font-[var(--font-mono)] text-[8px] font-semibold text-ss-text/20 tracking-[0.14em] border-r border-white/[0.06]">CONTRATS ERP</div>
             <div className="px-3 py-1 font-[var(--font-mono)] text-[8px] font-semibold text-ss-text/20 tracking-[0.14em]">SIGNALEMENTS</div>
           </div>
-          <div className="grid grid-cols-2">
+          <div className="grid grid-cols-2 lg:hidden">
             <div className="p-3.5 border-r border-white/[0.06]">
               <div className="font-[var(--font-mono)] text-[28px] font-bold text-ss-gold tracking-tight leading-none">1 247</div>
               <div className="flex items-center gap-1.5 mt-1.5">
@@ -181,6 +199,8 @@ function AdminContent() {
           ))}
         </div>
 
+        {/* Geographic + Contract sections */}
+        <div className="md:grid md:grid-cols-2 md:gap-4">
         {/* Geographic distribution */}
         <div className="border border-white/[0.07] mt-2 p-3.5">
           <div className="font-[var(--font-mono)] text-[9px] font-semibold text-ss-text/30 tracking-[0.14em] mb-2.5">REPARTITION GEOGRAPHIQUE</div>
@@ -206,6 +226,7 @@ function AdminContent() {
               <div className="h-px bg-white/[0.06]"><div className="h-full" style={{ width: `${t.pct}%`, background: t.color }} /></div>
             </div>
           ))}
+        </div>
         </div>
 
         {/* System alerts */}
@@ -242,7 +263,7 @@ function AdminContent() {
         {/* Admin actions */}
         <div className="mt-4">
           <div className="font-[var(--font-mono)] text-[9px] font-semibold text-ss-text/30 tracking-[0.14em] mb-2">ACTIONS</div>
-          <div className="grid grid-cols-2 gap-1.5">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-1.5">
             {[
               { title: "EXPORT PDF", sub: "Rapport mensuel", danger: false },
               { title: "NOTIFICATION", sub: "Push tous users", danger: false },

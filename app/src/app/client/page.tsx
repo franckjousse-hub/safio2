@@ -121,9 +121,9 @@ function ClientContent() {
   };
 
   return (
-    <div className="min-h-screen bg-ss-bg pb-24 max-w-md mx-auto">
+    <div className="min-h-screen bg-ss-bg pb-24 app-container">
       {/* Header */}
-      <div className="px-6 pt-4 pb-5 bg-gradient-to-b from-ss-green/5 to-transparent">
+      <div className="px-6 md:px-8 pt-4 pb-5 bg-gradient-to-b from-ss-green/5 to-transparent">
         <div className="flex justify-between items-center mb-5">
           <Logo size="small" />
           <BackButton href="/" />
@@ -153,7 +153,7 @@ function ClientContent() {
       {activeTab === "map" && (
         <>
           {/* Map placeholder */}
-          <div className="mx-6 mb-5 rounded-[20px] overflow-hidden h-[180px] bg-ss-card border border-ss-border relative">
+          <div className="mx-6 mb-5 rounded-[20px] overflow-hidden h-[180px] md:h-[280px] lg:h-[350px] bg-ss-card border border-ss-border relative">
             <div className="w-full h-full flex items-center justify-center text-ss-muted text-sm">
               <div className="text-center">
                 <div className="text-3xl mb-2">🗺️</div>
@@ -165,7 +165,7 @@ function ClientContent() {
 
           {/* Tours bars */}
           {toursBars.length > 0 && (
-            <div className="px-6 flex flex-col gap-3.5 mb-6">
+            <div className="px-6 flex flex-col gap-3.5 mb-6 md:grid md:grid-cols-2 md:gap-4">
               {toursBars.map((bar, i) => (
                 <div key={bar.id} className="animate-slide-up" style={{ animationDelay: `${i * 0.1}s` }}>
                   <Card accentColor={bar.score >= 80 ? "green" : "orange"} onClick={() => setSelectedBar(bar)}>
@@ -205,7 +205,7 @@ function ClientContent() {
                 </div>
                 <p className="text-[13px] text-ss-muted">{parisBars.length} etablissements - Marais & Oberkampf</p>
               </div>
-              <div className="px-6 flex flex-col gap-3.5 pb-6">
+              <div className="px-6 flex flex-col gap-3.5 pb-6 md:grid md:grid-cols-2 md:gap-4">
                 {parisBars.map((bar) => (
                   <Card key={bar.id} accentColor={bar.score >= 80 ? "green" : "orange"} onClick={() => setSelectedBar(bar)}>
                     <div className="absolute top-2.5 right-2.5 bg-ss-gold/12 border border-ss-gold/30 text-ss-gold text-[8px] font-bold py-0.5 px-2 rounded-full">Paris</div>
@@ -239,7 +239,7 @@ function ClientContent() {
 
       {/* FAVORITES TAB */}
       {activeTab === "favorites" && (
-        <div className="px-6">
+        <div className="px-6 md:px-8">
           <div className="flex justify-between items-center py-4">
             <h2 className="font-[var(--font-syne)] text-[22px] font-extrabold">Mes favoris</h2>
             <span className="text-[11px] text-ss-muted">{favorites.length} bar{favorites.length !== 1 ? "s" : ""}</span>
@@ -272,7 +272,7 @@ function ClientContent() {
 
       {/* SEARCH TAB */}
       {activeTab === "search" && (
-        <div className="px-6">
+        <div className="px-6 md:px-8">
           <h2 className="font-[var(--font-syne)] text-[22px] font-extrabold mb-3 pt-4">Rechercher</h2>
           <div className="flex items-center gap-2.5 bg-ss-card border border-ss-border rounded-2xl px-4 py-3 mb-4">
             <span className="text-lg">🔍</span>
@@ -310,7 +310,7 @@ function ClientContent() {
 
       {/* ALERTS TAB */}
       {activeTab === "alerts" && (
-        <div className="px-5">
+        <div className="px-5 md:px-8">
           <div className="py-5">
             <h2 className="font-[var(--font-syne)] text-lg font-extrabold">Mes alertes score</h2>
             <p className="text-xs text-ss-muted mt-0.5">Soyez notifie des qu&apos;un score change</p>
@@ -356,7 +356,7 @@ function ClientContent() {
 
       {/* PROFILE TAB */}
       {activeTab === "profile" && (
-        <div className="px-6">
+        <div className="px-6 md:px-8">
           <div className="py-4">
             <h2 className="font-[var(--font-syne)] text-[22px] font-extrabold mb-1">Mon profil</h2>
             <p className="text-xs text-ss-muted">Utilisateur Spotysafe</p>
@@ -396,8 +396,8 @@ function ClientContent() {
 
       {/* DETAIL MODAL */}
       {selectedBar && (
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[200] flex items-end max-w-md mx-auto" onClick={() => setSelectedBar(null)}>
-          <div className="w-full bg-ss-bg2 rounded-t-[28px] border-t border-ss-border p-6 pb-10 max-h-[80vh] overflow-y-auto no-scrollbar" onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[200] flex items-end app-container" onClick={() => setSelectedBar(null)}>
+          <div className="w-full bg-ss-bg2 rounded-t-[28px] border-t border-ss-border p-6 pb-10 max-h-[80vh] overflow-y-auto no-scrollbar md:max-w-lg md:mx-auto md:rounded-2xl md:mb-4" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-4">
               <div className="w-9 h-1 bg-white/15 rounded-full" />
               <button onClick={() => setSelectedBar(null)} className="bg-white/8 border-none text-ss-text text-[13px] px-3.5 py-1.5 rounded-[10px] cursor-pointer">✕ Fermer</button>

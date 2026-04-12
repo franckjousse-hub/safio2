@@ -1,5 +1,5 @@
-@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
 
 :root {
   --green: #00E87A;
@@ -94,3 +94,31 @@ body {
 .animate-pulse-custom { animation: pulse 2s ease-in-out infinite; }
 .animate-blink { animation: blink 1.5s ease-in-out infinite; }
 .animate-slide-up { animation: slideUp 0.4s ease both; }
+
+/* Responsive container utility */
+.app-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+@media (min-width: 640px) {
+  .app-container { max-width: 640px; }
+}
+@media (min-width: 768px) {
+  .app-container { max-width: 768px; }
+}
+@media (min-width: 1024px) {
+  .app-container { max-width: 960px; }
+}
+
+/* Desktop background */
+@media (min-width: 640px) {
+  body { background: #070708; }
+}
+
+/* Safe area padding for notched devices */
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}

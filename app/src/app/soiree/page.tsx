@@ -71,9 +71,9 @@ function SoireeContent() {
         <div className="absolute bottom-[20%] left-[15%] w-[100px] h-[100px] rounded-full bg-[radial-gradient(circle,rgba(100,200,255,0.1),transparent_70%)]" />
       </div>
 
-      <div className="relative z-10 pb-24 max-w-md mx-auto">
+      <div className="relative z-10 pb-24 app-container">
         {/* Header */}
-        <div className="px-5 pt-6 flex items-start justify-between">
+        <div className="px-5 md:px-8 pt-6 flex items-start justify-between">
           <div>
             <div className="text-[10px] font-bold text-purple-300/50 tracking-[0.18em] uppercase mb-1.5">Ce soir on sort 🌙</div>
             <h1 className="font-[var(--font-syne)] text-2xl font-black text-white leading-tight tracking-tight">
@@ -88,7 +88,7 @@ function SoireeContent() {
         {/* Luminous divider */}
         <div className="h-px my-4" style={{ background: "linear-gradient(90deg,transparent,rgba(160,40,255,0.5),rgba(255,60,180,0.4),transparent)" }} />
 
-        <div className="px-5">
+        <div className="px-5 md:px-8">
           {/* Zone selection */}
           <div className="text-[10px] font-extrabold text-purple-300/55 tracking-[0.16em] uppercase mb-2.5">📍 T&apos;es ou ce soir ?</div>
           <div className="flex gap-2 flex-wrap mb-5">
@@ -104,7 +104,7 @@ function SoireeContent() {
 
           {/* Vibe check */}
           <div className="text-[10px] font-extrabold text-purple-300/55 tracking-[0.16em] uppercase mb-2.5">🎭 Vibe check</div>
-          <div className="grid grid-cols-2 gap-2 mb-5">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-5">
             {VIBES.map((v) => (
               <button key={v.id} onClick={() => setVibe(v.id)}
                 className={`rounded-2xl p-3.5 flex items-center gap-2.5 cursor-pointer transition-all border ${
@@ -192,6 +192,7 @@ function SoireeContent() {
 
           {/* History */}
           <div className="text-[10px] font-extrabold text-purple-300/55 tracking-[0.16em] uppercase mb-3">📅 Tes dernieres sorties</div>
+          <div className="md:grid md:grid-cols-2 md:gap-2">
           {[
             { icon: "🎉", title: "Tours Centre - 3 bars", sub: "Score moyen 86 - il y a 5 jours" },
             { icon: "🍷", title: "Le Marais - 4 bars", sub: "Score moyen 91 - il y a 12 jours" },
@@ -205,6 +206,7 @@ function SoireeContent() {
               <span className="text-base text-white/20">›</span>
             </div>
           ))}
+          </div>
         </div>
       </div>
     </div>

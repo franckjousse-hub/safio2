@@ -27,9 +27,9 @@ function ParentContent() {
   const isSafe = loc.safe;
 
   return (
-    <div className="min-h-screen bg-ss-bg pb-24 max-w-md mx-auto">
+    <div className="min-h-screen bg-ss-bg pb-24 app-container">
       {/* Header */}
-      <div className="px-6 pt-4 pb-2 bg-gradient-to-b from-ss-green/5 to-transparent">
+      <div className="px-6 md:px-8 pt-4 pb-2 bg-gradient-to-b from-ss-green/5 to-transparent">
         <div className="flex justify-between items-center mb-5">
           <Logo size="small" />
           <BackButton href="/" />
@@ -42,7 +42,7 @@ function ParentContent() {
       </div>
 
       {/* Tab headers */}
-      <div className="flex border-b border-ss-border mx-6">
+      <div className="flex border-b border-ss-border mx-6 md:mx-8">
         {TABS.map((tab) => (
           <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`flex-1 py-2.5 text-center text-xs font-bold cursor-pointer border-b-2 transition-all ${
             activeTab === tab.id ? "text-ss-purple border-ss-purple" : "text-ss-muted border-transparent"
@@ -54,7 +54,7 @@ function ParentContent() {
 
       {/* LIVE TAB */}
       {activeTab === "live" && (
-        <div className="px-6 pt-4">
+        <div className="px-6 md:px-8 pt-4">
           {/* Child profile */}
           <div className="flex items-center gap-3.5 bg-ss-card border border-ss-border rounded-[14px] p-3.5 mb-4">
             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-ss-purple/25 to-ss-purple/5 border-2 border-ss-purple/40 flex items-center justify-center text-[22px]">🧑</div>
@@ -116,7 +116,7 @@ function ParentContent() {
           </div>
 
           {/* Quick actions */}
-          <div className="grid grid-cols-2 gap-2.5 mb-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 mb-4">
             <button onClick={() => showToast("📱 Message envoye a Lea")} className="bg-ss-card border border-ss-border rounded-xl p-3.5 text-center cursor-pointer">
               <div className="text-[22px] mb-1.5">💬</div>
               <div className="text-[11px] font-bold">Envoyer message</div>
@@ -150,7 +150,7 @@ function ParentContent() {
 
       {/* HISTORY TAB */}
       {activeTab === "history" && (
-        <div className="px-6 pt-4">
+        <div className="px-6 md:px-8 pt-4">
           <p className="text-[11px] text-ss-muted font-bold tracking-wider mb-3">LIEUX VISITES — 7 DERNIERS JOURS</p>
 
           <p className="text-[10px] text-ss-muted font-bold py-2 tracking-wide">AUJOURD&apos;HUI</p>
@@ -164,6 +164,7 @@ function ParentContent() {
           </div>
 
           <p className="text-[10px] text-ss-muted font-bold py-3 tracking-wide">HIER</p>
+          <div className="md:grid md:grid-cols-2 md:gap-2">
           <div className="bg-ss-card border border-ss-border rounded-xl p-3.5 flex gap-3 items-center mb-0.5">
             <div className="w-9 h-9 rounded-[10px] bg-ss-orange/10 border border-ss-orange/30 flex items-center justify-center text-base">⚠️</div>
             <div className="flex-1">
@@ -172,13 +173,14 @@ function ParentContent() {
             </div>
             <span className="text-[13px] font-black text-ss-orange">74</span>
           </div>
-          <div className="bg-ss-card border border-ss-border rounded-xl p-3.5 flex gap-3 items-center mt-0.5">
+          <div className="bg-ss-card border border-ss-border rounded-xl p-3.5 flex gap-3 items-center mt-0.5 md:mt-0">
             <div className="w-9 h-9 rounded-[10px] bg-ss-green/12 border border-ss-green/30 flex items-center justify-center text-base">✅</div>
             <div className="flex-1">
               <div className="text-xs font-bold">Bar Republique</div>
               <div className="text-[10px] text-ss-muted mt-0.5">Paris 3e - 18h30→20h15 - Score 88</div>
             </div>
             <span className="text-[13px] font-black text-ss-green">88</span>
+          </div>
           </div>
 
           <p className="text-[10px] text-ss-muted font-bold py-3 tracking-wide">VENDREDI 14 FEV.</p>
@@ -214,7 +216,7 @@ function ParentContent() {
 
       {/* SETTINGS TAB */}
       {activeTab === "settings" && (
-        <div className="px-6 pt-4">
+        <div className="px-6 md:px-8 pt-4">
           <p className="text-[11px] text-ss-muted font-bold tracking-wider mb-3">PROFIL SUIVI</p>
           <div className="bg-ss-card border border-ss-border rounded-[14px] overflow-hidden mb-4">
             <div className="px-4 py-3.5 border-b border-ss-border flex justify-between items-center">

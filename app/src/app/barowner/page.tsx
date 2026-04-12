@@ -46,12 +46,12 @@ function BarOwnerContent() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-ss-bg pb-24 max-w-md mx-auto">
+    <div className="min-h-screen bg-ss-bg pb-24 app-container">
       {/* HOME TAB */}
       {activeTab === "home" && (
         <>
           {/* Header */}
-          <div className="px-6 pt-4 pb-6 bg-gradient-to-b from-ss-orange/[0.06] to-transparent">
+          <div className="px-6 md:px-8 pt-4 pb-6 bg-gradient-to-b from-ss-orange/[0.06] to-transparent">
             <div className="flex justify-between items-center mb-5">
               <Logo size="small" />
               <BackButton href="/" />
@@ -61,7 +61,7 @@ function BarOwnerContent() {
           </div>
 
           {/* Big Score Card */}
-          <div className="mx-6 mb-5 bg-ss-card border border-ss-border rounded-3xl p-7 relative overflow-hidden">
+          <div className="mx-6 md:mx-8 mb-5 bg-ss-card border border-ss-border rounded-3xl p-7 md:p-10 relative overflow-hidden">
             <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[radial-gradient(circle,rgba(255,140,0,0.12),transparent_70%)]" />
             <div className="flex items-center justify-between mb-5 relative">
               <div>
@@ -90,9 +90,9 @@ function BarOwnerContent() {
           </div>
 
           {/* Criteria */}
-          <div className="px-6 mb-5">
+          <div className="px-6 md:px-8 mb-5">
             <h2 className="font-[var(--font-syne)] text-base font-bold mb-3.5">Detail par critere</h2>
-            <div className="flex flex-col gap-2.5">
+            <div className="flex flex-col gap-2.5 md:grid md:grid-cols-2 md:gap-3">
               {CRITERIA.map((c) => (
                 <div key={c.name} className="bg-ss-card border border-ss-border rounded-2xl p-3.5 flex items-center gap-3.5 active:scale-[0.98] transition-all cursor-pointer">
                   <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-lg shrink-0 ${
@@ -120,8 +120,9 @@ function BarOwnerContent() {
           </div>
 
           {/* Actions */}
-          <div className="px-6 pb-6">
+          <div className="px-6 md:px-8 pb-6">
             <h2 className="font-[var(--font-syne)] text-base font-bold mb-3.5">Actions recommandees</h2>
+            <div className="md:grid md:grid-cols-2 md:gap-3">
             {[
               { icon: "📅", title: "Planifier une inspection", sub: "Prochaine visite recommandee : mars 2026", accent: false },
               { icon: "📤", title: "Envoyer mon dossier", sub: "Commission de securite d'Indre-et-Loire", accent: true },
@@ -137,20 +138,21 @@ function BarOwnerContent() {
                 <span className="text-ss-muted">›</span>
               </button>
             ))}
+            </div>
           </div>
         </>
       )}
 
       {/* ANALYTICS TAB */}
       {activeTab === "analytics" && (
-        <div className="px-6 pt-4 pb-6">
+        <div className="px-6 md:px-8 pt-4 pb-6">
           <div className="flex justify-between items-center mb-1">
             <h2 className="font-[var(--font-syne)] text-[22px] font-extrabold">Statistiques</h2>
             <button onClick={() => setActiveTab("home")} className="text-[13px] text-ss-muted">&larr; Retour</button>
           </div>
           <p className="text-xs text-ss-muted mb-4">Bar du Centre - Tours — 30 derniers jours</p>
 
-          <div className="grid grid-cols-2 gap-2.5 mb-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 mb-4">
             <div className="bg-gradient-to-br from-ss-green/12 to-ss-green/[0.04] border border-ss-green/25 rounded-[14px] p-3.5">
               <div className="text-[10px] text-ss-green font-bold tracking-wider mb-1.5">VUES FICHE</div>
               <div className="text-[28px] font-black leading-none">847</div>
@@ -232,7 +234,7 @@ function BarOwnerContent() {
 
       {/* PARTNERS TAB */}
       {activeTab === "partners" && (
-        <div className="px-6 pt-4 pb-6">
+        <div className="px-6 md:px-8 pt-4 pb-6">
           <div className="flex justify-between items-center mb-4">
             <div>
               <h2 className="font-[var(--font-syne)] text-[22px] font-extrabold">Partenaires agrees</h2>
@@ -240,6 +242,7 @@ function BarOwnerContent() {
             </div>
             <button onClick={() => setActiveTab("home")} className="text-[13px] text-ss-muted">&larr; Retour</button>
           </div>
+          <div className="md:grid md:grid-cols-2 md:gap-3">
           {[
             { name: "Apave Centre-Val de Loire", type: "Bureau de controle agree", logo: "🏢", badges: ["Agree Prefecture", "Tours", "ERP certifie"], delay: "Sous 5 jours", price: "A partir de 380€", services: ["Visite de securite ERP", "Rapport commission", "Suivi annuel"] },
             { name: "Bureau Veritas Centre", type: "Bureau de controle & certification", logo: "✅", badges: ["Agree Prefecture", "ERP certifie"], delay: "Sous 10 jours", price: "A partir de 450€", services: ["Controle reglementaire ERP", "Audit complet", "Rapport officiel"] },
@@ -274,12 +277,13 @@ function BarOwnerContent() {
               </div>
             </div>
           ))}
+          </div>
         </div>
       )}
 
       {/* DOCUMENTS TAB */}
       {activeTab === "docs" && (
-        <div className="px-6 pt-4 pb-6">
+        <div className="px-6 md:px-8 pt-4 pb-6">
           <div className="flex justify-between items-center mb-1">
             <h2 className="font-[var(--font-syne)] text-[22px] font-extrabold">Certification</h2>
             <button onClick={() => setActiveTab("home")} className="text-[13px] text-ss-muted">&larr; Retour</button>
@@ -321,7 +325,7 @@ function BarOwnerContent() {
 
       {/* SETTINGS TAB */}
       {activeTab === "settings" && (
-        <div className="px-6 pt-4 pb-6">
+        <div className="px-6 md:px-8 pt-4 pb-6">
           <div className="flex justify-between items-center mb-5">
             <h2 className="font-[var(--font-syne)] text-[22px] font-extrabold">Reglages</h2>
             <button onClick={() => setActiveTab("home")} className="text-[13px] text-ss-muted">&larr; Retour</button>

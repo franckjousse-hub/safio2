@@ -60,24 +60,24 @@ export default function SplashPage() {
   return (
     <ToastProvider>
       <div className="min-h-screen bg-ss-bg flex flex-col items-center">
-        <div className="w-full max-w-md mx-auto relative">
+        <div className="w-full app-container relative">
           {/* Background glow */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-[300px] rounded-full bg-[radial-gradient(ellipse,rgba(0,232,122,0.15),transparent_70%)] pointer-events-none" />
 
           {/* Floating orb */}
           <div className="absolute top-[60px] left-1/2 -translate-x-1/2 w-[180px] h-[180px] rounded-full bg-[radial-gradient(circle,rgba(0,232,122,0.3),transparent_70%)] animate-float blur-[20px] pointer-events-none" />
 
-          <div className="relative z-10 flex flex-col items-center pt-16 px-7 pb-12">
+          <div className="relative z-10 flex flex-col items-center pt-16 px-7 pb-12 md:pt-24 md:px-10 lg:pt-32">
             {/* Logo */}
             <div className="mb-3">
               <Logo size="large" />
             </div>
-            <p className="text-ss-muted text-[13px] tracking-wider mb-16">
+            <p className="text-ss-muted text-[13px] tracking-wider mb-16 md:mb-20">
               Parce que chaque sortie compte
             </p>
 
             {/* Role cards */}
-            <div className="flex flex-col gap-3.5 w-full">
+            <div className="flex flex-col gap-3.5 w-full md:grid md:grid-cols-2">
               {roles.map((role) => (
                 <Link
                   key={role.id}
